@@ -1,2 +1,5 @@
-# TPW_Trabalho2
-TPW_Trabalho1 - Football Nerds.
+# TPW_Trabalho2 - Football Nerds.
+
+João Soares Nmec 93078
+
+Hugo Ferreira Nmec 93093
