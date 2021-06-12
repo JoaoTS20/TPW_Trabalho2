@@ -16,6 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from app import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ws/competitions/', views.get_competitions),
+    path('ws/competitions/<int:id>', views.get_competitionDetails),
+
+
+    path('ws/teams/', views.get_teams),
+    path('ws/teams/<int:id>', views.get_teamDetails),
+    path('ws/teams/<int:id>/<str:season>', views.get_teamDetails),
+
+    path('ws/players/', views.get_players),
+    path('ws/players/<int:id>', views.get_playerdetails),
+
+    path('ws/staff/', views.get_staff),
+    path('ws/staff/<int:id>', views.get_staffdetails),
+
+
+
 ]
