@@ -19,6 +19,7 @@ class StaffSerializer(serializers.ModelSerializer):
 
 
 class TeamSerializer(serializers.ModelSerializer):
+    players = PlayerSerializer(many=True)
     class Meta:
         model = Team
         fields = ('id', 'full_name', 'abreviated_name', 'founding_year', 'club_badge_img', 'city', 'country', 'players',
@@ -26,6 +27,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
 
 class CompetitionSerializer(serializers.ModelSerializer):
+    teams = TeamSerializer(many=True)
     class Meta:
         model = Competition
         fields = ('id', 'full_name', 'competition_badge_img', 'teams', 'region')
