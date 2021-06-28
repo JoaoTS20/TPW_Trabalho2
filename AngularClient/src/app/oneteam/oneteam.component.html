@@ -1,0 +1,8 @@
+<p>oneteam works!</p>
+<div *ngIf="team">
+  <p>{{team.full_name}}</p>
+  <p>Players</p>
+  <div *ngFor="let player of team.players">
+    <p>{{player.name}}</p>
+  </div>
+</div>

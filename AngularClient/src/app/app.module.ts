@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
+import { AllteamsComponent } from './allteams/allteams.component';
+import { OneteamComponent } from './oneteam/oneteam.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AllteamsComponent,
+    OneteamComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
