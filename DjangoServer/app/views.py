@@ -43,7 +43,7 @@ def get_teamDetails(request, id, season='2020-2021'):
     print(season)
     try:
         team = Team.objects.get(id=id)
-        player=Player.objects.filter(playerplaysfor__team_id=id, playerplaysfor__season=season)
+        players=Player.objects.filter(playerplaysfor__team_id=id, playerplaysfor__season=season)
     except Team.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = TeamSerializer(team)

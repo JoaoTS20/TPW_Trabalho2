@@ -16,7 +16,7 @@ export class TeamService {
   constructor(private http:HttpClient) { }
 
   getTeam(id: number): Observable<Team>{
-    const url = this.baseURL + 'teams/' + id;
+    const url = this.baseURL + 'teams/' + id+"/2020-2021";
     return this.http.get<Team>(url);
   }
 }
