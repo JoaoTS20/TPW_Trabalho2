@@ -15,6 +15,11 @@ export class TeamService {
   private baseURL = 'http://localhost:8000/ws/'
   constructor(private http:HttpClient) { }
 
+  getTeams():Observable<Team[]>{
+    const url = this.baseURL + 'teams/';
+    return this.http.get<Team[]>(url);
+  }
+
   getTeam(id: number): Observable<Team>{
     const url = this.baseURL + 'teams/' + id+"/2020-2021";
     return this.http.get<Team>(url);
