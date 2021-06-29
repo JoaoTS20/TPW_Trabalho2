@@ -1,4 +1,5 @@
 export class Player {
+  id: number;
   full_name: string;
   name: string;
   birthday: Date;
@@ -8,7 +9,8 @@ export class Player {
   best_foot: string;
   preferred_number: number;
   player_img: string;
-  constructor(full_name: string,
+  constructor(id: number,
+              full_name: string,
               name: string,
               birthday: Date,
               height: number,
@@ -17,6 +19,7 @@ export class Player {
               best_foot: string,
               preferred_number: number,
               player_img: string) {
+    this.id = id;
     this.full_name = full_name;
     this.name = name;
     this.birthday = birthday;
