@@ -8,6 +8,7 @@ import {AllStaffComponent} from "./all-staff/all-staff.component";
 import {AllPlayersComponent} from "./all-players/all-players.component";
 import {OnePlayerComponent} from "./one-player/one-player.component";
 import {CommonModule} from "@angular/common";
+import {OneCompetitionComponent} from "./one-competition/one-competition.component";
 
 const routes: Routes =[
   {path: '', component: HomepageComponent},
@@ -17,6 +18,7 @@ const routes: Routes =[
   {path: 'teams', component:AllteamsComponent},
   {path: 'playersdetails/:id',component:OnePlayerComponent},
   {path: 'teamdetails/:id',component:OneteamComponent},
+  {path: 'competitiondetails/:id',component:OneCompetitionComponent},
 
 
 
