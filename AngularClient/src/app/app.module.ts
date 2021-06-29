@@ -5,16 +5,34 @@ import {HttpClientModule} from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { AllteamsComponent } from './allteams/allteams.component';
 import { OneteamComponent } from './oneteam/oneteam.component';
+import {RouterModule} from "@angular/router";
+import { HomepageComponent } from './homepage/homepage.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AllPlayersComponent } from './all-players/all-players.component';
+import { AllStaffComponent } from './all-staff/all-staff.component';
+import { AllCompetitionsComponent } from './all-competitions/all-competitions.component';
+import { OnePlayerComponent } from './one-player/one-player.component';
+import { OneStaffComponent } from './one-staff/one-staff.component';
+import { OneCompetitionComponent } from './one-competition/one-competition.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AllteamsComponent,
-    OneteamComponent
+    OneteamComponent,
+    HomepageComponent,
+    AllPlayersComponent,
+    AllStaffComponent,
+    AllCompetitionsComponent,
+    OnePlayerComponent,
+    OneStaffComponent,
+    OneCompetitionComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
