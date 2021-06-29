@@ -15,5 +15,9 @@ export class PlayerService {
     const url = this.baseURL + 'players/';
     return this.http.get<Player[]>(url);
   }
+  getSelectedPlayer(id:number):Observable<Player>{
+    const url = this.baseURL+'players/'+id;
+    return this.http.get<Player>(url);
+  }
 
 }

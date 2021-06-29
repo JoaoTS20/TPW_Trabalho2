@@ -24,18 +24,20 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ws/competitions/', views.get_competitions),
     path('ws/competitions/<int:id>', views.get_competitionDetails),
-
+    path('ws/competitions/comments/<int:id>',views.get_competitionComments),
 
     path('ws/teams/', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),
     path('ws/teams/<int:id>/<str:season>', views.get_teamDetails),
+    path('ws/teams/comments/<int:id>',views.get_teamComments),
 
     path('ws/players/', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
+    path('ws/players/comments/<int:id>', views.get_playerComments),
 
     path('ws/staff/', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),
-
+    path('ws/staff/comments/<int:id>', views.get_staffComments),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

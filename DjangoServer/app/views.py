@@ -5,8 +5,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from app.models import Competition, Team, Player, Staff
-from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer
+from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff
+from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer, \
+    CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer
 
 
 # Competition Related
@@ -27,8 +28,17 @@ def get_competitionDetails(request, id):
     serializer = CompetitionSerializer(competition)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_competitionComments(request, id):
+    try:
+        comments = CommentCompetition.objects.filter(competition_id=id)
+    except CommentCompetition.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CommentCompetitionSerializer(comments, many=True)
+    return Response(serializer.data)
 
-# Team Related
+
+# Team Related ###############
 
 
 @api_view(['GET'])
@@ -49,8 +59,17 @@ def get_teamDetails(request, id, season='2020-2021'):
     serializer = TeamSerializer(team)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_teamComments(request, id):
+    try:
+        comments = CommentTeam.objects.filter(team_id=id)
+    except CommentTeam.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CommentTeamSerializer(comments, many=True)
+    return Response(serializer.data)
 
-# Player Related
+
+# Player Related ############3
 
 @api_view(['GET'])
 def get_players(request):
@@ -68,6 +87,17 @@ def get_playerdetails(request, id):
     serializer = PlayerSerializer(player)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_playerComments(request, id):
+    try:
+        comments = CommentPlayer.objects.filter(player_id=id)
+    except CommentPlayer.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CommentPlayerSerializer(comments, many=True)
+    return Response(serializer.data)
+
+
+# Staff Related
 
 @api_view(['GET'])
 def get_staff(request):
@@ -83,4 +113,13 @@ def get_staffdetails(request, id):
     except Staff.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = StaffSerializer(staff)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_staffComments(request, id):
+    try:
+        comments = CommentStaff.objects.filter(staff_id=id)
+    except CommentStaff.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CommentStaffSerializer(comments, many=True)
     return Response(serializer.data)
