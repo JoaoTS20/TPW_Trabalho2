@@ -1,5 +1,6 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
-
+from app.models import *;
 from app.models import Player, Staff, Team, Competition, Match, ClubPlaysIn, StaffManages, CompetitionsMatches, \
     PlayerPlaysFor, NormalUser, FavouritePlayer, FavouriteTeam, FavouriteCompetition, CommentPlayer, CommentMatch, \
     CommentCompetition, CommentTeam
@@ -62,8 +63,13 @@ class CompetitionsMatchesSerializer(serializers.ModelSerializer):
         model = CompetitionsMatches
         fields = ('id', 'competition', 'match', 'season')
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ('username','date_joined')
 
 class NormalUserSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = NormalUser
         fields = ('id', 'user', 'job_football_related', 'favouriteplayers', 'favouriteteams', 'favouritecompetitions')
@@ -88,6 +94,7 @@ class FavouriteCompetitionSerializer(serializers.ModelSerializer):
 
 
 class CommentPlayerSerializer(serializers.ModelSerializer):
+    user=NormalUserSerializer()
     class Meta:
         model = CommentPlayer
         fields = ('id', 'player', 'user', 'timeofpost', 'comment')

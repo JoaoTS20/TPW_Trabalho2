@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {Team} from "./team";
 import {Player} from "./player";
+import {CommentPlayer} from "./comment-player";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class PlayerService {
   getSelectedPlayer(id:number):Observable<Player>{
     const url = this.baseURL+'players/'+id;
     return this.http.get<Player>(url);
+  }
+  getCommentsPlayer(id:number):Observable<CommentPlayer[]>{
+    const url = this.baseURL+'players/comments/'+id;
+    return this.http.get<CommentPlayer[]>(url);
   }
 
 }
