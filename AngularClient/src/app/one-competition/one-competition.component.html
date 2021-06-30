@@ -45,14 +45,11 @@
         </div>
       </div>
       <div class="col-md-8">
-        <!--select class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example" onchange="javascript:location.href = this.value;">
-          <option selected>Select a Season:</option>
-          {% for season in seasons  %}
-          <option value="{% url 'competitions' %}{{ competition.id }}/{{ season }}">{{ season }}</option>
-          {% endfor %}
+        <select [(ngModel)]="season"  (change)="getselectedseason()" class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example">
+          <option selected [ngValue]="'2020-2021'">Select a Season:</option>
+          <option *ngFor="let season of seasons" [ngValue]="season">{{ season }}</option>
         </select>
         <br>
-        -->
         <h2>Teams</h2>
         <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a id="insert_team" style="color: white" href="">Add</a></button>
         <hr>

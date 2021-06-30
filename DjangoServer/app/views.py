@@ -100,13 +100,7 @@ def get_competition_matches(request,id, season="2020-2021"):
 
 @api_view(['GET'])
 def get_competition_seasons(request,id):
-    try:
-        seasons=ClubPlaysIn.objects.filter(competition_id=id).distinct()
-        print(seasons)
-    except ClubPlaysIn.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ClubPlaysInSerializer(seasons, many=True)
-    return Response(serializer.data)
+    return Response(ClubPlaysIn.objects.filter(competition_id=id).values_list('season', flat=True).distinct())
 
 
 
