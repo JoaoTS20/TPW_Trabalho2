@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Player} from "../player";
+import {Player} from "../_classes/player";
 import {PlayerService} from "../_services/player.service";
-import {Competition} from "../competition";
+import {Competition} from "../_classes/competition";
 import {CompetitionService} from "../_services/competition.service";
 
 @Component({

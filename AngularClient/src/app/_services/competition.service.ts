@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
-import {Competition} from "../competition";
-import {CommentPlayer} from "../comment-player";
-import {CommentCompetition} from "../comment-competition";
-import {Table} from "../table";
+import {Competition} from "../_classes/competition";
+import {CommentPlayer} from "../_classes/comment-player";
+import {CommentCompetition} from "../_classes/comment-competition";
+import {Table} from "../_classes/table";
 
 @Injectable({
   providedIn: 'root'

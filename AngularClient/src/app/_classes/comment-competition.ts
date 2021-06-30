@@ -1,4 +1,4 @@
-import {NormalUser} from "./normal-user";
+import {NormalUser} from "../normal-user";
 
 export class CommentCompetition {
   id: number;

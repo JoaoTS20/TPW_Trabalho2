@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TeamService} from "../_services/team.service";
-import {Team} from "../team";
+import {Team} from "../_classes/team";
 import {ActivatedRoute} from "@angular/router";
-import {PlayersTeam} from "../players-team";
-import {Player} from "../player";
-import {StaffTeam} from "../staff-team";
-import {CommentTeam} from "../comment-team";
+import {PlayersTeam} from "../_classes/players-team";
+import {Player} from "../_classes/player";
+import {StaffTeam} from "../_classes/staff-team";
+import {CommentTeam} from "../_classes/comment-team";
 
 @Component({
   selector: 'app-oneteam',

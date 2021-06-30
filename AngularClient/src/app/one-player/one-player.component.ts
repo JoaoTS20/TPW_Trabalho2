@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Player} from "../player";
+import {Player} from "../_classes/player";
 import {PlayerService} from "../_services/player.service";
 import {ActivatedRoute} from "@angular/router";
-import {CommentPlayer} from "../comment-player";
+import {CommentPlayer} from "../_classes/comment-player";
 
 @Component({
   selector: 'app-one-player',

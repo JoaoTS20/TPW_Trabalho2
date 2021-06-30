@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {CommentCompetition} from "../comment-competition";
-import {Competition} from "../competition";
+import {CommentCompetition} from "../_classes/comment-competition";
+import {Competition} from "../_classes/competition";
 import {CompetitionService} from "../_services/competition.service";
-import {Table} from "../table";
+import {Table} from "../_classes/table";
 
 @Component({
   selector: 'app-one-competition',
