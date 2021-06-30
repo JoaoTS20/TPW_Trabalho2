@@ -65,7 +65,7 @@
             <div class="row">
               <div *ngFor="let team of competition.teams" class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                 <div class="d-flex flex-column align-items-center text-center">
-                  <a href="/teamdetails/{{ team.id }}"><img src="{{baseURL}}{{team.club_badge_img }}" style="width: 100px; height: 100px"></a>
+                  <a routerLink="/teamdetails/{{ team.id }}"><img src="{{baseURL}}{{team.club_badge_img }}" style="width: 100px; height: 100px"></a>
                 </div>
               </div>
             </div>
