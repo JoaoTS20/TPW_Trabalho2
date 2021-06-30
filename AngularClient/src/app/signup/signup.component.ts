@@ -20,7 +20,8 @@ export class SignupComponent implements OnInit {
   }
   signup(username: string, email: string, password1: string, password2: string) {
     this.authServiceService.signup(username, email, password1, password2).subscribe(
-      success => this.router.navigate(['']),
+      success => this.router.navigate(['']).then(() => {
+        window.location.reload();}),
       error => this.error = error
     );
   }
