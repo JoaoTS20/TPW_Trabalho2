@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {CompetitionService} from "../competition.service";
-import {Competition} from "../competition";
+import {CompetitionService} from "../_services/competition.service";
+import {Competition} from "../_classes/competition";
 import {ActivatedRoute} from "@angular/router";
 
 
@@ -33,7 +33,7 @@ export class EditCompetitionComponent implements OnInit {
   getCompetitionToEdit(){
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
-    this.competitionService.getCompetition(id).subscribe(comp => {
+    this.competitionService.getSelectedCompetition(id).subscribe(comp => {
       this.form.patchValue({
         full_name:comp.full_name,
         region:comp.region,

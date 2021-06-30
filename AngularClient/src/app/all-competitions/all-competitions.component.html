@@ -24,9 +24,9 @@
     <div class="row">
       <div *ngFor="let competition of competitions" class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-3">
         <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-          <a href="{{ competition.id }}"><img class="center"  src="{{baseURL}}{{ competition.competition_badge_img }}"></a>
+          <a href="/competitiondetails/{{ competition.id }}"><img class="center"  src="{{baseURL}}{{ competition.competition_badge_img }}"></a>
           <br>
-          <h2 class="ClubName" style="text-align: center"><a  class="ClubName" href="{{ competition.id }}">{{ competition.full_name }}</a></h2>
+          <h2 class="ClubName" style="text-align: center"><a  class="ClubName" href="/competitiondetails/{{ competition.id }}">{{ competition.full_name }}</a></h2>
         </div>
       </div>
     </div>

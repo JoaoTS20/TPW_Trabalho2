@@ -17,6 +17,8 @@ import { OneCompetitionComponent } from './one-competition/one-competition.compo
 import { InsertCompetitionComponent } from './insert-competition/insert-competition.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { EditCompetitionComponent } from './edit-competition/edit-competition.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { EditCompetitionComponent } from './edit-competition/edit-competition.co
     OneStaffComponent,
     OneCompetitionComponent,
     InsertCompetitionComponent,
-    EditCompetitionComponent
+    EditCompetitionComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

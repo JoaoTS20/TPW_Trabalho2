@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {TeamService} from "../team.service";
-import {Player} from "../player";
-import {Team} from "../team";
-import {PlayerService} from "../player.service";
+import {TeamService} from "../_services/team.service";
+import {Player} from "../_classes/player";
+import {Team} from "../_classes/team";
+import {PlayerService} from "../_services/player.service";
 
 @Component({
   selector: 'app-all-players',

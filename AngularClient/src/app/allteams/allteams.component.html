@@ -35,7 +35,7 @@
     <div class="row" >
       <div *ngFor="let team of teams" class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-3">
         <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-          <a routerLink="{{ team.id }}"><img  class="center" src="{{baseURL}}{{ team.club_badge_img }}"></a>
+          <a routerLink="/teamdetails/{{ team.id }}"><img  class="center" src="{{baseURL}}{{ team.club_badge_img }}"></a>
           <br>
           <h1 class="ClubName" style="text-align: center"><a  class="ClubName" routerLink="{{ team.id }}">{{ team.abreviated_name }}</a></h1>
         </div>

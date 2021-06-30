@@ -1,0 +1,33 @@
+<div style="padding-top: 20px; width:800px;">
+  <form action="." method="post" >
+    <h2>Log In</h2>
+    <p>Enter your credentials</p>
+
+    <hr />
+    <div class="form-group">
+      <div class="input-group mb-3" style="max-width: 50%">
+        <span class="input-group-text"><i class="fa fa-user"></i></span>
+        <input #User_Username type="text" class="form-control" id="User_Username" aria-describedby="emailHelp" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-3" style="max-width: 50%">
+        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+        <input #User_Password type="password" class="form-control" id="User_Password" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <br>
+      <input type="hidden" name="next" value="/" />
+      <button (click)="login(User_Username.value, User_Password.value)" style="background: #106eea;font-size: 15px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Log In</button>
+    </div>
+  </form>
+  <div class="form-group">
+    <p>{{ error?.message }}</p>
+    <p *ngIf="error">{{ error?.error | json }}</p>
+    <div>Don't have an account? <a style="font-weight: bolder" routerLink="/signup">Register</a></div>
+  </div>
+</div>
+<div class="col-md-4">
+  <section id="socialLoginForm"></section>
+</div>

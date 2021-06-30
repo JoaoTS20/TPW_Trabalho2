@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Player} from "../player";
-import {PlayerService} from "../player.service";
-import {Competition} from "../competition";
-import {CompetitionService} from "../competition.service";
+import {Player} from "../_classes/player";
+import {PlayerService} from "../_services/player.service";
+import {Competition} from "../_classes/competition";
+import {CompetitionService} from "../_services/competition.service";
 
 @Component({
   selector: 'app-all-competitions',

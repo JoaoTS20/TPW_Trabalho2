@@ -10,6 +10,10 @@ import {OnePlayerComponent} from "./one-player/one-player.component";
 import {CommonModule} from "@angular/common";
 import {InsertCompetitionComponent} from "./insert-competition/insert-competition.component";
 import {EditCompetitionComponent} from "./edit-competition/edit-competition.component";
+import {OneCompetitionComponent} from "./one-competition/one-competition.component";
+import {LoginComponent} from "./login/login.component";
+import {SignupComponent} from "./signup/signup.component";
+import {AuthGuard} from "./auth-service.service";
 
 const routes: Routes =[
   {path: '', component: HomepageComponent},
@@ -19,7 +23,11 @@ const routes: Routes =[
   {path: 'teams', component:AllteamsComponent},
   {path: 'playersdetails/:id',component:OnePlayerComponent},
   {path: 'insertcompetition', component:InsertCompetitionComponent},
-  {path: 'editcompetition/:id', component: EditCompetitionComponent}
+  {path: 'editcompetition/:id', component: EditCompetitionComponent},
+  {path: 'teamdetails/:id',component:OneteamComponent},
+  {path: 'competitiondetails/:id',component:OneCompetitionComponent},
+  {path: 'login',component:LoginComponent},
+  {path: 'signup', component:SignupComponent}
 
 
 ]

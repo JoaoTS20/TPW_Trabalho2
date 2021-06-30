@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CompetitionService} from "../competition.service";
+import {CompetitionService} from "../_services/competition.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
