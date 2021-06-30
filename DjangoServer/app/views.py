@@ -3,7 +3,8 @@ from django.shortcuts import render
 import json
 # Create your views here.
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from app import serializers
@@ -244,6 +245,7 @@ def get_staffComments(request, id):
 
 #User Stuff
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def get_UserProfile(request, id):
     try:
         userInfo= NormalUser.objects.get(user_id=id),
@@ -255,6 +257,7 @@ def get_UserProfile(request, id):
 
 
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
 def get_AdminProfile(request, id):
     try:
         userInfo= User.objects.get(id=id),
