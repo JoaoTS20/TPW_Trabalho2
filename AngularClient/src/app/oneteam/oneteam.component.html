@@ -66,9 +66,9 @@
         </div>
       </div>
       <div class="col-md-8">
-        <select class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example">
+        <select [(ngModel)]="season"  (change)="getselectedseason()" class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example">
           <option>Select a Season:</option>
-          <option  (click)="getselectedseason(item.season)" *ngFor="let item of seasons" >{{ item.season }}</option>
+          <option  *ngFor="let item of seasons"  [ngValue]="item.season" >{{ item.season }}</option>
         </select>
         <br>
         <h2>Competitions</h2>

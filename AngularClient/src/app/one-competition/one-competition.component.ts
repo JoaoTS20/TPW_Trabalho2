@@ -17,6 +17,9 @@ export class OneCompetitionComponent implements OnInit {
   matches: any[] | undefined;
   user: string | null | undefined;
   userID: string | null | undefined;
+
+  season="2020-2021"
+
   baseURL = 'http://localhost:8000';
   constructor(
     private route: ActivatedRoute,
@@ -27,8 +30,8 @@ export class OneCompetitionComponent implements OnInit {
     this.userID = localStorage.getItem('userID')
     this.getCompetition();
     this.getComments();
-    this.getTable("2020-2021")
-    this.getMatches("2020-2021")
+    this.getTable(this.season)
+    this.getMatches(this.season)
 
   }
   getCompetition(): void {
@@ -53,6 +56,7 @@ export class OneCompetitionComponent implements OnInit {
     this.competitionService.getMatchesCompetitions(id,season).subscribe(matches => this.matches=matches);
 
   }
+
 
 
 
