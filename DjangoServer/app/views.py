@@ -251,3 +251,14 @@ def get_UserProfile(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = NormalUserSerializer(userInfo, many=True)
     return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+def get_AdminProfile(request, id):
+    try:
+        userInfo= User.objects.get(id=id),
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = UserSerializer(userInfo, many=True)
+    return Response(serializer.data)
