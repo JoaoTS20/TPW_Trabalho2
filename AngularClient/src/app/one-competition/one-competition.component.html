@@ -8,18 +8,16 @@
               <img src="{{baseURL}}{{ competition.competition_badge_img }}" alt="Admin" class="center" style="width: 200px; height: 200px">
               <div class="mt-3">
                 <h4>{{ competition.full_name }}</h4>
-                <!--form action="{% url 'competitions' %}{{ competition.id }}" method="post" >
-                  {% csrf_token %}
+                <form action="{% url 'competitions' %}{{ competition.id }}" method="post" >
+                  <!--{% csrf_token %}
                   {% if favouritecompetition %}
                   <button style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
                   {% else %}
                   <button style="background: #106eea;" class="btn btn-primary" value="add" name="add">Add Favourite</button>
-                  {% endif %}
-                  {% if deleteeditbbt %}
-                  <button class="btn btn-info"  name="edit"><a  href="{% url 'edit_competition' competition.id %}" style="color: white">Edit</a></button>
-                  <button class="btn btn-danger" value="delete" name="delete">Delete</button>
-                  {% endif %}
-                </form-->
+                  {% endif %}-->
+                  <button class="btn btn-info" *ngIf="user=='admin'" name="edit"><a  href="{% url 'edit_competition' competition.id %}" style="color: white">Edit</a></button>
+                  <button class="btn btn-danger" *ngIf="user=='admin'"value="delete" name="delete">Delete</button>
+                </form>
               </div>
             </div>
           </div>
@@ -42,23 +40,19 @@
         <div class="card mt-3" style="border-color: white">
           <form action="{% url 'competitions' %}{{ competition.id }}" method="post">
             <textarea class="form-control" style="resize:none" id="w3review" name="w3review" rows="3"></textarea>
-            <button style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
+            <button [disabled]="user == undefined || user=='admin'" style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
           </form>
         </div>
       </div>
       <div class="col-md-8">
-        <!--select class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example" onchange="javascript:location.href = this.value;">
-          <option selected>Select a Season:</option>
-          {% for season in seasons  %}
-          <option value="{% url 'competitions' %}{{ competition.id }}/{{ season }}">{{ season }}</option>
-          {% endfor %}
+        <select [(ngModel)]="season"  (change)="getselectedseason()" class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example">
+          <option selected [ngValue]="'2020-2021'">Select a Season:</option>
+          <option *ngFor="let season of seasons" [ngValue]="season">{{ season }}</option>
         </select>
         <br>
         <h2>Teams</h2>
-        {% if deleteeditbbt %}
-        <button style="background: #106eea;" class="btn btn-primary"><a id="insert_team" style="color: white" href="/insertteamincompetition/{{ competition.id }}/{{ season }}">Add</a></button>
-        {% endif %}
-        <hr-->
+        <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a id="insert_team" style="color: white" href="">Add</a></button>
+        <hr>
         <div class="card mb-3">
           <div class="card-body">
             <div class="row">
@@ -104,9 +98,7 @@
     </tbody>
   </table>
   <h2>Matches</h2>
-  <!--{% if deleteeditbbt %}
-  <button style="background: #106eea;" class="btn btn-primary" ><a id="insert_match" style="color: white" href="/insertmatch/{{ competition.id }}">Add</a></button>{% endif %}
-  -->
+  <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary" ><a id="insert_match" style="color: white" href="/insertmatch/{{ competition.id }}">Add</a></button>
   <hr>
   <table class="table table-striped">
     <thead>

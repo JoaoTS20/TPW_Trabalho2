@@ -20,6 +20,7 @@ import {InsertStaffComponent} from "./insert-staff/insert-staff.component";
 import {EditStaffComponent} from "./edit-staff/edit-staff.component";
 import {InsertPlayerComponent} from "./insert-player/insert-player.component";
 import {EditPlayerComponent} from "./edit-player/edit-player.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes =[
   {path: '', component: HomepageComponent},
@@ -39,7 +40,8 @@ const routes: Routes =[
   {path: 'teamdetails/:id',component:OneteamComponent},
   {path: 'competitiondetails/:id',component:OneCompetitionComponent},
   {path: 'login',component:LoginComponent},
-  {path: 'signup', component:SignupComponent}
+  {path: 'signup', component:SignupComponent},
+  {path: 'profile/:id',component:ProfileComponent, canActivate: [AuthGuard]}
 
 
 ]

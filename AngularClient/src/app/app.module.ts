@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { AllteamsComponent } from './allteams/allteams.component';
@@ -25,6 +25,8 @@ import { InsertStaffComponent } from './insert-staff/insert-staff.component';
 import { EditStaffComponent } from './edit-staff/edit-staff.component';
 import { InsertPlayerComponent } from './insert-player/insert-player.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { ProfileComponent } from './profile/profile.component';
+import {AuthGuard, AuthInterceptor} from "./auth-service.service";
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     InsertStaffComponent,
     EditStaffComponent,
     InsertPlayerComponent,
-    EditPlayerComponent
+    EditPlayerComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,14 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -35,6 +35,10 @@ export class CompetitionService {
     const url = this.baseURL+'competitions/matches/'+id+"/"+season;
     return this.http.get<any[]>(url);
   }
+  getSeasons(id: number):Observable<any[]>{
+    const url = this.baseURL+'competitions/seasons/'+id;
+    return this.http.get<any[]>(url);
+  }
 
   insertCompetition(competition:any):Observable<any>{
     const url = this.baseURL + 'insertcompetition/';

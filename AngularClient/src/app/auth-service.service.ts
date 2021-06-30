@@ -14,11 +14,15 @@ export class AuthServiceService {
   private baseURL = 'http://localhost:8000/ws/auth/'
   constructor(private http: HttpClient) {
   }
+
   private setSession(authResult: any) {
     const token = authResult.token;
     // @ts-ignore
     const payload = <JWTPayload> jwt_decode(token);
     const expiresAt = moment.unix(payload.exp);
+
+    localStorage.setItem('username',payload.username)
+    localStorage.setItem('userID',String(payload.user_id))
     // @ts-ignore
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
@@ -49,6 +53,8 @@ export class AuthServiceService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userID' );
   }
 
   // @ts-ignore

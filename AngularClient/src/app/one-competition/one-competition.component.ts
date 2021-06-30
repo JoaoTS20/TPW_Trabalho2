@@ -15,16 +15,24 @@ export class OneCompetitionComponent implements OnInit {
   comments: CommentCompetition[] | undefined;
   table: Table | undefined;
   matches: any[] | undefined;
+  user: string | null | undefined;
+  userID: string | null | undefined;
+  seasons: any[] | undefined;
+  season="2020-2021"
+
   baseURL = 'http://localhost:8000';
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService) { }
 
   ngOnInit(): void {
+    this.user = localStorage.getItem('username')
+    this.userID = localStorage.getItem('userID')
     this.getCompetition();
     this.getComments();
-    this.getTable("2020-2021")
-    this.getMatches("2020-2021")
+    this.getTable(this.season)
+    this.getMatches(this.season)
+    this.getSeasons();
 
   }
   getCompetition(): void {
@@ -47,11 +55,19 @@ export class OneCompetitionComponent implements OnInit {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
     this.competitionService.getMatchesCompetitions(id,season).subscribe(matches => this.matches=matches);
+  }
 
+  getSeasons(): void{
+    // @ts-ignore
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.competitionService.getSeasons(id).subscribe(seasons => this.seasons=seasons);
   }
 
 
-
+  getselectedseason() {
+    this.getTable(this.season)
+    this.getMatches(this.season)
+  }
 }
 
 

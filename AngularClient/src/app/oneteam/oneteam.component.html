@@ -15,18 +15,17 @@
               <div class="mt-3">
                 <h4>{{ team.name }}</h4>
                 <p class="text-secondary mb-1">{{ team.abreviated_name }}</p>
-                <!--form action="{% url 'teams' %}{{ team.id }}" method="post" >
-                  {% csrf_token %}
+                <form action="{% url 'teams' %}{{ team.id }}" method="post" >
+                  <!--{% csrf_token %}
                   {% if favouriteteam %}
                   <button style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
                   {% else %}
                   <button style="background: #106eea;" class="btn btn-primary" value="add" name="add">Add Favourite</button>
                   {% endif %}
-                  {% if deleteeditbbt %}
-                  <button class="btn btn-info"  name="edit"><a  href="{% url 'edit_team' team.id %}" style="color: white">Edit</a></button>
-                  <button class="btn btn-danger" value="delete" name="delete">Delete</button>
-                  {% endif %}
-                </form-->
+                  -->
+                  <button class="btn btn-info" *ngIf="user=='admin'"  name="edit"><a  href="{% url 'edit_team' team.id %}" style="color: white">Edit</a></button>
+                  <button class="btn btn-danger" *ngIf="user=='admin'" value="delete" name="delete">Delete</button>
+                </form>
                 <!--button class="btn btn-outline-primary">Message</button-->
               </div>
             </div>
@@ -62,14 +61,14 @@
         <div class="card mt-3" style="border-color: white">
           <form action="{% url 'teams' %}{{ team.id }}" method="post">
             <textarea class="form-control" style="resize:none" id="w3review" name="w3review" rows="3"></textarea>
-            <button style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
+            <button [disabled]="user == undefined || user=='admin'" style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
           </form>
         </div>
       </div>
       <div class="col-md-8">
-        <select class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example">
-          <option>Select a Season:</option>
-          <option  (click)="getselectedseason(item.season)" *ngFor="let item of seasons" >{{ item.season }}</option>
+        <select [(ngModel)]="season"  (change)="getselectedseason()" class="form-select-lg  mb-3 btn btn-default dropdown-toggle" style="border-color: #106eea" aria-label="Default select example">
+          <option selected [ngValue]="'2020-2021'">Select a Season:</option>
+          <option  *ngFor="let item of seasons"  [ngValue]="item.season" >{{ item.season }}</option>
         </select>
         <br>
         <h2>Competitions</h2>
