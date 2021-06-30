@@ -25,7 +25,7 @@ const routes: Routes =[
   {path: 'competitiondetails/:id',component:OneCompetitionComponent},
   {path: 'login',component:LoginComponent},
   {path: 'signup', component:SignupComponent},
-  {path: 'profile/:id',component:ProfileComponent}
+  {path: 'profile/:id',component:ProfileComponent, canActivate: [AuthGuard]}
 
 
 

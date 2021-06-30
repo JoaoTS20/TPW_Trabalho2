@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { AllteamsComponent } from './allteams/allteams.component';
@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import {FormsModule} from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
+import {AuthGuard, AuthInterceptor} from "./auth-service.service";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,14 @@ import { ProfileComponent } from './profile/profile.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
