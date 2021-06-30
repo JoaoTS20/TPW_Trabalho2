@@ -45,6 +45,29 @@ def insert_competition(request):
     print(c)
     return Response(status=200)
 
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def edit_competition(request, id):
+    #print(request)
+    print(request.FILES)
+    print(request.data)
+    print(request.data['region'])
+    print(request.data['full_name'])
+    print(request.data['competition_badge_img'])
+    try:
+        competition = Competition.objects.get(id=id)
+    except Competition.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'competition_badge_img' in request.FILES.keys():
+        competition.competition_badge_img= request.data['competition_badge_img']
+    competition.full_name = request.data['full_name']
+    competition.region = request.data['region']
+
+    competition.save()
+    return Response(status=200)
+
+
 @api_view(['GET'])
 def get_competitionComments(request, id):
     try:
