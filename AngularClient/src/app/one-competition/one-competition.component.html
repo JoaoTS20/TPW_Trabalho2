@@ -9,9 +9,7 @@
               <div class="mt-3">
                 <h4>{{ competition.full_name }}</h4>
                 <ng-container *ngIf="profile">
-                  <ng-container *ngFor="let s of profile[0].favouritecompetitions">
-                  <button  *ngIf="competition.id==s.id else elseBlock;" style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
-                  </ng-container>
+                  <button  *ngIf="checkfavourite(competition.id); else elseBlock" style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
                   <ng-template #elseBlock>
                     <button style="background: #106eea;" class="btn btn-primary" value="add" name="add">Add Favourite</button>
                   </ng-template>

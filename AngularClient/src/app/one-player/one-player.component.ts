@@ -3,6 +3,8 @@ import {Player} from "../_classes/player";
 import {PlayerService} from "../_services/player.service";
 import {ActivatedRoute} from "@angular/router";
 import {CommentPlayer} from "../_classes/comment-player";
+import {ProfileService} from "../profile.service";
+import {NormalUser} from "../normal-user";
 
 @Component({
   selector: 'app-one-player',
@@ -18,9 +20,12 @@ export class OnePlayerComponent implements OnInit {
   user: string | null | undefined;
   userID: string | null | undefined;
   baseURL = 'http://localhost:8000';
+  profile: NormalUser[] | undefined;
+  favourite: boolean | undefined;
   constructor(
     private route: ActivatedRoute,
-    private playerService: PlayerService) { }
+    private playerService: PlayerService,
+    private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -28,6 +33,7 @@ export class OnePlayerComponent implements OnInit {
     this.getPlayer();
     this.getComments();
     this.getseasons();
+    this.getProfile();
   }
   getPlayer(): void {
     // @ts-ignore
@@ -46,6 +52,14 @@ export class OnePlayerComponent implements OnInit {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
     this.playerService.getSeasonsPlayer(id).subscribe(seasons => this.seasons=seasons);
+  }
+  getProfile(): void{
+    // @ts-ignore
+    this.profileService.getProfile(this.userID).subscribe(profile => this.profile = profile);
+  }
+  checkfavourite(id: number){
+    // @ts-ignore
+    return this.profile[0].favouriteplayers.find(e => e.id === id);
   }
 
 }

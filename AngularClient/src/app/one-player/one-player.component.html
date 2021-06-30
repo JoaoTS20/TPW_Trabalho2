@@ -10,16 +10,14 @@
                 <h4>{{ player.name }}</h4>
                 <p class="text-secondary mb-1">{{ player.birthday }} ({{ age }})</p>
                 <p class="text-muted font-size-sm">{{ player.position }}</p>
-                <form action="{% url 'players' %}{{ player.id }}" method="post" >
-                  <!--{% csrf_token %}
-                  {% if favouriteplayer %}
-                  <button style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
-                  {% else %}
-                  <button style="background: #106eea;" class="btn btn-primary" value="add" name="add">Add Favourite</button>
-                  {% endif %}-->
+                <ng-container *ngIf="profile">
+                    <button  *ngIf="checkfavourite(player.id); else elseBlock" style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
+                    <ng-template #elseBlock>
+                      <button style="background: #106eea;" class="btn btn-primary" value="add" name="add">Add Favourite</button>
+                    </ng-template>
+                </ng-container>
                   <button class="btn btn-info"   *ngIf="user=='admin'" name="edit"><a  href="{% url 'edit_player' player.id %}" style="color: white">Edit</a></button>
                   <button class="btn btn-danger" *ngIf="user=='admin'" value="delete" name="delete">Delete</button>
-                </form>
                 <!--button class="btn btn-outline-primary">Message</button-->
               </div>
             </div>

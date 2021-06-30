@@ -75,6 +75,11 @@ export class OneCompetitionComponent implements OnInit {
     this.getTable(this.season)
     this.getMatches(this.season)
   }
+
+  checkfavourite(id: number){
+    // @ts-ignore
+    return this.profile[0].favouritecompetitions.find(e => e.id === id);
+  }
 }
 
 

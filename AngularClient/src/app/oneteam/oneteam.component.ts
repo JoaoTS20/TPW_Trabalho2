@@ -6,6 +6,8 @@ import {PlayersTeam} from "../_classes/players-team";
 import {Player} from "../_classes/player";
 import {StaffTeam} from "../_classes/staff-team";
 import {CommentTeam} from "../_classes/comment-team";
+import {NormalUser} from "../normal-user";
+import {ProfileService} from "../profile.service";
 
 @Component({
   selector: 'app-oneteam',
@@ -24,9 +26,12 @@ export class OneteamComponent implements OnInit {
   user: string | null | undefined;
   userID: string | null | undefined;
   season="2020-2021"
+  profile: NormalUser[] | undefined;
   constructor(
     private route: ActivatedRoute,
-    private teamservice: TeamService) { }
+    private teamservice: TeamService,
+    private profileService: ProfileService
+    ) { }
   selectedSeason: any;
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -37,6 +42,7 @@ export class OneteamComponent implements OnInit {
     this.getCompetitionsSeason(this.season)
     this.getComments();
     this.getSeasons();
+    this.getProfile();
   }
   getTeam() {
     // @ts-ignore
@@ -91,6 +97,15 @@ export class OneteamComponent implements OnInit {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
     this.teamservice.getTeamSeasons(id).subscribe(seasons => this.seasons=seasons);
+  }
+
+  getProfile(): void{
+    // @ts-ignore
+    this.profileService.getProfile(this.userID).subscribe(profile => this.profile = profile);
+  }
+  checkfavourite(id: number){
+    // @ts-ignore
+    return this.profile[0].favouriteteams.find(e => e.id === id);
   }
 
 }
