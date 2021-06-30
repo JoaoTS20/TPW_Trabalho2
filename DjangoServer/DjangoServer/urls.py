@@ -28,8 +28,12 @@ urlpatterns = [
 
     path('ws/teams/', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),
-    path('ws/teams/<int:id>/<str:season>', views.get_teamDetails),
+    path('ws/teams/players/<int:id>/<str:season>', views.get_teamPlayers),
+    path('ws/teams/staff/<int:id>/<str:season>', views.get_teamStaff),
+    path('ws/teams/competitions/<int:id>/<str:season>', views.get_teamCompetition),
     path('ws/teams/comments/<int:id>',views.get_teamComments),
+    path('ws/teams/seasons/<int:id>',views.get_teamSeasons),
+
 
     path('ws/players/', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),

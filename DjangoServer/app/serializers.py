@@ -41,18 +41,21 @@ class MatchSerializer(serializers.ModelSerializer):
 
 
 class ClubPlaysInSerializer(serializers.ModelSerializer):
+    competition=Competition()
     class Meta:
         model = ClubPlaysIn
         fields = ('id', 'team', 'competition', 'season')
 
 
 class StaffManagesInSerializer(serializers.ModelSerializer):
+    staff=StaffSerializer()
     class Meta:
         model = StaffManages
         fields = ('id', 'staff', 'team', 'season')
 
 
 class PlayerPlaysForInSerializer(serializers.ModelSerializer):
+    player= PlayerSerializer()
     class Meta:
         model = PlayerPlaysFor
         fields = ('id', 'player', 'team', 'season')

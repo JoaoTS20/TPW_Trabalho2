@@ -1,13 +1,16 @@
 from django.shortcuts import render
-
+import json
 # Create your views here.
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff
+from app import serializers
+from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff, \
+    ClubPlaysIn, PlayerPlaysFor, StaffManages
 from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer, \
-    CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer
+    CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer, \
+    PlayerPlaysForInSerializer, ClubPlaysInSerializer, StaffManagesInSerializer
 
 
 # Competition Related
@@ -49,11 +52,9 @@ def get_teams(request):
 
 
 @api_view(['GET'])
-def get_teamDetails(request, id, season='2020-2021'):
-    print(season)
+def get_teamDetails(request, id):
     try:
         team = Team.objects.get(id=id)
-        players=Player.objects.filter(playerplaysfor__team_id=id, playerplaysfor__season=season)
     except Team.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = TeamSerializer(team)
@@ -67,6 +68,44 @@ def get_teamComments(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CommentTeamSerializer(comments, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def get_teamPlayers(request,id, season='2020-2021'):
+    try:
+        players = PlayerPlaysFor.objects.filter(season=season,team_id=id)
+    except PlayerPlaysFor.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = PlayerPlaysForInSerializer(players, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_teamCompetition(request,id, season='2020-2021'):
+    try:
+        competitions = ClubPlaysIn.objects.filter(season=season,team_id=id)
+    except ClubPlaysIn.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ClubPlaysInSerializer(competitions, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_teamStaff(request,id, season='2020-2021'):
+    try:
+        staff = StaffManages.objects.filter(season=season,team_id=id)
+    except PlayerPlaysFor.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = StaffManagesInSerializer(staff, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_teamSeasons(request,id):
+    try:
+        seasons=ClubPlaysIn.objects.filter(team_id=id).distinct()
+        print(seasons)
+    except ClubPlaysIn.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ClubPlaysInSerializer(seasons, many=True)
+    return Response(serializer.data)
+
 
 
 # Player Related ############3
