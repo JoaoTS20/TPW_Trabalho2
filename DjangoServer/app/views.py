@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 
 from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff
@@ -27,6 +28,22 @@ def get_competitionDetails(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CompetitionSerializer(competition)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def insert_competition(request):
+    print(request)
+    print(request.FILES)
+    print(request.data)
+    print(request.data['region'])
+    print(request.data['full_name'])
+    print(request.data['competition_badge_img'])
+    c = Competition(full_name=request.data['full_name'],
+                    region=request.data['region'],
+                    competition_badge_img=request.FILES['competition_badge_img'])
+    c.save()
+    print(c)
+    return Response(status=200)
 
 @api_view(['GET'])
 def get_competitionComments(request, id):

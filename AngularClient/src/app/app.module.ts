@@ -14,6 +14,9 @@ import { AllCompetitionsComponent } from './all-competitions/all-competitions.co
 import { OnePlayerComponent } from './one-player/one-player.component';
 import { OneStaffComponent } from './one-staff/one-staff.component';
 import { OneCompetitionComponent } from './one-competition/one-competition.component';
+import { InsertCompetitionComponent } from './insert-competition/insert-competition.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { EditCompetitionComponent } from './edit-competition/edit-competition.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +29,17 @@ import { OneCompetitionComponent } from './one-competition/one-competition.compo
     AllCompetitionsComponent,
     OnePlayerComponent,
     OneStaffComponent,
-    OneCompetitionComponent
+    OneCompetitionComponent,
+    InsertCompetitionComponent,
+    EditCompetitionComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
