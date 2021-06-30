@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthServiceService} from "./auth-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
   user: string | null | undefined;
   userID: string | null | undefined;
 
-  constructor(private authServiceService: AuthServiceService) {
+  constructor(private authServiceService: AuthServiceService, private router: Router) {
   }
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -22,6 +23,7 @@ export class AppComponent {
   logout(): void{
     this.authServiceService.logout();
     this.ngOnInit();
+    this.router.navigate([''])
   }
 
   title = 'AngularClient';
