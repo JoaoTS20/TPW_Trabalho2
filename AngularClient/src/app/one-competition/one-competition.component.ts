@@ -32,6 +32,8 @@ export class OneCompetitionComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.competitionService.getCommentsCompetitions(id).subscribe(comments => this.comments=comments);
   }
+
+
 }
 
 

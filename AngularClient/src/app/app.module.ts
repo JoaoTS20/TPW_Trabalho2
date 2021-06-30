@@ -16,6 +16,7 @@ import { OneStaffComponent } from './one-staff/one-staff.component';
 import { OneCompetitionComponent } from './one-competition/one-competition.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SignupComponent } from './signup/signup.component';
     BrowserModule,
     HttpClientModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
