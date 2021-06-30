@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from app import serializers
 from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff, \
-    ClubPlaysIn, PlayerPlaysFor, StaffManages
+    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match
 from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer, \
     CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer, \
     PlayerPlaysForInSerializer, ClubPlaysInSerializer, StaffManagesInSerializer
@@ -39,6 +39,62 @@ def get_competitionComments(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CommentCompetitionSerializer(comments, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def get_competition_table(request,id, season="2020-2021"):
+    teams = Team.objects.filter(clubplaysin__competition=id, clubplaysin__season=season)
+    table = []
+    for t in teams:
+        dic = {
+            "team": t, "points": 0, "home_goal": 0, "away_goal": 0,
+            "home_concede": 0, "away_concede": 0,
+            "win": 0, "draw": 0, "loss": 0
+        }
+        home_matches = Match.objects.filter(competitionsmatches__competition_id=id,
+                                            competitionsmatches__season=season,
+                                            home_team=t)
+        for m in home_matches:
+            if m.home_goals > m.away_goals:
+                dic["win"] += 1
+                dic["points"] += 3
+            elif m.home_goals == m.away_goals:
+                dic["draw"] += 1
+                dic["points"] += 1
+            else:
+                dic["loss"] += 1
+            dic["home_goal"] += m.home_goals
+            dic["home_concede"] += m.away_goals
+        away_matches = Match.objects.filter(competitionsmatches__competition_id=id,
+                                            competitionsmatches__season=season,
+                                            away_team=t)
+        for m in away_matches:
+            if m.home_goals < m.away_goals:
+                dic["win"] += 1
+                dic["points"] += 3
+            elif m.home_goals == m.away_goals:
+                dic["draw"] += 1
+                dic["points"] += 1
+            else:
+                dic["loss"] += 1
+            dic["away_goal"] += m.away_goals
+            dic["away_concede"] += m.home_goals
+
+        table.append(dic)
+    table.sort(key=lambda k: -k["points"])
+    print(table)
+
+@api_view(['GET'])
+def get_competition_teams(request,id, season="2020-2021"):
+    try:
+        clubs = ClubPlaysIn.objects.filter(season=season, competition_id=id)
+    except ClubPlaysIn.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ClubPlaysInSerializer(clubs, many=True)
+    return Response(serializer.data)
+
+
+
+
 
 
 # Team Related ###############
