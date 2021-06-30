@@ -135,6 +135,15 @@ def get_playerComments(request, id):
     serializer = CommentPlayerSerializer(comments, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_playerSeasons(request,id):
+    try:
+        players = PlayerPlaysFor.objects.filter(player_id=id)
+    except PlayerPlaysFor.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = PlayerPlaysForInSerializer(players, many=True)
+    return Response(serializer.data)
+
 
 # Staff Related
 

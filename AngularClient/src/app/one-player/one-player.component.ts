@@ -14,6 +14,8 @@ export class OnePlayerComponent implements OnInit {
   @Input() player: Player | undefined;
   comments: CommentPlayer[] | undefined;
   age: number | undefined;
+  seasons: any[] |undefined;
+
   baseURL = 'http://localhost:8000';
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +24,7 @@ export class OnePlayerComponent implements OnInit {
   ngOnInit(): void {
     this.getPlayer();
     this.getComments();
+    this.getseasons();
   }
   getPlayer(): void {
     // @ts-ignore
@@ -34,6 +37,12 @@ export class OnePlayerComponent implements OnInit {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
    this.playerService.getCommentsPlayer(id).subscribe(comments => this.comments=comments);
+  }
+
+  getseasons():void{
+    // @ts-ignore
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.playerService.getSeasonsPlayer(id).subscribe(seasons => this.seasons=seasons);
   }
 
 }

@@ -28,15 +28,14 @@
           </div>
         </div>
         <br>
-        <!--h5>{{ formComment.comment.label}}:</h5>
+        <h5>Add Comment:</h5>
         <hr>
         <div class="card mt-3" style="border-color: white">
-          <form action="{% url 'players' %}{{ player.id }}" method="post">
-            {% csrf_token %}
-            {{ formComment.comment }}
+          <form action="}" method="post">
+            <textarea class="form-control" style="resize:none" id="w3review" name="w3review" rows="3"></textarea>
             <button style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
           </form>
-        </div-->
+        </div>
       </div>
       <div class="col-md-8">
         <div class="card mb-3">
@@ -89,31 +88,23 @@
         </div>
         <h2>Teams</h2>
         <hr>
-        <!--div class="card mb-3">
-          <div class="card-body">
-            {% for team in teams %}
-            {% for sea in season %}
-            {% if sea.team.id == team.id %}
-            <div class="row">
+        <div class="card mb-3">
+          <div *ngFor="let itemTeam of seasons; let itemSeasons of seasons" class="card-body">
+            <div *ngIf="itemSeasons.team.id ==itemTeam.team.id" class="row">
               <div class="col-sm-3">
-                <a href="{% url 'teams' %}{{ team.id }}"><h6 class="mb-0">{{ team.name}}</h6></a>
+                <a href="/teamdetails/{{ itemTeam.team.id }}"><h6 class="mb-0">{{itemTeam.team.name}}</h6></a>
               </div>
               <div class="col-sm-9 text-secondary">
-
-                {{sea.season}}
-
+                {{itemSeasons.season}}
               </div>
             </div>
             <hr>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
           </div>
         </div>
       </div>
     </div>
   </div>
-</div-->
+</div>
 <div class="my-3 p-3 bg-body rounded shadow-sm">
   <h3 class="border-bottom pb-2 mb-0">Comments</h3>
   <div *ngFor="let comment of comments" class=" border-bottom d-flex text-muted pt-3">
@@ -125,7 +116,4 @@
     </p>
   </div>
 </div>
-</div>
-</div>
-</div>
-</div>
+

@@ -24,7 +24,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ('id', 'full_name', 'abreviated_name', 'founding_year', 'club_badge_img', 'city', 'country', 'players',
+        fields = ('id', 'full_name', 'name', 'abreviated_name', 'founding_year', 'club_badge_img', 'city', 'country', 'players',
                   'formation')
 
 
@@ -44,7 +44,6 @@ class MatchSerializer(serializers.ModelSerializer):
 
 class ClubPlaysInSerializer(serializers.ModelSerializer):
     competition = CompetitionSerializer()
-
     class Meta:
         model = ClubPlaysIn
         fields = ('id', 'team', 'competition', 'season')
@@ -60,7 +59,7 @@ class StaffManagesInSerializer(serializers.ModelSerializer):
 
 class PlayerPlaysForInSerializer(serializers.ModelSerializer):
     player = PlayerSerializer()
-
+    team=TeamSerializer()
     class Meta:
         model = PlayerPlaysFor
         fields = ('id', 'player', 'team', 'season')

@@ -38,6 +38,7 @@ urlpatterns = [
     path('ws/players/', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
     path('ws/players/comments/<int:id>', views.get_playerComments),
+    path('ws/players/seasons/<int:id>', views.get_playerSeasons),
 
     path('ws/staff/', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),

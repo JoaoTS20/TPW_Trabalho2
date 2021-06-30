@@ -25,4 +25,9 @@ export class PlayerService {
     return this.http.get<CommentPlayer[]>(url);
   }
 
+  getSeasonsPlayer(id:number):Observable<any[]>{
+    const url = this.baseURL+'players/seasons/'+id;
+    return this.http.get<any[]>(url);
+  }
+
 }
