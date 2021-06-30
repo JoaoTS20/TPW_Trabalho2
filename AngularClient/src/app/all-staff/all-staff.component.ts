@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Competition} from "../competition";
-import {CompetitionService} from "../competition.service";
+import {CompetitionService} from "../_services/competition.service";
 import {Staff} from "../staff";
-import {StaffService} from "../staff.service";
+import {StaffService} from "../_services/staff.service";
 
 @Component({
   selector: 'app-all-staff',

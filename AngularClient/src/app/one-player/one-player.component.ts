@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Player} from "../player";
-import {PlayerService} from "../player.service";
+import {PlayerService} from "../_services/player.service";
 import {ActivatedRoute} from "@angular/router";
 import {CommentPlayer} from "../comment-player";
 

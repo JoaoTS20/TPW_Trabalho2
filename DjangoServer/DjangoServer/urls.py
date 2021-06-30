@@ -22,9 +22,14 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('ws/competitions/', views.get_competitions),
     path('ws/competitions/<int:id>', views.get_competitionDetails),
     path('ws/competitions/comments/<int:id>',views.get_competitionComments),
+    path('ws/competitions/table/<int:id>/<str:season>',views.get_competition_table),
+    path('ws/competitions/teams/<int:id>/<str:season>',views.get_competition_table),
+    path('ws/competitions/matches/<int:id>/<str:season>',views.get_competition_matches),
+    path('ws/competitions/seasons/<int:id>',views.get_competition_seasons),
 
     path('ws/teams/', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),

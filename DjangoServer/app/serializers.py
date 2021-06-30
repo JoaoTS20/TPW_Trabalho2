@@ -37,6 +37,8 @@ class CompetitionSerializer(serializers.ModelSerializer):
 
 
 class MatchSerializer(serializers.ModelSerializer):
+    home_team=TeamSerializer()
+    away_team=TeamSerializer()
     class Meta:
         model = Match
         fields = ('id', 'ngame', 'description', 'home_team', 'away_team', 'competition', 'home_goals', 'away_goals')
@@ -66,6 +68,7 @@ class PlayerPlaysForInSerializer(serializers.ModelSerializer):
 
 
 class CompetitionsMatchesSerializer(serializers.ModelSerializer):
+    match=MatchSerializer()
     class Meta:
         model = CompetitionsMatches
         fields = ('id', 'competition', 'match', 'season')

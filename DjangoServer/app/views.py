@@ -7,10 +7,11 @@ from rest_framework.response import Response
 
 from app import serializers
 from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff, \
-    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match
+    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match, CompetitionsMatches
 from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer, \
     CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer, \
-    PlayerPlaysForInSerializer, ClubPlaysInSerializer, StaffManagesInSerializer
+    PlayerPlaysForInSerializer, ClubPlaysInSerializer, StaffManagesInSerializer, MatchSerializer, \
+    CompetitionsMatchesSerializer
 
 
 # Competition Related
@@ -46,7 +47,7 @@ def get_competition_table(request,id, season="2020-2021"):
     table = []
     for t in teams:
         dic = {
-            "team": t, "points": 0, "home_goal": 0, "away_goal": 0,
+            "team": TeamSerializer(t).data, "points": 0, "home_goal": 0, "away_goal": 0,
             "home_concede": 0, "away_concede": 0,
             "win": 0, "draw": 0, "loss": 0
         }
@@ -81,17 +82,29 @@ def get_competition_table(request,id, season="2020-2021"):
 
         table.append(dic)
     table.sort(key=lambda k: -k["points"])
-    print(table)
+    return Response({"table": table})
+
+
+
 
 @api_view(['GET'])
-def get_competition_teams(request,id, season="2020-2021"):
+def get_competition_matches(request,id, season="2020-2021"):
     try:
-        clubs = ClubPlaysIn.objects.filter(season=season, competition_id=id)
-    except ClubPlaysIn.DoesNotExist:
+        matches=CompetitionsMatches.objects.filter(competition_id=id,season=season)
+    except CompetitionsMatches.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ClubPlaysInSerializer(clubs, many=True)
+    serializer = CompetitionsMatchesSerializer(matches, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_competition_seasons(request,id):
+    try:
+        seasons=ClubPlaysIn.objects.filter(competition_id=id).distinct()
+        print(seasons)
+    except ClubPlaysIn.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ClubPlaysInSerializer(seasons, many=True)
+    return Response(serializer.data)
 
 
 

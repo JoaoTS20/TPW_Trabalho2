@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Team} from "./team";
+import {Team} from "../team";
 import {Observable} from "rxjs/internal/Observable";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {PlayersTeam} from "./players-team";
-import {StaffTeam} from "./staff-team";
-import {CommentPlayer} from "./comment-player";
-import {CommentTeam} from "./comment-team";
+import {PlayersTeam} from "../players-team";
+import {StaffTeam} from "../staff-team";
+import {CommentPlayer} from "../comment-player";
+import {CommentTeam} from "../comment-team";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

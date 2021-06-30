@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
-import {Competition} from "./competition";
-import {CommentPlayer} from "./comment-player";
-import {CommentCompetition} from "./comment-competition";
+import {Competition} from "../competition";
+import {CommentPlayer} from "../comment-player";
+import {CommentCompetition} from "../comment-competition";
+import {Table} from "../table";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,16 @@ export class CompetitionService {
   getCommentsCompetitions(id:number):Observable<CommentCompetition[]>{
     const url = this.baseURL+'competitions/comments/'+id;
     return this.http.get<CommentCompetition[]>(url);
+  }
+
+  getTableCompetitions(id: number, season: string):Observable<Table>{
+    const url = this.baseURL+'competitions/table/'+id+"/"+season;
+    return this.http.get<Table>(url);
+  }
+
+  getMatchesCompetitions(id: number, season: string):Observable<any[]>{
+    const url = this.baseURL+'competitions/matches/'+id+"/"+season;
+    return this.http.get<any[]>(url);
   }
 
 
