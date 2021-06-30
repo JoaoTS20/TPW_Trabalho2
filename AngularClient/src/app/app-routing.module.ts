@@ -11,6 +11,7 @@ import {CommonModule} from "@angular/common";
 import {OneCompetitionComponent} from "./one-competition/one-competition.component";
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
+import {AuthGuard} from "./auth-service.service";
 
 const routes: Routes =[
   {path: '', component: HomepageComponent},
