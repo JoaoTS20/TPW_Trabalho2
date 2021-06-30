@@ -33,6 +33,7 @@ def get_competitionDetails(request, id):
     serializer = CompetitionSerializer(competition)
     return Response(serializer.data)
 
+
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def insert_competition(request):
@@ -49,10 +50,11 @@ def insert_competition(request):
     print(c)
     return Response(status=200)
 
+
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def edit_competition(request, id):
-    #print(request)
+    # print(request)
     print(request.FILES)
     print(request.data)
     print(request.data['region'])
@@ -64,7 +66,7 @@ def edit_competition(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if 'competition_badge_img' in request.FILES.keys():
-        competition.competition_badge_img= request.data['competition_badge_img']
+        competition.competition_badge_img = request.data['competition_badge_img']
     competition.full_name = request.data['full_name']
     competition.region = request.data['region']
 
@@ -81,8 +83,9 @@ def get_competitionComments(request, id):
     serializer = CommentCompetitionSerializer(comments, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
-def get_competition_table(request,id, season="2020-2021"):
+def get_competition_table(request, id, season="2020-2021"):
     teams = Team.objects.filter(clubplaysin__competition=id, clubplaysin__season=season)
     table = []
     for t in teams:
@@ -125,29 +128,25 @@ def get_competition_table(request,id, season="2020-2021"):
     return Response({"table": table})
 
 
-
-
 @api_view(['GET'])
-def get_competition_matches(request,id, season="2020-2021"):
+def get_competition_matches(request, id, season="2020-2021"):
     try:
-        matches=CompetitionsMatches.objects.filter(competition_id=id,season=season)
+        matches = CompetitionsMatches.objects.filter(competition_id=id, season=season)
     except CompetitionsMatches.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CompetitionsMatchesSerializer(matches, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
-def get_competition_seasons(request,id):
+def get_competition_seasons(request, id):
     try:
-        seasons=ClubPlaysIn.objects.filter(competition_id=id).distinct()
+        seasons = ClubPlaysIn.objects.filter(competition_id=id).distinct()
         print(seasons)
     except ClubPlaysIn.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ClubPlaysInSerializer(seasons, many=True)
     return Response(serializer.data)
-
-
-
 
 
 # Team Related ###############
@@ -169,6 +168,7 @@ def get_teamDetails(request, id):
     serializer = TeamSerializer(team)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_teamComments(request, id):
     try:
@@ -178,43 +178,89 @@ def get_teamComments(request, id):
     serializer = CommentTeamSerializer(comments, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
-def get_teamPlayers(request,id, season='2020-2021'):
+def get_teamPlayers(request, id, season='2020-2021'):
     try:
-        players = PlayerPlaysFor.objects.filter(season=season,team_id=id)
+        players = PlayerPlaysFor.objects.filter(season=season, team_id=id)
     except PlayerPlaysFor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = PlayerPlaysForInSerializer(players, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
-def get_teamCompetition(request,id, season='2020-2021'):
+def get_teamCompetition(request, id, season='2020-2021'):
     try:
-        competitions = ClubPlaysIn.objects.filter(season=season,team_id=id)
+        competitions = ClubPlaysIn.objects.filter(season=season, team_id=id)
     except ClubPlaysIn.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ClubPlaysInSerializer(competitions, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
-def get_teamStaff(request,id, season='2020-2021'):
+def get_teamStaff(request, id, season='2020-2021'):
     try:
-        staff = StaffManages.objects.filter(season=season,team_id=id)
+        staff = StaffManages.objects.filter(season=season, team_id=id)
     except PlayerPlaysFor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = StaffManagesInSerializer(staff, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
-def get_teamSeasons(request,id):
+def get_teamSeasons(request, id):
     try:
-        seasons=ClubPlaysIn.objects.filter(team_id=id).distinct()
+        seasons = ClubPlaysIn.objects.filter(team_id=id).distinct()
         print(seasons)
     except ClubPlaysIn.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ClubPlaysInSerializer(seasons, many=True)
     return Response(serializer.data)
 
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def insert_team(request):
+    print(request)
+    print(request.FILES)
+    t = Team(full_name=request.data['full_name'],
+             name=request.data['name'],
+             abreviated_name=request.data['abreviated_name'],
+             founding_year=int(request.data['founding_year']),
+             club_badge_img=request.data['club_badge_img'],
+             city=request.data['city'],
+             country=request.data['country'],
+             formation=request.data['formation']
+             )
+    t.save()
+    print(t)
+    return Response(status=200)
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def edit_team(request, id):
+    print(request)
+    print(request.FILES)
+    try:
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'club_badge_img' in request.FILES.keys():
+        team.club_badge_img = request.data['club_badge_img']
+    team.full_name = request.data['full_name']
+    team.name = request.data['name']
+    team.abreviated_name = request.data['abreviated_name']
+    team.founding_year = int(request.data['founding_year'])
+    team.city = request.data['city']
+    team.country = request.data['country']
+    team.formation = request.data['formation']
+    team.save()
+    print(team)
+    return Response(status=200)
 
 
 # Player Related ############3
@@ -235,6 +281,7 @@ def get_playerdetails(request, id):
     serializer = PlayerSerializer(player)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_playerComments(request, id):
     try:
@@ -244,14 +291,63 @@ def get_playerComments(request, id):
     serializer = CommentPlayerSerializer(comments, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
-def get_playerSeasons(request,id):
+def get_playerSeasons(request, id):
     try:
         players = PlayerPlaysFor.objects.filter(player_id=id)
     except PlayerPlaysFor.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = PlayerPlaysForInSerializer(players, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def insert_player(request):
+    print(request)
+    print(request.FILES)
+    p = Player(full_name=request.data['full_name'],
+               name=request.data['name'],
+               birthday=request.data['birthday'],
+               height=request.data['height'],
+               nationality=request.data['nationality'],
+               position=request.data['position'],
+               best_foot=request.data['best_foot'],
+               preferred_number=request.data['preferred_number'],
+               player_img=request.data['player_img']
+               )
+
+    p.save()
+    print(p)
+    return Response(status=200)
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def edit_player(request, id):
+    print(request)
+    print(request.FILES)
+
+    try:
+        player = Player.objects.get(id=id)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'player_img' in request.FILES.keys():
+        player.player_img = request.data['player_img']
+
+    player.full_name=request.data['full_name']
+    player.name=request.data['name']
+    player.birthday=request.data['birthday']
+    player.height=request.data['height']
+    player.nationality=request.data['nationality']
+    player.position=request.data['position']
+    player.best_foot=request.data['best_foot']
+    player.preferred_number=request.data['preferred_number']
+    player.save()
+
+    return Response(status=200)
 
 
 # Staff Related
@@ -272,6 +368,7 @@ def get_staffdetails(request, id):
     serializer = StaffSerializer(staff)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_staffComments(request, id):
     try:
@@ -280,3 +377,43 @@ def get_staffComments(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CommentStaffSerializer(comments, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def insert_staff(request):
+    print(request)
+    print(request.FILES)
+    s = Staff(full_name=request.data['full_name'],
+              name=request.data['name'],
+              birthday=request.data['birthday'],
+              nationality=request.data['nationality'],
+              staff_img=request.data['staff_img'],
+              funcao=request.data['funcao']
+              )
+    s.save()
+    print(s)
+    return Response(status=200)
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def edit_staff(request, id):
+    print(request)
+    print(request.FILES)
+
+    try:
+        staff = Staff.objects.get(id=id)
+    except Staff.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'staff_img' in request.FILES.keys():
+        staff.staff_img = request.data['staff_img']
+
+    staff.full_name = request.data['full_name']
+    staff.name = request.data['name']
+    staff.birthday = request.data['birthday']
+    staff.nationality = request.data['nationality']
+    staff.funcao = request.data['funcao']
+    staff.save()
+    return Response(status=200)

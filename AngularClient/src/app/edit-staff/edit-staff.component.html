@@ -1,0 +1,29 @@
+<div>
+  <h1>Insert Staff</h1>
+  <div *ngIf="staff">
+    <form [formGroup]="form" (ngSubmit)="insertStaff()">
+      <div class="form-group">
+        Full Name: <input type="text" (change)="changeFullName($event)" value="{{staff.full_name}}">
+      </div>
+      <div class="form-group">
+        Name: <input type="text" (change)="changeName($event)" value="{{staff.name}}">
+      </div>
+      <div class="form-group">
+        Birthday: <input type="date" (change)="changeBirthday($event)" value="{{staff.birthday}}">
+      </div>
+      <div class="form-group">
+        Nationality: <input type="text" (change)="changeNationality($event)" value="{{staff.nationality}}">
+      </div>
+      <div class="form-group">
+        Function: <input type="text" (change)="changeFunction($event)" value="{{staff.funcao}}">
+      </div>
+      <div class="form-group">
+        StaffImage: <input type="file" (change)="upload($event)">
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-danger">Upload</button>
+      </div>
+    </form>
+  </div>
+</div>

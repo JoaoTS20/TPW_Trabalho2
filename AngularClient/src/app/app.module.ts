@@ -19,6 +19,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { EditCompetitionComponent } from './edit-competition/edit-competition.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { InsertTeamComponent } from './insert-team/insert-team.component';
+import { EditTeamComponent } from './edit-team/edit-team.component';
+import { InsertStaffComponent } from './insert-staff/insert-staff.component';
+import { EditStaffComponent } from './edit-staff/edit-staff.component';
+import { InsertPlayerComponent } from './insert-player/insert-player.component';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,13 @@ import { SignupComponent } from './signup/signup.component';
     InsertCompetitionComponent,
     EditCompetitionComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    InsertTeamComponent,
+    EditTeamComponent,
+    InsertStaffComponent,
+    EditStaffComponent,
+    InsertPlayerComponent,
+    EditPlayerComponent
   ],
   imports: [
     BrowserModule,

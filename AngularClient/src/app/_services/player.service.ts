@@ -29,5 +29,13 @@ export class PlayerService {
     const url = this.baseURL+'players/seasons/'+id;
     return this.http.get<any[]>(url);
   }
+  insertPlayer(player:any):Observable<any>{
+    const url = this.baseURL+'insertplayer/';
+    return this.http.post<any>(url,player);
+  }
+  editPlayer(id:number,player:any):Observable<any>{
+    const url = this.baseURL+'editplayer/'+id;
+    return this.http.post<any>(url,player);
+  }
 
 }

@@ -1,0 +1,34 @@
+<div>
+  <h1>Insert Competition</h1>
+  <form [formGroup]="form" (ngSubmit)="insertCompetition()">
+    <div class="form-group">
+      Full Name: <input type="text" (change)="changeFullName($event)">
+    </div>
+    <div class="form-group">
+      Name: <input type="text" (change)="changeName($event)" >
+    </div>
+    <div class="form-group">
+      Abreviated name: <input type="text" (change)="changeAbrName($event)" >
+    </div>
+    <div class="form-group">
+      Founding year: <input type="text" (change)="changeFoundingYear($event)" >
+    </div>
+    <div class="form-group">
+      Image of the Team: <input type="file" (change)="upload($event)">
+    </div>
+    <div class="form-group">
+      City: <input type="text" (change)="changeCity($event)" >
+    </div>
+    <div class="form-group">
+      Country: <input type="text" (change)="changeCountry($event)" >
+    </div>
+    <div class="form-group">
+      Formation: <input type="text" (change)="changeFormation($event)" >
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-danger">Upload</button>
+    </div>
+  </form>
+</div>
+

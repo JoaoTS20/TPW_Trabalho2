@@ -15,4 +15,16 @@ export class StaffService {
     const url = this.baseURL + 'staff/';
     return this.http.get<Staff[]>(url);
   }
+  getcertainStaff(id:number): Observable<Staff> {
+    const url = this.baseURL + 'staff/'+id;
+    return this.http.get<Staff>(url);
+  }
+  insertStaff(staff: any): Observable<any>{
+    const url = this.baseURL + 'insertstaff/';
+    return this.http.post<any>(url,staff);
+  }
+  editStaff(id:number,staff: any): Observable<any>{
+    const url = this.baseURL + 'editstaff/'+id;
+    return this.http.post<any>(url,staff);
+  }
 }

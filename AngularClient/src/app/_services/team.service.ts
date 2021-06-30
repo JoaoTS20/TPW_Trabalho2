@@ -49,6 +49,14 @@ export class TeamService {
     const url = this.baseURL + 'teams/seasons/' + id;
     return this.http.get<any[]>(url);
   }
+  insertTeam(team:any): Observable<any>{
+    const url = this.baseURL + 'insertteam/';
+    return this.http.post<any>(url,team);
+  }
+  editTeam(id: number,team:any): Observable<any>{
+    const url = this.baseURL + 'editteam/' + id;
+    return this.http.post<any>(url,team);
+  }
 
 
 }

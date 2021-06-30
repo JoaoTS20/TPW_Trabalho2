@@ -47,16 +47,22 @@ urlpatterns = [
     path('ws/teams/competitions/<int:id>/<str:season>', views.get_teamCompetition),
     path('ws/teams/comments/<int:id>',views.get_teamComments),
     path('ws/teams/seasons/<int:id>',views.get_teamSeasons),
+    path('ws/insertteam/', views.insert_team),
+    path('ws/editteam/<int:id>', views.edit_team),
 
 
     path('ws/players/', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
     path('ws/players/comments/<int:id>', views.get_playerComments),
     path('ws/players/seasons/<int:id>', views.get_playerSeasons),
+    path('ws/insertplayer/', views.insert_player),
+    path('ws/editplayer/<int:id>', views.edit_player),
 
     path('ws/staff/', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),
     path('ws/staff/comments/<int:id>', views.get_staffComments),
+    path('ws/insertstaff/', views.insert_staff),
+    path('ws/editstaff/<int:id>', views.edit_staff),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
