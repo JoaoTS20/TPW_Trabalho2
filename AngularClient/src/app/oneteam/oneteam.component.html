@@ -16,7 +16,7 @@
                 <h4>{{ team.name }}</h4>
                 <p class="text-secondary mb-1">{{ team.abreviated_name }}</p>
                 <form action="{% url 'teams' %}{{ team.id }}" method="post" >
-                  <!--{% csrf_token %}
+                  <!--
                   {% if favouriteteam %}
                   <button style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
                   {% else %}
@@ -84,11 +84,7 @@
         </div>
         <br>
         <h2>Players</h2>
-        <!--
-        {% if deleteeditbbt %}
-        <button style="background: #106eea;" class="btn btn-primary"><a href="/insertplayerinteam/{{ team.id }}" style="color: white">Add</a></button>
-        {% endif %}
-        -->
+        <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a href="" style="color: white">Add</a></button>
         <hr>
         <div class="card mb-3">
           <div class="card-body">
@@ -107,11 +103,7 @@
       </div>
     </div>
     <h2>Staff Members</h2>
-    <!--
-    {% if deleteeditbbt %}
-    <button style="background: #106eea;" class="btn btn-primary"><a href="/insertstaffinteam/{{ team.id }}" style="color: white">Add</a></button>
-    {% endif %}
-    -->
+    <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a href="/insertstaffinteam/{{ team.id }}" style="color: white">Add</a></button>
     <hr>
     <div class="card mb-3">
       <div class="card-body">
