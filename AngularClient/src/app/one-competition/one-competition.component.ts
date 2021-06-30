@@ -15,12 +15,16 @@ export class OneCompetitionComponent implements OnInit {
   comments: CommentCompetition[] | undefined;
   table: Table | undefined;
   matches: any[] | undefined;
+  user: string | null | undefined;
+  userID: string | null | undefined;
   baseURL = 'http://localhost:8000';
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService) { }
 
   ngOnInit(): void {
+    this.user = localStorage.getItem('username')
+    this.userID = localStorage.getItem('userID')
     this.getCompetition();
     this.getComments();
     this.getTable("2020-2021")

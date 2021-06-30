@@ -10,18 +10,16 @@
                 <h4>{{ player.name }}</h4>
                 <p class="text-secondary mb-1">{{ player.birthday }} ({{ age }})</p>
                 <p class="text-muted font-size-sm">{{ player.position }}</p>
-                <!--form action="{% url 'players' %}{{ player.id }}" method="post" >
-                  {% csrf_token %}
+                <form action="{% url 'players' %}{{ player.id }}" method="post" >
+                  <!--{% csrf_token %}
                   {% if favouriteplayer %}
                   <button style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
                   {% else %}
                   <button style="background: #106eea;" class="btn btn-primary" value="add" name="add">Add Favourite</button>
-                  {% endif %}
-                  {% if deleteeditbbt %}
-                  <button class="btn btn-info"  name="edit"><a  href="{% url 'edit_player' player.id %}" style="color: white">Edit</a></button>
-                  <button class="btn btn-danger" value="delete" name="delete">Delete</button>
-                  {% endif %}
-                </form-->
+                  {% endif %}-->
+                  <button class="btn btn-info"   *ngIf="user=='admin'" name="edit"><a  href="{% url 'edit_player' player.id %}" style="color: white">Edit</a></button>
+                  <button class="btn btn-danger" *ngIf="user=='admin'" value="delete" name="delete">Delete</button>
+                </form>
                 <!--button class="btn btn-outline-primary">Message</button-->
               </div>
             </div>
@@ -33,7 +31,7 @@
         <div class="card mt-3" style="border-color: white">
           <form action="}" method="post">
             <textarea class="form-control" style="resize:none" id="w3review" name="w3review" rows="3"></textarea>
-            <button style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
+            <button [disabled]="user == undefined || user=='admin'" style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
           </form>
         </div>
       </div>

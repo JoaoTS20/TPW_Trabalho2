@@ -15,13 +15,16 @@ export class OnePlayerComponent implements OnInit {
   comments: CommentPlayer[] | undefined;
   age: number | undefined;
   seasons: any[] |undefined;
-
+  user: string | null | undefined;
+  userID: string | null | undefined;
   baseURL = 'http://localhost:8000';
   constructor(
     private route: ActivatedRoute,
     private playerService: PlayerService) { }
 
   ngOnInit(): void {
+    this.user = localStorage.getItem('username')
+    this.userID = localStorage.getItem('userID')
     this.getPlayer();
     this.getComments();
     this.getseasons();

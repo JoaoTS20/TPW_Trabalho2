@@ -21,13 +21,16 @@ export class OneteamComponent implements OnInit {
   competitions: any[] | undefined;
   comments: CommentTeam[] | undefined;
   seasons: any[] | undefined;
-
+  user: string | null | undefined;
+  userID: string | null | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private teamservice: TeamService) { }
   selectedSeason: any;
   ngOnInit(): void {
+    this.user = localStorage.getItem('username')
+    this.userID = localStorage.getItem('userID')
     this.getTeam()
     this.getPlayersSeason('2020-2021')
     this.getStaffSeason('2020-2021')
