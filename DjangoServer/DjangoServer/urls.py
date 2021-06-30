@@ -25,6 +25,8 @@ urlpatterns = [
     path('ws/competitions/', views.get_competitions),
     path('ws/competitions/<int:id>', views.get_competitionDetails),
     path('ws/competitions/comments/<int:id>',views.get_competitionComments),
+    path('ws/insertcompetition/',views.insert_competition),
+    path('ws/editcompetition/<int:id>', views.edit_competition),
 
     path('ws/teams/', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),

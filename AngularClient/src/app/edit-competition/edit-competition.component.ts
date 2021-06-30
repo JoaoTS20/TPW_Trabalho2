@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {CompetitionService} from "../competition.service";
+import {Competition} from "../competition";
+import {ActivatedRoute} from "@angular/router";
+
 
 @Component({
   selector: 'app-edit-competition',
@@ -9,7 +12,9 @@ import {CompetitionService} from "../competition.service";
 })
 export class EditCompetitionComponent implements OnInit {
   form: FormGroup;
+  @Input() competition: Competition | undefined;
   constructor(
+    private route: ActivatedRoute,
     public fb: FormBuilder,
     private competitionService: CompetitionService) {
     this.form = this.fb.group({
@@ -26,13 +31,15 @@ export class EditCompetitionComponent implements OnInit {
   }
 
   getCompetitionToEdit(){
-    this.competitionService.getCompetition(2).subscribe(comp => {
-      console.log(this.form.controls)
+    // @ts-ignore
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.competitionService.getCompetition(id).subscribe(comp => {
       this.form.patchValue({
         full_name:comp.full_name,
         region:comp.region,
                                   });
       this.form.updateValueAndValidity()
+      this.competition = comp
       console.log(comp.full_name)
     })
   }
@@ -50,7 +57,6 @@ export class EditCompetitionComponent implements OnInit {
   changeName(event: Event){
     // @ts-ignore
     const full_name = (event.target as HTMLInputElement).value;
-    console.log(full_name);
 
     // @ts-ignore
     this.form.get('full_name')?.setValue(full_name)
@@ -59,7 +65,6 @@ export class EditCompetitionComponent implements OnInit {
   changeRegion(event: Event){
     // @ts-ignore
     const region = (event.target as HTMLInputElement).value;
-    console.log(region);
 
     // @ts-ignore
     this.form.get('region')?.setValue(region)
@@ -75,6 +80,7 @@ export class EditCompetitionComponent implements OnInit {
     // @ts-ignore
     formData.append("region", this.form.get('region').value);
 
-    //this.competitionService.insertCompetition(formData).subscribe(a => a)
+    // @ts-ignore
+    this.competitionService.editCompetition(this.competition.id,formData).subscribe(a => a)
   }
 }

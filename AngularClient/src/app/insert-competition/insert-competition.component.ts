@@ -39,7 +39,6 @@ export class InsertCompetitionComponent implements OnInit {
   changeName(event: Event){
     // @ts-ignore
     const full_name = (event.target as HTMLInputElement).value;
-    console.log(full_name);
 
     // @ts-ignore
     this.form.get('full_name')?.setValue(full_name)
@@ -48,7 +47,6 @@ export class InsertCompetitionComponent implements OnInit {
   changeRegion(event: Event){
     // @ts-ignore
     const region = (event.target as HTMLInputElement).value;
-    console.log(region);
 
     // @ts-ignore
     this.form.get('region')?.setValue(region)
