@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 import json
 # Create your views here.
@@ -7,11 +8,11 @@ from rest_framework.response import Response
 
 from app import serializers
 from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff, \
-    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match, CompetitionsMatches
+    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match, CompetitionsMatches, NormalUser
 from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer, \
     CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer, \
     PlayerPlaysForInSerializer, ClubPlaysInSerializer, StaffManagesInSerializer, MatchSerializer, \
-    CompetitionsMatchesSerializer
+    CompetitionsMatchesSerializer, UserSerializer, NormalUserSerializer
 
 
 # Competition Related
@@ -239,4 +240,14 @@ def get_staffComments(request, id):
     except CommentStaff.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CommentStaffSerializer(comments, many=True)
+    return Response(serializer.data)
+
+#User Stuff
+@api_view(['GET'])
+def get_UserProfile(request, id):
+    try:
+        userInfo= NormalUser.objects.get(user_id=id),
+    except NormalUser.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = NormalUserSerializer(userInfo, many=True)
     return Response(serializer.data)

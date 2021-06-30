@@ -22,7 +22,7 @@
         <li><a routerLink="/staff">Staff</a></li>
         <li *ngIf="user==undefined; else elseBlock"> <a routerLink="/login">Log in</a></li>
         <ng-template #elseBlock>
-          <li><a routerLink="/user/{{userID}}">{{user}}</a></li>
+          <li><a routerLink="/profile/{{userID}}">{{user}}</a></li>
           <li><a (click)="logout()">Log out</a></li>
         </ng-template>
        <!-- {% include 'loginpartial.html' %} -->

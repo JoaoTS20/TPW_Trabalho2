@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('ws/profile/<int:id>',views.get_UserProfile),
     #path('ws/auth/login/', obtain_jwt_token),
     path('ws/auth/refresh-token/', refresh_jwt_token),
     path('ws/auth/', include('rest_auth.urls')),

@@ -80,13 +80,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'date_joined')
 
 
-class NormalUserSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-
-    class Meta:
-        model = NormalUser
-        fields = ('id', 'user', 'job_football_related', 'favouriteplayers', 'favouriteteams', 'favouritecompetitions')
-
 
 class FavouritePlayerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -104,6 +97,15 @@ class FavouriteCompetitionSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavouriteCompetition
         fields = ('id', 'competition', 'user')
+
+class NormalUserSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    favouriteplayers = PlayerSerializer(many=True)
+    favouriteteams=TeamSerializer(many=True)
+    favouritecompetitions=CompetitionSerializer(many=True)
+    class Meta:
+        model = NormalUser
+        fields = ('id', 'user', 'job_football_related', 'favouriteplayers', 'favouriteteams', 'favouritecompetitions')
 
 
 class CommentPlayerSerializer(serializers.ModelSerializer):

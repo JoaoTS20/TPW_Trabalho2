@@ -12,6 +12,7 @@ import {OneCompetitionComponent} from "./one-competition/one-competition.compone
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {AuthGuard} from "./auth-service.service";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes =[
   {path: '', component: HomepageComponent},
@@ -23,7 +24,8 @@ const routes: Routes =[
   {path: 'teamdetails/:id',component:OneteamComponent},
   {path: 'competitiondetails/:id',component:OneCompetitionComponent},
   {path: 'login',component:LoginComponent},
-  {path: 'signup', component:SignupComponent}
+  {path: 'signup', component:SignupComponent},
+  {path: 'profile/:id',component:ProfileComponent}
 
 
 
