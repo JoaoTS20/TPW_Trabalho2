@@ -79,7 +79,7 @@
         </div>
         <br>
         <h2>Players</h2>
-        <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a href="" style="color: white">Add</a></button>
+        <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a routerLink="/addplayertoteam/{{team.id}}" style="color: white">Add</a></button>
         <hr>
         <div class="card mb-3">
           <div class="card-body">
@@ -98,7 +98,7 @@
       </div>
     </div>
     <h2>Staff Members</h2>
-    <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a href="/insertstaffinteam/{{ team.id }}" style="color: white">Add</a></button>
+    <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary"><a routerLink="/addstafftoteam/{{ team.id }}" style="color: white">Add</a></button>
     <hr>
     <div class="card mb-3">
       <div class="card-body">

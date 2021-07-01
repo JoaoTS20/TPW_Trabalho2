@@ -1,14 +1,14 @@
 <div>
   <div *ngIf="competition && allteams">
-    <h1>Insert Match in Competition</h1>
+    <h1 style="padding-top: 20px">Insert Match in Competition</h1>
     <form [formGroup]="form" (ngSubmit)="insertMatchInCompetition()">
-      <div class="form-group">
-        NGame: <input type="number" (change)="changeNGame($event)">
+      <div class="form-group col-md-6">
+        NGame: <input class="form-control" type="number" (change)="changeNGame($event)">
       </div>
-      <div class="form-group">
-        Description: <input type="text" (change)="changeDescription($event)">
+      <div class="form-group col-md-6">
+        Description: <input class="form-control" type="text" (change)="changeDescription($event)">
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         Home Team:
         <select class="form-control" (change)="changeHomeTeam($event)">
           <option *ngFor="let team of allteams"
@@ -17,7 +17,7 @@
           </option>
         </select>
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         Away Team:
         <select class="form-control" (change)="changeAwayTeam($event)">
           <option *ngFor="let team of allteams"
@@ -26,21 +26,21 @@
           </option>
         </select>
       </div>
-      <div class="form-group">
-        Competition: <input type="text" readonly class="form-control-plaintext" value="{{competition.full_name}}">
+      <div class="form-group col-md-6">
+        Competition: <input  type="text" readonly class="form-control-plaintext" value="{{competition.full_name}}">
       </div>
-      <div class="form-group">
-        Home goals: <input type="number" (change)="changeHomeGoals($event)">
+      <div class="form-group col-md-6">
+        Home goals: <input class="form-control" type="number" (change)="changeHomeGoals($event)">
       </div>
-      <div class="form-group">
-        Away goals: <input type="number" (change)="changeAwayGoals($event)">
+      <div class="form-group col-md-6">
+        Away goals: <input class="form-control" type="number" (change)="changeAwayGoals($event)">
       </div>
-      <div class="form-group">
-        Season: <input type="text" (change)="changeSeason($event)" value="2020-2021">
+      <div class="form-group col-md-6">
+        Season: <input class="form-control" type="text" (change)="changeSeason($event)" value="2020-2021">
       </div>
 
-      <div class="form-group">
-        <button class="btn btn-danger">Insert</button>
+      <div class="form-group col-md-6">
+        <button  style="background: #106eea;font-size: 15px; font-weight: bolder;" class="btn btn-primary btn-lg">Insert</button>
       </div>
     </form>
   </div>
