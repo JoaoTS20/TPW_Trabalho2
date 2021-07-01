@@ -11,9 +11,9 @@
                 <p class="text-secondary mb-1">{{ player.birthday }} ({{ age }})</p>
                 <p class="text-muted font-size-sm">{{ player.position }}</p>
                 <ng-container *ngIf="profile">
-                    <button  *ngIf="checkfavourite(player.id); else elseBlock" style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
+                    <button  *ngIf="checkfavourite(player.id); else elseBlock" (click)="remove_to_Favourite()" style="background: #106eea;" class="btn btn-primary" name="remove" remove="remove"> Remove Favourite</button>
                     <ng-template #elseBlock>
-                      <button style="background: #106eea;" class="btn btn-primary" value="add" name="add">Add Favourite</button>
+                      <button style="background: #106eea;" class="btn btn-primary" (click)="add_to_Favourite()" value="add" name="add">Add Favourite</button>
                     </ng-template>
                 </ng-container>
                   <button class="btn btn-info"   *ngIf="user=='admin'" name="edit"><a  href="{% url 'edit_player' player.id %}" style="color: white">Edit</a></button>
@@ -27,10 +27,8 @@
         <h5>Add Comment:</h5>
         <hr>
         <div class="card mt-3" style="border-color: white">
-          <form action="}" method="post">
-            <textarea class="form-control" style="resize:none" id="w3review" name="w3review" rows="3"></textarea>
-            <button [disabled]="user == undefined || user=='admin'" style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
-          </form>
+            <textarea #text class="form-control" style="resize:none" id="w3review" name="w3review" rows="3"></textarea>
+            <button [disabled]="user == undefined || user=='admin'" (click)="add_comment(text.value)" style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
         </div>
       </div>
       <div class="col-md-8">
