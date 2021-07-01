@@ -605,6 +605,11 @@ def get_UserProfile(request, id):
     serializer = NormalUserSerializer(userInfo, many=True)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def make_Normal_User(request,username):
+    user= User.objects.get(username=username)
+    s= NormalUser(user=user, job_football_related=False).save()
+    return Response(status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
