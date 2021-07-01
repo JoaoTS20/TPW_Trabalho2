@@ -60,6 +60,7 @@ urlpatterns = [
     path('ws/deleteteam/<int:id>', views.deleteTeam),
 
     path('ws/players/', views.get_players),
+    path('ws/players/search/<str:name>', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
     path('ws/players/comments/<int:id>', views.get_playerComments),
     path('ws/players/seasons/<int:id>', views.get_playerSeasons),

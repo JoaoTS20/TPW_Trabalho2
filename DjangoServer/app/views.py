@@ -382,10 +382,15 @@ def deleteTeam(request, id):
 # Player Related ############3
 
 @api_view(['GET'])
-def get_players(request):
-    players = Player.objects.all()
-    serializer = PlayerSerializer(players, many=True)
-    return Response(serializer.data)
+def get_players(request, name=""):
+    if name=="":
+        players = Player.objects.all()
+        serializer = PlayerSerializer(players, many=True)
+        return Response(serializer.data)
+    else:
+        players = Player.objects.filter(name__contains=name)
+        serializer = PlayerSerializer(players, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET','POST'])
