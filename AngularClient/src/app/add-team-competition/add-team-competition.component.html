@@ -1,6 +1,8 @@
+<br>
 <div>
   <div *ngIf="competition && allteams">
   <h1 style="padding-top: 20px">Insert Team in Competition</h1>
+    <hr>
   <form [formGroup]="form" (ngSubmit)="insertTeamInCompetition()">
     <div class="form-group col-md-6">
       Team:
