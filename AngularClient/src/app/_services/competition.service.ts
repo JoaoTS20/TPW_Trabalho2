@@ -46,7 +46,16 @@ export class CompetitionService {
   }
   editCompetition( id: number, competition:any):Observable<any>{
     const url = this.baseURL + 'editcompetition/'+ id;
-    return this.http.post(url,competition)
+    return this.http.put(url,competition)
+  }
+
+  addTeamToCompetition(id: number, teamcomp: any):Observable<any>{
+    const url = this.baseURL + 'addteamtocompetition/'+ id;
+    return this.http.post(url,teamcomp)
+  }
+  addMatchToCompetition(id: number, matchcomp: any):Observable<any>{
+    const url = this.baseURL + 'addmatchtocompetition/'+ id;
+    return this.http.post(url,matchcomp)
   }
 
 }

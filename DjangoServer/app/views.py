@@ -53,7 +53,7 @@ def insert_competition(request):
     return Response(status=200)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @parser_classes([MultiPartParser])
 def edit_competition(request, id):
     # print(request)
@@ -154,6 +154,39 @@ def get_competition_seasons(request,id):
     return Response(ClubPlaysIn.objects.filter(competition_id=id).values_list('season', flat=True).distinct())
 
 
+@api_view(['POST'])
+def addTeamtoCompetition(request,compid):
+    print(request.data)
+    teamid = request.data['teamid']
+    season = request.data['season']
+    c= ClubPlaysIn(competition_id=compid,team_id=teamid,season=season)
+    c.save()
+    return Response(status=200)
+
+@api_view(['POST'])
+def addMatchtoCompetition(request,compid):
+    print(request.data)
+    ngame = request.data['ngame']
+    description = request.data['description']
+    hometeamid = request.data['hometeamid']
+    awayteamid = request.data['awayteamid']
+    homegoals = request.data['homegoals']
+    awaygoals = request.data['awaygoals']
+    season = request.data['season']
+    match = Match(ngame=ngame, description=description,
+                  home_team_id=hometeamid,away_team_id=awayteamid,
+                  home_goals=homegoals, away_goals=awaygoals,
+                  competition_id=compid)
+    home_team = ClubPlaysIn.objects.filter(competition=match.competition, team=match.home_team, season=season)
+    away_team = ClubPlaysIn.objects.filter(competition=match.competition, team=match.away_team, season=season)
+
+    if len(home_team) < 1 or len(away_team) < 1:
+        print("jogo inválido")
+        return Response(status=400)
+    match.save()
+    cm = CompetitionsMatches(competition=match.competition, match=match, season=season)
+    cm.save()
+    return Response(status=200)
 
 # Team Related ###############
 
@@ -245,7 +278,7 @@ def insert_team(request):
     return Response(status=200)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @parser_classes([MultiPartParser])
 def edit_team(request, id):
     print(request)
@@ -266,6 +299,25 @@ def edit_team(request, id):
     team.formation = request.data['formation']
     team.save()
     print(team)
+    return Response(status=200)
+
+
+@api_view(['POST'])
+def addPlayertoTeam(request,teamid):
+    print(request.data)
+    playerid = request.data['playerid']
+    season = request.data['season']
+    p = PlayerPlaysFor(team_id=teamid, player_id=playerid, season=season)
+    p.save()
+    return Response(status=200)
+
+@api_view(['POST'])
+def addStafftoTeam(request,teamid):
+    print(request.data)
+    staffid = request.data['staffid']
+    season = request.data['season']
+    s = StaffManages(team_id=teamid, staff_id=staffid, season=season)
+    s.save()
     return Response(status=200)
 
 
@@ -329,7 +381,7 @@ def insert_player(request):
     return Response(status=200)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @parser_classes([MultiPartParser])
 def edit_player(request, id):
     print(request)
@@ -402,7 +454,7 @@ def insert_staff(request):
     return Response(status=200)
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @parser_classes([MultiPartParser])
 def edit_staff(request, id):
     print(request)

@@ -27,6 +27,10 @@ import { InsertPlayerComponent } from './insert-player/insert-player.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
 import { ProfileComponent } from './profile/profile.component';
 import {AuthGuard, AuthInterceptor} from "./auth-service.service";
+import { AddTeamCompetitionComponent } from './add-team-competition/add-team-competition.component';
+import { AddMatchCompetitionComponent } from './add-match-competition/add-match-competition.component';
+import { AddPlayerTeamComponent } from './add-player-team/add-player-team.component';
+import { AddStaffTeamComponent } from './add-staff-team/add-staff-team.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,11 @@ import {AuthGuard, AuthInterceptor} from "./auth-service.service";
     EditStaffComponent,
     InsertPlayerComponent,
     EditPlayerComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddTeamCompetitionComponent,
+    AddMatchCompetitionComponent,
+    AddPlayerTeamComponent,
+    AddStaffTeamComponent
   ],
   imports: [
     BrowserModule,

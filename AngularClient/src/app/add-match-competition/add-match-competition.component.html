@@ -1,0 +1,47 @@
+<div>
+  <div *ngIf="competition && allteams">
+    <h1>Insert Match in Competition</h1>
+    <form [formGroup]="form" (ngSubmit)="insertMatchInCompetition()">
+      <div class="form-group">
+        NGame: <input type="number" (change)="changeNGame($event)">
+      </div>
+      <div class="form-group">
+        Description: <input type="text" (change)="changeDescription($event)">
+      </div>
+      <div class="form-group">
+        Home Team:
+        <select class="form-control" (change)="changeHomeTeam($event)">
+          <option *ngFor="let team of allteams"
+                  [value]="team.id">
+            {{team.full_name}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        Away Team:
+        <select class="form-control" (change)="changeAwayTeam($event)">
+          <option *ngFor="let team of allteams"
+                  [value]="team.id">
+            {{team.full_name}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        Competition: <input type="text" readonly class="form-control-plaintext" value="{{competition.full_name}}">
+      </div>
+      <div class="form-group">
+        Home goals: <input type="number" (change)="changeHomeGoals($event)">
+      </div>
+      <div class="form-group">
+        Away goals: <input type="number" (change)="changeAwayGoals($event)">
+      </div>
+      <div class="form-group">
+        Season: <input type="text" (change)="changeSeason($event)" value="2020-2021">
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-danger">Insert</button>
+      </div>
+    </form>
+  </div>
+</div>

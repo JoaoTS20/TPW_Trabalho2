@@ -1,0 +1,27 @@
+<div>
+  <div *ngIf="team && allstaff">
+    <h1>Insert Staff in Team</h1>
+    <form [formGroup]="form" (ngSubmit)="insertStaffInTeam()">
+      <div class="form-group">
+        Player:
+        <select class="form-control" (change)="changeStaff($event)">
+          <option *ngFor="let staff of allstaff"
+                  [value]="staff.id">
+            {{staff.full_name}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        Competition: <input type="text" readonly class="form-control-plaintext" value="{{team.full_name}}">
+      </div>
+      <div class="form-group">
+        Season: <input type="text" (change)="changeSeason($event)" value="2020-2021">
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-danger">Insert</button>
+      </div>
+    </form>
+  </div>
+</div>
+

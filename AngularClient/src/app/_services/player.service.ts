@@ -35,7 +35,7 @@ export class PlayerService {
   }
   editPlayer(id:number,player:any):Observable<any>{
     const url = this.baseURL+'editplayer/'+id;
-    return this.http.post<any>(url,player);
+    return this.http.put<any>(url,player);
   }
 
 }

@@ -55,8 +55,15 @@ export class TeamService {
   }
   editTeam(id: number,team:any): Observable<any>{
     const url = this.baseURL + 'editteam/' + id;
-    return this.http.post<any>(url,team);
+    return this.http.put<any>(url,team);
   }
-
+  addPlayertoTeam(id: number,player:any): Observable<any>{
+    const url = this.baseURL + 'addplayertoteam/' + id;
+    return this.http.post<any>(url,player);
+  }
+  addStafftoTeam(id: number,staff:any): Observable<any>{
+    const url = this.baseURL + 'addstafftoteam/' + id;
+    return this.http.post<any>(url,staff);
+  }
 
 }

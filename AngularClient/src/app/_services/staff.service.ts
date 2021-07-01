@@ -25,6 +25,6 @@ export class StaffService {
   }
   editStaff(id:number,staff: any): Observable<any>{
     const url = this.baseURL + 'editstaff/'+id;
-    return this.http.post<any>(url,staff);
+    return this.http.put<any>(url,staff);
   }
 }

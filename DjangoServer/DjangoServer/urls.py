@@ -41,6 +41,8 @@ urlpatterns = [
     path('ws/competitions/teams/<int:id>/<str:season>',views.get_competition_table),
     path('ws/competitions/matches/<int:id>/<str:season>',views.get_competition_matches),
     path('ws/competitions/seasons/<int:id>',views.get_competition_seasons),
+    path('ws/addteamtocompetition/<int:compid>', views.addTeamtoCompetition),
+    path('ws/addmatchtocompetition/<int:compid>', views.addMatchtoCompetition),
 
     path('ws/teams/', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),
@@ -51,7 +53,8 @@ urlpatterns = [
     path('ws/teams/seasons/<int:id>',views.get_teamSeasons),
     path('ws/insertteam/', views.insert_team),
     path('ws/editteam/<int:id>', views.edit_team),
-
+    path('ws/addplayertoteam/<int:teamid>', views.addPlayertoTeam),
+    path('ws/addstafftoteam/<int:teamid>', views.addStafftoTeam),
 
     path('ws/players/', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
