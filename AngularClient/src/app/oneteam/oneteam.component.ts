@@ -132,7 +132,6 @@ export class OneteamComponent implements OnInit {
     this.teamservice.removeFavouriteTeam(this.team?.id,formData).subscribe(a => a)
     this.ngOnInit();
   }
-
   deleteTeam(){
     // @ts-ignore
     this.teamservice.deleteTeam(this.team.id).subscribe(
@@ -144,4 +143,14 @@ export class OneteamComponent implements OnInit {
     )
   }
 
+  add_comment(text: any){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("team_id", this.team?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("text", text);
+    this.teamservice.addCommentPlayer(this.team?.id,formData).subscribe(a => a)
+    window.location.reload();
+  }
 }

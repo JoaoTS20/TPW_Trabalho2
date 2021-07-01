@@ -68,12 +68,17 @@ export class TeamService {
   }
 
   addFavouriteTeam(id:any,values: any): Observable<any>{
-    const url = this.baseURL+'teams/' + id;;
+    const url = this.baseURL+'teams/' + id;
     return this.http.post<any>(url,values);
   }
 
   removeFavouriteTeam(id: any, values: any): Observable<any> {
-    const url = this.baseURL+'teams/' + id;;
+    const url = this.baseURL+'teams/' + id;
+    return this.http.post<any>(url,values);
+  }
+
+  addCommentPlayer(id: any , values: any) {
+    const url = this.baseURL+'teams/' + id;
     return this.http.post<any>(url,values);
   }
   deleteTeam(id:number){

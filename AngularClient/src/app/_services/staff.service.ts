@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {Staff} from "../_classes/staff";
 import {GlobalConstants} from "../_classes/globalconstants";
+import {CommentStaff} from "../comment-staff";
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,6 @@ export class StaffService {
     const url = this.baseURL + 'staff/';
     return this.http.get<Staff[]>(url);
   }
-  getcertainStaff(id:number): Observable<Staff> {
-    const url = this.baseURL + 'staff/'+id;
-    return this.http.get<Staff>(url);
-  }
   insertStaff(staff: any): Observable<any>{
     const url = this.baseURL + 'insertstaff/';
     return this.http.post<any>(url,staff);
@@ -31,5 +28,22 @@ export class StaffService {
   deleteStaff(id:number){
     const url = this.baseURL + 'deletestaff/'+ id;
     return this.http.delete(url)
+  }
+
+  getSelectedStaff(id: any):Observable<Staff>{
+    const url = this.baseURL + 'staff/'+id;
+    return this.http.get<Staff>(url);
+  }
+  getStaffComments(id: any):Observable<CommentStaff[]>{
+    const url = this.baseURL + 'staff/comments/'+id;
+    return this.http.get<CommentStaff[]>(url);
+  }
+  getStaffSeasons(id: any):Observable<any[]>{
+    const url = this.baseURL + 'staff/seasons/'+id;
+    return this.http.get<any[]>(url);
+  }
+  addCommentStaff(id: any, formData: any) {
+    const url = this.baseURL + 'staff/'+id;
+    return this.http.post<Staff>(url,formData);
   }
 }

@@ -35,7 +35,7 @@ export class EditStaffComponent implements OnInit {
   getStaff(){
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
-    this.staffService.getcertainStaff(id).subscribe(staff =>{
+    this.staffService.getSelectedStaff(id).subscribe(staff =>{
       this.staff = staff
       this.form.patchValue({
         staff_img: null,

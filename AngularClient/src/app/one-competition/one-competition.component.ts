@@ -81,7 +81,7 @@ export class OneCompetitionComponent implements OnInit {
     // @ts-ignore
     return this.profile[0].favouritecompetitions.find(e => e.id === id);
   }
-  deleteCompetition(){
+  deleteCompetition() {
     // @ts-ignore
     this.competitionService.deleteCompetition(this.competition.id).subscribe(
       // @ts-ignore
@@ -89,6 +89,38 @@ export class OneCompetitionComponent implements OnInit {
         window.location.reload();
       }),
       error => error)
+  }
+  add_to_Favourite(){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("competition_id", this.competition?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("func","add")
+    this.competitionService.addFavouriteCompetition(this.competition?.id,formData).subscribe(a => a)
+    this.ngOnInit();
+  }
+
+  remove_to_Favourite(){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("competition_id", this.competition?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("func",  "remove");
+    this.competitionService.removeFavouriteCompetition(this.competition?.id,formData).subscribe(a => a)
+    this.ngOnInit();
+  }
+
+  add_comment(text: any){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("competition_id", this.competition?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("text", text);
+    this.competitionService.addCommentCompetition(this.competition?.id,formData).subscribe(a => a)
+    window.location.reload();
   }
 }
 

@@ -72,6 +72,7 @@ urlpatterns = [
     path('ws/insertstaff/', views.insert_staff),
     path('ws/editstaff/<int:id>', views.edit_staff),
     path('ws/deleteStaff/<int:id>', views.deleteStaff),
+    path('ws/staff/seasons/<int:id>', views.get_staffSeasons),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

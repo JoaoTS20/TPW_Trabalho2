@@ -117,24 +117,28 @@ class CommentPlayerSerializer(serializers.ModelSerializer):
 
 
 class CommentMatchSerializer(serializers.ModelSerializer):
+    user = NormalUserSerializer()
     class Meta:
         model = CommentMatch
         fields = ('id', 'match', 'user', 'timeofpost', 'comment')
 
 
 class CommentCompetitionSerializer(serializers.ModelSerializer):
+    user = NormalUserSerializer()
     class Meta:
         model = CommentCompetition
         fields = ('id', 'competition', 'user', 'timeofpost', 'comment')
 
 
 class CommentTeamSerializer(serializers.ModelSerializer):
+    user = NormalUserSerializer()
     class Meta:
         model = CommentTeam
         fields = ('id', 'team', 'user', 'timeofpost', 'comment')
 
 
 class CommentStaffSerializer(serializers.ModelSerializer):
+    user = NormalUserSerializer()
     class Meta:
-        model = CommentPlayer
+        model = CommentStaff
         fields = ('id', 'staff', 'user', 'timeofpost', 'comment')

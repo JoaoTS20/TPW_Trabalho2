@@ -38,9 +38,23 @@ export class PlayerService {
     const url = this.baseURL+'editplayer/'+id;
     return this.http.put<any>(url,player);
   }
-  deletePlayer(id:number){
-    const url = this.baseURL + 'deleteplayer/'+ id;
+  deletePlayer(id:number) {
+    const url = this.baseURL + 'deleteplayer/' + id;
     return this.http.delete(url)
+  }
+  addFavouritePlayer(id:any,values: any): Observable<any>{
+    const url = this.baseURL+'players/' + id;
+    return this.http.post<any>(url,values);
+  }
+
+  removeFavouritePlayer(id: any, values: any): Observable<any> {
+    const url = this.baseURL+'players/' + id;
+    return this.http.post<any>(url,values);
+  }
+
+  addCommentPlayer(id: any , values: any) {
+    const url = this.baseURL+'players/' + id;
+    return this.http.post<any>(url,values);
   }
 
 }

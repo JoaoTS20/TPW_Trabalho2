@@ -25,6 +25,7 @@ import {AddTeamCompetitionComponent} from "./add-team-competition/add-team-compe
 import {AddMatchCompetitionComponent} from "./add-match-competition/add-match-competition.component";
 import {AddPlayerTeamComponent} from "./add-player-team/add-player-team.component";
 import {AddStaffTeamComponent} from "./add-staff-team/add-staff-team.component";
+import {OneStaffComponent} from "./one-staff/one-staff.component";
 
 const routes: Routes =[
   {path: '', component: HomepageComponent},
@@ -47,6 +48,7 @@ const routes: Routes =[
   {path: 'editplayer/:id', component: EditPlayerComponent, canActivate: [AuthGuard]},
   {path: 'teamdetails/:id',component:OneteamComponent},
   {path: 'competitiondetails/:id',component:OneCompetitionComponent},
+  {path: 'staffdetails/:id',component:OneStaffComponent},
   {path: 'login',component:LoginComponent},
   {path: 'signup', component:SignupComponent},
   {path: 'profile/:id',component:ProfileComponent, canActivate: [AuthGuard]}
