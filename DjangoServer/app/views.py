@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 from app import serializers
 from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff, \
-    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match, CompetitionsMatches, NormalUser
+    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match, CompetitionsMatches, NormalUser, FavouriteTeam
 from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer, \
     CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer, \
     PlayerPlaysForInSerializer, ClubPlaysInSerializer, StaffManagesInSerializer, MatchSerializer, \
@@ -142,17 +142,7 @@ def get_competition_matches(request, id, season="2020-2021"):
 
 @api_view(['GET'])
 def get_competition_seasons(request, id):
-    try:
-        seasons = ClubPlaysIn.objects.filter(competition_id=id).distinct()
-        print(seasons)
-    except ClubPlaysIn.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ClubPlaysInSerializer(seasons, many=True)
-    return Response(serializer.data)
-
-def get_competition_seasons(request,id):
     return Response(ClubPlaysIn.objects.filter(competition_id=id).values_list('season', flat=True).distinct())
-
 
 @api_view(['POST'])
 def addTeamtoCompetition(request,compid):
@@ -198,8 +188,23 @@ def get_teams(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST', 'DELETE'])
 def get_teamDetails(request, id):
+    if request.POST:
+        user_id = request.data['user_id']
+        team_id = request.data['team_id']
+        if "func" in request.data:
+            func = request.data['func']
+            if func == "add":
+                normal = NormalUser.objects.get(user_id=user_id)
+                s = FavouriteTeam(team_id=int(team_id), user_id=normal.id)
+                s.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                normal = NormalUser.objects.get(user_id=user_id)
+                s = FavouriteTeam.objects.get(team_id=id, user_id=normal.id)
+                s.delete()
+                return Response(status=status.HTTP_200_OK)
     try:
         team = Team.objects.get(id=id)
     except Team.DoesNotExist:
@@ -252,7 +257,6 @@ def get_teamStaff(request, id, season='2020-2021'):
 def get_teamSeasons(request, id):
     try:
         seasons = ClubPlaysIn.objects.filter(team_id=id).distinct()
-        print(seasons)
     except ClubPlaysIn.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = ClubPlaysInSerializer(seasons, many=True)
@@ -319,7 +323,6 @@ def addStafftoTeam(request,teamid):
     s = StaffManages(team_id=teamid, staff_id=staffid, season=season)
     s.save()
     return Response(status=200)
-
 
 # Player Related ############3
 
@@ -478,24 +481,22 @@ def edit_staff(request, id):
 
 #User Stuff
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def get_UserProfile(request, id):
     try:
-        userInfo= NormalUser.objects.get(user_id=id),
+        userInfo = NormalUser.objects.get(user_id=id),
     except NormalUser.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = NormalUserSerializer(userInfo, many=True)
     return Response(serializer.data)
 
 
-
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+@permission_classes((IsAuthenticated,))
 def get_AdminProfile(request, id):
     try:
-        userInfo= User.objects.get(id=id),
+        userInfo = User.objects.get(id=id),
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = UserSerializer(userInfo, many=True)
     return Response(serializer.data)
-

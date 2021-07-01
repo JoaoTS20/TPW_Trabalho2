@@ -4,6 +4,8 @@ import {CommentCompetition} from "../_classes/comment-competition";
 import {Competition} from "../_classes/competition";
 import {CompetitionService} from "../_services/competition.service";
 import {Table} from "../_classes/table";
+import {ProfileService} from "../profile.service";
+import {NormalUser} from "../normal-user";
 
 @Component({
   selector: 'app-one-competition',
@@ -19,11 +21,12 @@ export class OneCompetitionComponent implements OnInit {
   userID: string | null | undefined;
   seasons: any[] | undefined;
   season="2020-2021"
-
+  profile: NormalUser[] | undefined;
   baseURL = 'http://localhost:8000';
   constructor(
     private route: ActivatedRoute,
-    private competitionService: CompetitionService) { }
+    private competitionService: CompetitionService,
+    private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -33,7 +36,7 @@ export class OneCompetitionComponent implements OnInit {
     this.getTable(this.season)
     this.getMatches(this.season)
     this.getSeasons();
-
+    this.getProfile();
   }
   getCompetition(): void {
     // @ts-ignore
@@ -63,10 +66,19 @@ export class OneCompetitionComponent implements OnInit {
     this.competitionService.getSeasons(id).subscribe(seasons => this.seasons=seasons);
   }
 
+  getProfile(): void{
+    // @ts-ignore
+    this.profileService.getProfile(this.userID).subscribe(profile => this.profile = profile);
+  }
 
   getselectedseason() {
     this.getTable(this.season)
     this.getMatches(this.season)
+  }
+
+  checkfavourite(id: number){
+    // @ts-ignore
+    return this.profile[0].favouritecompetitions.find(e => e.id === id);
   }
 }
 
