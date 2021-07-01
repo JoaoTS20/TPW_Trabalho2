@@ -138,6 +138,7 @@ class CommentTeamSerializer(serializers.ModelSerializer):
 
 
 class CommentStaffSerializer(serializers.ModelSerializer):
+    user = NormalUserSerializer()
     class Meta:
-        model = CommentPlayer
+        model = CommentStaff
         fields = ('id', 'staff', 'user', 'timeofpost', 'comment')

@@ -281,8 +281,16 @@ def get_staff(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 def get_staffdetails(request, id):
+    if request.POST:
+        user_id = request.data['user_id']
+        staff_id = request.data['staff_id']
+        if "text" in request.data:
+            text = request.data['text']
+            CommentStaff(user=NormalUser.objects.get(user_id=user_id), comment=text,
+                        staff=Staff.objects.get(id=staff_id)).save()
+            return Response(status=status.HTTP_200_OK)
     try:
         staff = Staff.objects.get(id=id)
     except Staff.DoesNotExist:
@@ -300,6 +308,9 @@ def get_staffComments(request, id):
     serializer = CommentStaffSerializer(comments, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_staffSeasons(request,id):
+    return Response(StaffManages.objects.filter(staff_id=id).values_list('season', flat=True).distinct())
 
 # User Stuff
 @api_view(['GET'])

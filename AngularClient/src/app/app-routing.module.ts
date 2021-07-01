@@ -13,6 +13,7 @@ import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {AuthGuard} from "./auth-service.service";
 import {ProfileComponent} from "./profile/profile.component";
+import {OneStaffComponent} from "./one-staff/one-staff.component";
 
 const routes: Routes =[
   {path: '', component: HomepageComponent},
@@ -23,6 +24,7 @@ const routes: Routes =[
   {path: 'playersdetails/:id',component:OnePlayerComponent},
   {path: 'teamdetails/:id',component:OneteamComponent},
   {path: 'competitiondetails/:id',component:OneCompetitionComponent},
+  {path: 'staffdetails/:id',component:OneStaffComponent},
   {path: 'login',component:LoginComponent},
   {path: 'signup', component:SignupComponent},
   {path: 'profile/:id',component:ProfileComponent, canActivate: [AuthGuard]}

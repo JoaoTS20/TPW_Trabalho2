@@ -57,6 +57,7 @@ urlpatterns = [
     path('ws/staff/', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),
     path('ws/staff/comments/<int:id>', views.get_staffComments),
+    path('ws/staff/seasons/<int:id>', views.get_staffSeasons),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
