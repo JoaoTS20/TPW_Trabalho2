@@ -14,14 +14,18 @@ export class AllStaffComponent implements OnInit {
 
   staffs: Staff[] | undefined;
   baseURL = GlobalConstants.baseurl;
-
+  name="";
   constructor(private staffService: StaffService) { }
 
   ngOnInit(): void {
-    this.getStaff();
+    this.getStaff(this.name);
   }
-  getStaff(): void{
-    this.staffService.getStaff().subscribe(staffs => this.staffs=staffs)
+  getStaff(name: any): void{
+    this.staffService.getStaffSearch(name).subscribe(staffs => this.staffs=staffs)
+  }
+
+  search(){
+    this.getStaff(this.name);
   }
 
 }

@@ -87,6 +87,13 @@ export class AuthServiceService {
   isLoggedOut() {
     return !this.isLoggedIn();
   }
+
+  makeNormalUser(username: string) {
+    const url = this.baseURL + 'normaluser/'+username;
+    // @ts-ignore
+    return this.http.post(url)
+
+  }
 }
 
 @Injectable()

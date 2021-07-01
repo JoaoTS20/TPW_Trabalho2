@@ -23,8 +23,7 @@
     </div>
   </form>
   <div class="form-group">
-    <p>{{ error?.message }}</p>
-    <p *ngIf="error">{{ error?.error | json }}</p>
+    <small style="color: red" *ngIf="error">{{ error?.error.global }}</small>
     <div>Don't have an account? <a style="font-weight: bolder" routerLink="/signup">Register</a></div>
   </div>
 </div>

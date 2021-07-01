@@ -5,27 +5,10 @@
     <p>Players from all over the world with accurate data.</p>
   </div>
   <div class="container" data-aos="fade-up">
-    <!--form class="form-row" style="text-align: center" action="{% url 'players' %}" method="post">
-      <div class="form-group col-md-3">
-        {% csrf_token %}
-        {{ form.full_name }}
+      <div style="align-items: center" class="form-group">
+        <h3>Search by Name:</h3>
+        <input [(ngModel)]="name" (ngModelChange)="search()" class="form-control" type="text">
       </div>
-      <div class="form-group col-md-2">
-        {{ form.nationality }}
-      </div>
-      <div class="form-group col-md-2">
-        {{ form.position }}
-      </div>
-      <div class="form-group col-md-2">
-        {{ form.foot }}
-      </div>
-      <div class="form-group col-md-2">
-        {{ form.order }}
-      </div>
-      <div class="form-group col-md-1">
-        <button class="btn btn-primary" style="background: #106eea;" name="search" type="submit" value="search">Search</button>
-      </div>
-    </form-->
     <hr>
     <div class="row">
       <div *ngFor="let player of players" class="col-md-6 col-lg-2 d-flex align-items-stretch mb-5 mb-lg-3">

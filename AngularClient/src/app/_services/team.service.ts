@@ -7,6 +7,7 @@ import {StaffTeam} from "../_classes/staff-team";
 import {CommentPlayer} from "../_classes/comment-player";
 import {CommentTeam} from "../_classes/comment-team";
 import {GlobalConstants} from "../_classes/globalconstants";
+import {Competition} from "../_classes/competition";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -22,6 +23,16 @@ export class TeamService {
 
   getTeams():Observable<Team[]>{
     const url = this.baseURL + 'teams/';
+    return this.http.get<Team[]>(url);
+  }
+  getTeamsSearch(name: any):Observable<Team[]> {
+    let url;
+    if (name!=""){
+      url = this.baseURL + 'teams/search/'+name;
+    }
+    else{
+      url = this.baseURL + 'teams/';
+    }
     return this.http.get<Team[]>(url);
   }
 
@@ -85,4 +96,6 @@ export class TeamService {
     const url = this.baseURL + 'deleteteam/'+ id;
     return this.http.delete(url)
   }
+
+
 }

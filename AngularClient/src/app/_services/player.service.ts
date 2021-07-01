@@ -17,6 +17,18 @@ export class PlayerService {
     const url = this.baseURL + 'players/';
     return this.http.get<Player[]>(url);
   }
+
+  getPlayersSearch(name: any):Observable<Player[]>{
+    let url;
+    if (name!=""){
+       url = this.baseURL + 'players/search/' +name;
+    }
+    else{
+       url = this.baseURL + 'players/';
+    }
+    return this.http.get<Player[]>(url);
+  }
+
   getSelectedPlayer(id:number):Observable<Player>{
     const url = this.baseURL+'players/'+id;
     return this.http.get<Player>(url);

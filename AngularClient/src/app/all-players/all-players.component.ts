@@ -14,16 +14,20 @@ export class AllPlayersComponent implements OnInit {
 
   players: Player[] | undefined;
   baseURL = GlobalConstants.baseurl;
+  name="";
 
   constructor(private playerService: PlayerService) { }
 
   ngOnInit(): void {
-    this.getPlayers();
+    this.getPlayers(this.name);
   }
-  getPlayers(): void{
-    this.playerService.getPlayers().subscribe(players => this.players=players)
+  getPlayers(name: any): void{
+    this.playerService.getPlayersSearch(name).subscribe(players => this.players=players)
   }
 
+  search() {
+    this.getPlayers(this.name);
+  }
 }
 
 

@@ -21,10 +21,15 @@ from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSeriali
 # Competition Related
 
 @api_view(['GET'])
-def get_competitions(request):
-    competitions = Competition.objects.all()
-    serializer = CompetitionSerializer(competitions, many=True)
-    return Response(serializer.data)
+def get_competitions(request, name=""):
+    if name=="":
+        competitions = Competition.objects.all()
+        serializer = CompetitionSerializer(competitions, many=True)
+        return Response(serializer.data)
+    else:
+        competitions = Competition.objects.filter(full_name__contains=name)
+        serializer = CompetitionSerializer(competitions, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET','POST'])
@@ -221,10 +226,15 @@ def deleteCompetition(request, id):
 
 
 @api_view(['GET'])
-def get_teams(request):
-    teams = Team.objects.all()
-    serializer = TeamSerializer(teams, many=True)
-    return Response(serializer.data)
+def get_teams(request, name=""):
+    if name=="":
+        teams = Team.objects.all()
+        serializer = TeamSerializer(teams, many=True)
+        return Response(serializer.data)
+    else:
+        teams = Team.objects.filter(full_name__contains=name)
+        serializer = TeamSerializer(teams, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET', 'POST'])
@@ -396,10 +406,15 @@ def deleteTeam(request, id):
 # Player Related ############3
 
 @api_view(['GET'])
-def get_players(request):
-    players = Player.objects.all()
-    serializer = PlayerSerializer(players, many=True)
-    return Response(serializer.data)
+def get_players(request, name=""):
+    if name=="":
+        players = Player.objects.all()
+        serializer = PlayerSerializer(players, many=True)
+        return Response(serializer.data)
+    else:
+        players = Player.objects.filter(name__contains=name)
+        serializer = PlayerSerializer(players, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET','POST'])
@@ -526,11 +541,15 @@ def deletePlayer(request, id):
 # Staff Related
 
 @api_view(['GET'])
-def get_staff(request):
-    staff = Staff.objects.all()
-    serializer = StaffSerializer(staff, many=True)
-    return Response(serializer.data)
-
+def get_staff(request,name=""):
+    if name=="":
+        staff = Staff.objects.all()
+        serializer = StaffSerializer(staff, many=True)
+        return Response(serializer.data)
+    else:
+        staff = Staff.objects.filter(full_name__contains=name)
+        serializer = StaffSerializer(staff, many=True)
+        return Response(serializer.data)
 
 @api_view(['GET','POST'])
 def get_staffdetails(request, id):
@@ -638,6 +657,11 @@ def get_UserProfile(request, id):
     serializer = NormalUserSerializer(userInfo, many=True)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def make_Normal_User(request,username):
+    user= User.objects.get(username=username)
+    s= NormalUser(user=user, job_football_related=False).save()
+    return Response(status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))

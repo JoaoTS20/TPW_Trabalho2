@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('ws/auth/normaluser/<str:username>', views.make_Normal_User),
     path('ws/profile/<int:id>',views.get_UserProfile),
     path('ws/adminprofile/<int:id>',views.get_AdminProfile),
     #path('ws/auth/login/', obtain_jwt_token),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('ws/auth/refresh-token/', refresh_jwt_token),
 
     path('ws/competitions/', views.get_competitions),
+    path('ws/competitions/search/<str:name>', views.get_competitions),
     path('ws/competitions/<int:id>', views.get_competitionDetails),
     path('ws/competitions/comments/<int:id>',views.get_competitionComments),
     path('ws/insertcompetition/',views.insert_competition),
@@ -46,6 +48,7 @@ urlpatterns = [
     path('ws/deletecompetition/<int:id>', views.deleteCompetition),
 
     path('ws/teams/', views.get_teams),
+    path('ws/teams/search/<str:name>', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),
     path('ws/teams/players/<int:id>/<str:season>', views.get_teamPlayers),
     path('ws/teams/staff/<int:id>/<str:season>', views.get_teamStaff),
@@ -59,6 +62,7 @@ urlpatterns = [
     path('ws/deleteteam/<int:id>', views.deleteTeam),
 
     path('ws/players/', views.get_players),
+    path('ws/players/search/<str:name>', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
     path('ws/players/comments/<int:id>', views.get_playerComments),
     path('ws/players/seasons/<int:id>', views.get_playerSeasons),
@@ -67,6 +71,7 @@ urlpatterns = [
     path('ws/deleteplayer/<int:id>', views.deletePlayer),
 
     path('ws/staff/', views.get_staff),
+    path('ws/staff/search/<str:name>', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),
     path('ws/staff/comments/<int:id>', views.get_staffComments),
     path('ws/insertstaff/', views.insert_staff),
