@@ -37,7 +37,7 @@
         <hr>
         <div class="card mt-3" style="border-color: white">
             <textarea #text class="form-control" style="resize:none;" id="w3review" name="w3review" rows="3"></textarea>
-            <button [disabled]="user == undefined || user=='admin'" (click)="add_comment(text.value)" style="background: #106eea;font-size: 12px; font-weight: bolder;" type="submit" class="btn btn-primary btn-lg">Comment</button>
+            <button [disabled]="user == undefined || user=='admin'" (click)="add_comment(text.value)" style="background: #106eea;font-size: 12px; font-weight: bolder;" class="btn btn-primary btn-lg">Comment</button>
         </div>
       </div>
       <div class="col-md-8">

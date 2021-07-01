@@ -92,7 +92,7 @@ export class OnePlayerComponent implements OnInit {
     formData.append("user_id",  this.userID);
     formData.append("text", text);
     this.playerService.addCommentPlayer(this.player?.id,formData).subscribe(a => a)
-    this.ngOnInit();
+    window.location.reload();
   }
 
 }

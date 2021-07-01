@@ -141,6 +141,6 @@ export class OneteamComponent implements OnInit {
     formData.append("user_id",  this.userID);
     formData.append("text", text);
     this.teamservice.addCommentPlayer(this.team?.id,formData).subscribe(a => a)
-    this.ngOnInit();
+    window.location.reload();
   }
 }
