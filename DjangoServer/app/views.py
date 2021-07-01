@@ -66,9 +66,13 @@ def insert_competition(request):
     print(request.data['region'])
     print(request.data['full_name'])
     print(request.data['competition_badge_img'])
-    c = Competition(full_name=request.data['full_name'],
-                    region=request.data['region'],
-                    competition_badge_img=request.FILES['competition_badge_img'])
+    if 'competition_badge_img' not in request.FILES:
+        c = Competition(full_name=request.data['full_name'],
+                        region=request.data['region'])
+    else:
+        c = Competition(full_name=request.data['full_name'],
+                        region=request.data['region'],
+                        competition_badge_img=request.FILES['competition_badge_img'])
     c.save()
     print(c)
     return Response(status=200)
@@ -309,15 +313,25 @@ def get_teamSeasons(request, id):
 def insert_team(request):
     print(request)
     print(request.FILES)
-    t = Team(full_name=request.data['full_name'],
-             name=request.data['name'],
-             abreviated_name=request.data['abreviated_name'],
-             founding_year=int(request.data['founding_year']),
-             club_badge_img=request.data['club_badge_img'],
-             city=request.data['city'],
-             country=request.data['country'],
-             formation=request.data['formation']
-             )
+    if 'club_badge_img' not in request.FILES:
+        t = Team(full_name=request.data['full_name'],
+                 name=request.data['name'],
+                 abreviated_name=request.data['abreviated_name'],
+                 founding_year=int(request.data['founding_year']),
+                 city=request.data['city'],
+                 country=request.data['country'],
+                 formation=request.data['formation']
+                 )
+    else:
+        t = Team(full_name=request.data['full_name'],
+                 name=request.data['name'],
+                 abreviated_name=request.data['abreviated_name'],
+                 founding_year=int(request.data['founding_year']),
+                 club_badge_img=request.data['club_badge_img'],
+                 city=request.data['city'],
+                 country=request.data['country'],
+                 formation=request.data['formation']
+                 )
     t.save()
     print(t)
     return Response(status=200)
@@ -443,16 +457,27 @@ def get_playerSeasons(request, id):
 def insert_player(request):
     print(request)
     print(request.FILES)
-    p = Player(full_name=request.data['full_name'],
-               name=request.data['name'],
-               birthday=request.data['birthday'],
-               height=request.data['height'],
-               nationality=request.data['nationality'],
-               position=request.data['position'],
-               best_foot=request.data['best_foot'],
-               preferred_number=request.data['preferred_number'],
-               player_img=request.data['player_img']
-               )
+    if 'player_img' not in request.FILES:
+        p = Player(full_name=request.data['full_name'],
+                   name=request.data['name'],
+                   birthday=request.data['birthday'],
+                   height=request.data['height'],
+                   nationality=request.data['nationality'],
+                   position=request.data['position'],
+                   best_foot=request.data['best_foot'],
+                   preferred_number=request.data['preferred_number']
+                   )
+    else:
+        p = Player(full_name=request.data['full_name'],
+                   name=request.data['name'],
+                   birthday=request.data['birthday'],
+                   height=request.data['height'],
+                   nationality=request.data['nationality'],
+                   position=request.data['position'],
+                   best_foot=request.data['best_foot'],
+                   preferred_number=request.data['preferred_number'],
+                   player_img=request.data['player_img']
+                   )
 
     p.save()
     print(p)
@@ -548,13 +573,21 @@ def get_staffSeasons(request,id):
 def insert_staff(request):
     print(request)
     print(request.FILES)
-    s = Staff(full_name=request.data['full_name'],
-              name=request.data['name'],
-              birthday=request.data['birthday'],
-              nationality=request.data['nationality'],
-              staff_img=request.data['staff_img'],
-              funcao=request.data['funcao']
-              )
+    if 'staff_img' not in request.FILES:
+        s = Staff(full_name=request.data['full_name'],
+                  name=request.data['name'],
+                  birthday=request.data['birthday'],
+                  nationality=request.data['nationality'],
+                  funcao=request.data['funcao']
+                  )
+    else:
+        s = Staff(full_name=request.data['full_name'],
+                  name=request.data['name'],
+                  birthday=request.data['birthday'],
+                  nationality=request.data['nationality'],
+                  staff_img=request.data['staff_img'],
+                  funcao=request.data['funcao']
+                  )
     s.save()
     print(s)
     return Response(status=200)
