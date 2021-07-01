@@ -53,7 +53,7 @@ class ClubPlaysInSerializer(serializers.ModelSerializer):
 
 class StaffManagesInSerializer(serializers.ModelSerializer):
     staff = StaffSerializer()
-
+    team = TeamSerializer()
     class Meta:
         model = StaffManages
         fields = ('id', 'staff', 'team', 'season')
