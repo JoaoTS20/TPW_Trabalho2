@@ -94,7 +94,7 @@
     </tbody>
   </table>
   <h2>Matches</h2>
-  <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary" ><a id="insert_match" style="color: white" href="/insertmatch/{{ competition.id }}">Add</a></button>
+  <button *ngIf="user=='admin'" style="background: #106eea;" class="btn btn-primary" ><a id="insert_match" style="color: white" routerLink="/addmatchtocompetition/{{ competition.id }}">Add</a></button>
   <hr>
   <table class="table table-striped">
     <thead>
