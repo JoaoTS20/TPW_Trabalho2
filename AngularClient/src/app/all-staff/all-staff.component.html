@@ -32,7 +32,7 @@
             <a routerLink="/staffdetails/{{ staff.id }}"><img style="height: 185px; width: 185px" src="{{baseURL}}{{ staff.staff_img }}" class="img-fluid" alt=""></a>
           </div>
           <div class="member-info">
-            <h4 style="text-align: center"><a href="/staffdetails/{{ staff.id }}">{{ staff.name }}</a></h4>
+            <h4 style="text-align: center"><a routerLink="/staffdetails/{{ staff.id }}">{{ staff.name }}</a></h4>
             <span style="text-align: center">{{ staff.funcao }}</span>
           </div>
         </div>

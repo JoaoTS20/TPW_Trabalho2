@@ -81,7 +81,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let pos of table?.table">
-      <td style="text-align:center" ><a href="/teamdetails/{{ pos.team.id }}"><img src="{{baseURL}}{{pos.team.club_badge_img }}" style="width: 30px; height: 30px"></a></td>
+      <td style="text-align:center" ><a routerLink="/teamdetails/{{ pos.team.id }}"><img src="{{baseURL}}{{pos.team.club_badge_img }}" style="width: 30px; height: 30px"></a></td>
       <td style="text-align:center">{{ pos.win }}</td>
       <td style="text-align:center">{{ pos.draw }}</td>
       <td style="text-align:center">{{ pos.loss }}</td>
@@ -112,8 +112,8 @@
     <tr *ngFor="let item of matches">
       <th  style="text-align:center" scope="row">{{ item.match.ngame }}</th>
       <td style="text-align:center" >{{ item.match.description }}</td>
-      <td style="text-align:center"><a href="/teamdetails/{{ item.match.home_team.id }}"><img src="{{baseURL}}{{item.match.home_team.club_badge_img }}" style="width: 30px; height: 30px"></a></td>
-      <td style="text-align:center"><a href="/teamdetails/{{ item.match.away_team.id }}"><img src="{{baseURL}}{{item.match.away_team.club_badge_img }}" style="width: 30px; height: 30px"></a></td>
+      <td style="text-align:center"><a routerLink="/teamdetails/{{ item.match.home_team.id }}"><img src="{{baseURL}}{{item.match.home_team.club_badge_img }}" style="width: 30px; height: 30px"></a></td>
+      <td style="text-align:center"><a routerLink="/teamdetails/{{ item.match.away_team.id }}"><img src="{{baseURL}}{{item.match.away_team.club_badge_img }}" style="width: 30px; height: 30px"></a></td>
       <td style="text-align:center">{{ item.match.home_goals }}</td>
       <td style="text-align:center">{{ item.match.away_goals }}</td>
       <td style="text-align:center">{{ item.match.home_goals }}-{{ item.match.away_goals }}</td>

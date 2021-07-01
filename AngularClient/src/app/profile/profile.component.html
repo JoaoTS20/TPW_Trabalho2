@@ -36,8 +36,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let team of profile[0].favouriteteams">
-        <th scope="row"><a href="/teamdetails/{{ team.id }}"><img src="{{baseURL}}{{ team.club_badge_img }}" style="width: 30px; height: 30px"></a></th>
-        <td><a href="/teamdetails/{{ team.id }}">{{ team.full_name }}</a></td>
+        <th scope="row"><a routerLink="/teamdetails/{{ team.id }}"><img src="{{baseURL}}{{ team.club_badge_img }}" style="width: 30px; height: 30px"></a></th>
+        <td><a routerLink="/teamdetails/{{ team.id }}">{{ team.full_name }}</a></td>
         <td>{{ team.country }}</td>
         <td>{{ team.formation }}</td>
       </tr>
@@ -58,8 +58,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let player of profile[0].favouriteplayers">
-        <th scope="row"><a href="/playersdetails/{{ player.id }}"><img src="{{baseURL}}{{ player.player_img }}" style="width: 30px; height: 30px"></a></th>
-        <td><a href="/playersdetails/{{ player.id }}">{{ player.name }}</a></td>
+        <th scope="row"><a routerLink="/playersdetails/{{ player.id }}"><img src="{{baseURL}}{{ player.player_img }}" style="width: 30px; height: 30px"></a></th>
+        <td><a routerLink="/playersdetails/{{ player.id }}">{{ player.name }}</a></td>
         <td>{{ player.height }} m</td>
         <td>{{ player.position }}</td>
         <td>{{ player.nationality }}</td>
@@ -79,8 +79,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let competition of profile[0].favouritecompetitions">
-        <th scope="row"><a href="/competitionsdetails/{{ competition.id }}"><img src="{{baseURL}}{{ competition.competition_badge_img }}" style="width: 30px; height: 30px"></a></th>
-        <td><a href="/competitionsdetails/{{ competition.id }}">{{ competition.full_name }}</a></td>
+        <th scope="row"><a routerLink="/competitionsdetails/{{ competition.id }}"><img src="{{baseURL}}{{ competition.competition_badge_img }}" style="width: 30px; height: 30px"></a></th>
+        <td><a routerLink="/competitionsdetails/{{ competition.id }}">{{ competition.full_name }}</a></td>
         <td>{{ competition.region }}</td>
       </tr>
       </tbody>
