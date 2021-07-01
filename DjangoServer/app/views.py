@@ -9,7 +9,8 @@ from rest_framework.response import Response
 
 from app import serializers
 from app.models import Competition, Team, Player, Staff, CommentPlayer, CommentCompetition, CommentTeam, CommentStaff, \
-    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match, CompetitionsMatches, NormalUser, FavouriteTeam
+    ClubPlaysIn, PlayerPlaysFor, StaffManages, Match, CompetitionsMatches, NormalUser, FavouriteTeam, \
+    FavouriteCompetition, FavouritePlayer
 from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSerializer, StaffSerializer, \
     CommentPlayerSerializer, CommentCompetitionSerializer, CommentTeamSerializer, CommentStaffSerializer, \
     PlayerPlaysForInSerializer, ClubPlaysInSerializer, StaffManagesInSerializer, MatchSerializer, \
@@ -25,8 +26,27 @@ def get_competitions(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 def get_competitionDetails(request, id):
+    if request.POST:
+        user_id = request.data['user_id']
+        competition_id = request.data['competition_id']
+        normal = NormalUser.objects.get(user_id=user_id)
+        if "func" in request.data:
+            func = request.data['func']
+            if func == "add":
+                s = FavouriteCompetition(competition_id=int(competition_id), user_id=normal.id)
+                s.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                s = FavouriteCompetition.objects.get(competition_id=int(competition_id), user_id=normal.id)
+                s.delete()
+                return Response(status=status.HTTP_200_OK)
+        if "text" in request.data:
+            text = request.data['text']
+            CommentCompetition(user=NormalUser.objects.get(user_id=user_id), comment=text,
+                        competition=Competition.objects.get(id=competition_id)).save()
+            return Response(status=status.HTTP_200_OK)
     try:
         competition = Competition.objects.get(id=id)
     except Competition.DoesNotExist:
@@ -114,23 +134,28 @@ def get_teams(request):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'POST'])
 def get_teamDetails(request, id):
     if request.POST:
         user_id = request.data['user_id']
         team_id = request.data['team_id']
+        normal = NormalUser.objects.get(user_id=user_id)
         if "func" in request.data:
             func = request.data['func']
             if func == "add":
-                normal = NormalUser.objects.get(user_id=user_id)
                 s = FavouriteTeam(team_id=int(team_id), user_id=normal.id)
                 s.save()
                 return Response(status=status.HTTP_200_OK)
             else:
-                normal = NormalUser.objects.get(user_id=user_id)
                 s = FavouriteTeam.objects.get(team_id=id, user_id=normal.id)
                 s.delete()
                 return Response(status=status.HTTP_200_OK)
+        if "text" in request.data:
+            text = request.data['text']
+            CommentTeam(user=NormalUser.objects.get(user_id=user_id), comment=text,
+                        team=Team.objects.get(id=team_id)).save()
+            return Response(status=status.HTTP_200_OK)
+
     try:
         team = Team.objects.get(id=id)
     except Team.DoesNotExist:
@@ -198,8 +223,27 @@ def get_players(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 def get_playerdetails(request, id):
+    if request.POST:
+        user_id = request.data['user_id']
+        player_id = request.data['player_id']
+        normal = NormalUser.objects.get(user_id=user_id)
+        if "func" in request.data:
+            func = request.data['func']
+            if func == "add":
+                s = FavouritePlayer(player_id=int(player_id), user_id=normal.id)
+                s.save()
+                return Response(status=status.HTTP_200_OK)
+            else:
+                s = FavouritePlayer.objects.get(player_id=int(player_id), user_id=normal.id)
+                s.delete()
+                return Response(status=status.HTTP_200_OK)
+        if "text" in request.data:
+            text = request.data['text']
+            CommentPlayer(user=NormalUser.objects.get(user_id=user_id), comment=text,
+                        player=Player.objects.get(id=player_id)).save()
+            return Response(status=status.HTTP_200_OK)
     try:
         player = Player.objects.get(id=id)
     except Player.DoesNotExist:

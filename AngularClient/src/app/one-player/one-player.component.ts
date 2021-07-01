@@ -62,4 +62,37 @@ export class OnePlayerComponent implements OnInit {
     return this.profile[0].favouriteplayers.find(e => e.id === id);
   }
 
+  add_to_Favourite(){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("player_id", this.player?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("func","add")
+    this.playerService.addFavouritePlayer(this.player?.id,formData).subscribe(a => a)
+    this.ngOnInit();
+  }
+
+  remove_to_Favourite(){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("player_id", this.player?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("func",  "remove");
+    this.playerService.removeFavouritePlayer(this.player?.id,formData).subscribe(a => a)
+    this.ngOnInit();
+  }
+
+  add_comment(text: any){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("player_id", this.player?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("text", text);
+    this.playerService.addCommentPlayer(this.player?.id,formData).subscribe(a => a)
+    this.ngOnInit();
+  }
+
 }

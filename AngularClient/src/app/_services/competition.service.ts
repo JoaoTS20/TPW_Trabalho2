@@ -41,5 +41,19 @@ export class CompetitionService {
   }
 
 
+  addFavouriteCompetition(id:any,values: any): Observable<any>{
+    const url = this.baseURL+'competitions/' + id;
+    return this.http.post<any>(url,values);
+  }
 
+
+  removeFavouriteCompetition(id: any, values: any): Observable<any> {
+    const url = this.baseURL+'competitions/' + id;
+    return this.http.post<any>(url,values);
+  }
+
+  addCommentCompetition(id: any , values: any) {
+    const url = this.baseURL+'competitions/' + id;
+    return this.http.post<any>(url,values);
+  }
 }

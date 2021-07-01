@@ -29,5 +29,19 @@ export class PlayerService {
     const url = this.baseURL+'players/seasons/'+id;
     return this.http.get<any[]>(url);
   }
+  addFavouritePlayer(id:any,values: any): Observable<any>{
+    const url = this.baseURL+'players/' + id;
+    return this.http.post<any>(url,values);
+  }
+
+  removeFavouritePlayer(id: any, values: any): Observable<any> {
+    const url = this.baseURL+'players/' + id;
+    return this.http.post<any>(url,values);
+  }
+
+  addCommentPlayer(id: any , values: any) {
+    const url = this.baseURL+'players/' + id;
+    return this.http.post<any>(url,values);
+  }
 
 }
