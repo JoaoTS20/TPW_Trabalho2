@@ -2,7 +2,7 @@
   <div *ngIf="competition && allteams">
   <h1>Insert Team in Competition</h1>
   <form [formGroup]="form" (ngSubmit)="insertTeamInCompetition()">
-    <div class="form-group">
+    <div class="form-group col-md-6">
       Team:
       <select class="form-control" (change)="changeTeam($event)">
         <option *ngFor="let team of allteams"
@@ -11,15 +11,15 @@
         </option>
       </select>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       Competition: <input type="text" readonly class="form-control-plaintext" value="{{competition.full_name}}">
     </div>
-    <div class="form-group">
-      Season: <input type="text" (change)="changeSeason($event)" value="2020-2021">
+    <div class="form-group col-md-6">
+      Season: <input class="form-control" type="text" (change)="changeSeason($event)" value="2020-2021">
     </div>
 
-    <div class="form-group">
-      <button class="btn btn-danger">Insert</button>
+    <div class="form-group col-md-6">
+      <button  style="background: #106eea;font-size: 15px; font-weight: bolder;" class="btn btn-primary btn-lg">Insert</button>
     </div>
   </form>
   </div>
