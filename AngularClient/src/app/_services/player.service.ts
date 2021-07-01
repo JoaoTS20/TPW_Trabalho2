@@ -4,12 +4,13 @@ import {Observable} from "rxjs/internal/Observable";
 import {Team} from "../_classes/team";
 import {Player} from "../_classes/player";
 import {CommentPlayer} from "../_classes/comment-player";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
-  private baseURL = 'http://localhost:8000/ws/'
+  private baseURL = GlobalConstants.apiurl
   constructor(private http:HttpClient) { }
 
   getPlayers():Observable<Player[]>{

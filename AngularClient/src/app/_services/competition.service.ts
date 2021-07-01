@@ -5,12 +5,13 @@ import {Competition} from "../_classes/competition";
 import {CommentPlayer} from "../_classes/comment-player";
 import {CommentCompetition} from "../_classes/comment-competition";
 import {Table} from "../_classes/table";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompetitionService {
-  private baseURL = 'http://localhost:8000/ws/'
+  private baseURL = GlobalConstants.apiurl
   constructor(private http: HttpClient) {
   }
   getCompetitions(): Observable<Competition[]> {

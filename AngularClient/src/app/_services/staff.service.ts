@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/internal/Observable";
 import {Staff} from "../_classes/staff";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StaffService {
 
-  private baseURL = 'http://localhost:8000/ws/'
+  private baseURL = GlobalConstants.apiurl
   constructor(private http: HttpClient) {
   }
   getStaff(): Observable<Staff[]> {

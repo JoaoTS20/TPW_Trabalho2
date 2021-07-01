@@ -6,6 +6,7 @@ import {PlayersTeam} from "../_classes/players-team";
 import {StaffTeam} from "../_classes/staff-team";
 import {CommentPlayer} from "../_classes/comment-player";
 import {CommentTeam} from "../_classes/comment-team";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,7 +17,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TeamService {
-  private baseURL = 'http://localhost:8000/ws/'
+  private baseURL = GlobalConstants.apiurl
   constructor(private http:HttpClient) { }
 
   getTeams():Observable<Team[]>{
