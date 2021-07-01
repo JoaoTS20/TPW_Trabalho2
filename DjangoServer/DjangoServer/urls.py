@@ -35,10 +35,15 @@ urlpatterns = [
     path('ws/competitions/', views.get_competitions),
     path('ws/competitions/<int:id>', views.get_competitionDetails),
     path('ws/competitions/comments/<int:id>',views.get_competitionComments),
+    path('ws/insertcompetition/',views.insert_competition),
+    path('ws/editcompetition/<int:id>', views.edit_competition),
     path('ws/competitions/table/<int:id>/<str:season>',views.get_competition_table),
     path('ws/competitions/teams/<int:id>/<str:season>',views.get_competition_table),
     path('ws/competitions/matches/<int:id>/<str:season>',views.get_competition_matches),
     path('ws/competitions/seasons/<int:id>',views.get_competition_seasons),
+    path('ws/addteamtocompetition/<int:compid>', views.addTeamtoCompetition),
+    path('ws/addmatchtocompetition/<int:compid>', views.addMatchtoCompetition),
+    path('ws/deletecompetition/<int:id>', views.deleteCompetition),
 
     path('ws/teams/', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),
@@ -47,16 +52,26 @@ urlpatterns = [
     path('ws/teams/competitions/<int:id>/<str:season>', views.get_teamCompetition),
     path('ws/teams/comments/<int:id>',views.get_teamComments),
     path('ws/teams/seasons/<int:id>',views.get_teamSeasons),
-
+    path('ws/insertteam/', views.insert_team),
+    path('ws/editteam/<int:id>', views.edit_team),
+    path('ws/addplayertoteam/<int:teamid>', views.addPlayertoTeam),
+    path('ws/addstafftoteam/<int:teamid>', views.addStafftoTeam),
+    path('ws/deleteteam/<int:id>', views.deleteTeam),
 
     path('ws/players/', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
     path('ws/players/comments/<int:id>', views.get_playerComments),
     path('ws/players/seasons/<int:id>', views.get_playerSeasons),
+    path('ws/insertplayer/', views.insert_player),
+    path('ws/editplayer/<int:id>', views.edit_player),
+    path('ws/deleteplayer/<int:id>', views.deletePlayer),
 
     path('ws/staff/', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),
     path('ws/staff/comments/<int:id>', views.get_staffComments),
+    path('ws/insertstaff/', views.insert_staff),
+    path('ws/editstaff/<int:id>', views.edit_staff),
+    path('ws/deletestaff/<int:id>', views.deleteStaff),
     path('ws/staff/seasons/<int:id>', views.get_staffSeasons),
 
 

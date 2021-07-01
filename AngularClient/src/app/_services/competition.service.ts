@@ -5,12 +5,13 @@ import {Competition} from "../_classes/competition";
 import {CommentPlayer} from "../_classes/comment-player";
 import {CommentCompetition} from "../_classes/comment-competition";
 import {Table} from "../_classes/table";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompetitionService {
-  private baseURL = 'http://localhost:8000/ws/'
+  private baseURL = GlobalConstants.apiurl
   constructor(private http: HttpClient) {
   }
   getCompetitions(): Observable<Competition[]> {
@@ -40,12 +41,31 @@ export class CompetitionService {
     return this.http.get<any[]>(url);
   }
 
+  insertCompetition(competition:any):Observable<any>{
+    const url = this.baseURL + 'insertcompetition/';
+    return this.http.post(url,competition)
+  }
+  editCompetition( id: number, competition:any):Observable<any>{
+    const url = this.baseURL + 'editcompetition/'+ id;
+    return this.http.put(url,competition)
+  }
 
+  addTeamToCompetition(id: number, teamcomp: any):Observable<any>{
+    const url = this.baseURL + 'addteamtocompetition/'+ id;
+    return this.http.post(url,teamcomp)
+  }
+  addMatchToCompetition(id: number, matchcomp: any):Observable<any>{
+    const url = this.baseURL + 'addmatchtocompetition/'+ id;
+    return this.http.post(url,matchcomp)
+  }
+  deleteCompetition(id:number){
+    const url = this.baseURL + 'deletecompetition/'+ id;
+    return this.http.delete(url)
+  }
   addFavouriteCompetition(id:any,values: any): Observable<any>{
     const url = this.baseURL+'competitions/' + id;
     return this.http.post<any>(url,values);
   }
-
 
   removeFavouriteCompetition(id: any, values: any): Observable<any> {
     const url = this.baseURL+'competitions/' + id;

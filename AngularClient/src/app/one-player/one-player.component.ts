@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Player} from "../_classes/player";
 import {PlayerService} from "../_services/player.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CommentPlayer} from "../_classes/comment-player";
 import {ProfileService} from "../profile.service";
 import {NormalUser} from "../normal-user";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-one-player',
@@ -19,13 +20,14 @@ export class OnePlayerComponent implements OnInit {
   seasons: any[] |undefined;
   user: string | null | undefined;
   userID: string | null | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
   profile: NormalUser[] | undefined;
   favourite: boolean | undefined;
   constructor(
     private route: ActivatedRoute,
     private playerService: PlayerService,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -38,9 +40,13 @@ export class OnePlayerComponent implements OnInit {
   getPlayer(): void {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
-    this.playerService.getSelectedPlayer(id).subscribe(player => this.player = player);
-    // @ts-ignore
-    this.age= Math.floor((( Math.abs(Date.now() - this.player?.birthday)) / (1000 * 3600 * 24))/365.25);
+    this.playerService.getSelectedPlayer(id).subscribe(player => {
+      this.player = player
+      // @ts-ignore
+      this.age= Math.floor((( Math.abs(Date.now() - Date.parse(this.player.birthday.slice(0,11)))) / (1000 * 3600 * 24))/365.25);
+    });
+
+
   }
   getComments(): void{
     // @ts-ignore
@@ -62,6 +68,16 @@ export class OnePlayerComponent implements OnInit {
     return this.profile[0].favouriteplayers.find(e => e.id === id);
   }
 
+  deletePlayer(){
+    // @ts-ignore
+    this.playerService.deletePlayer(this.player.id).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/players']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
+  }
   add_to_Favourite(){
     const formData: any = new FormData();
     // @ts-ignore

@@ -1,0 +1,72 @@
+
+<div>
+  <h1>Insert Player</h1>
+  <form [formGroup]="form" (ngSubmit)="insertPlayer()">
+    <div class="form-group">
+      Full Name: <input type="text" (change)="changeFullName($event)">
+    </div>
+    <div class="form-group">
+      Name: <input type="text" (change)="changeName($event)" >
+    </div>
+    <div class="form-group">
+      Birthday: <input type="date" (change)="changeBirthday($event)" >
+    </div>
+    <div class="form-group">
+      Height: <input type="number" (change)="changeHeight($event)" >
+    </div>
+    <div class="form-group">
+      Nationality: <input type="text" (change)="changeNationality($event)" >
+    </div>
+    <div class="form-group">
+      <label>Position</label>
+      <select name="position" class="form-control" (change)="changePosition($event)">
+
+        <option value="Striker">ST-Striker</option>
+
+        <option value="Left Winger">LW-Left Winger</option>
+
+        <option value="Right Winger">RW-Right Winger</option>
+
+        <option value="Central Attacking Midfielder">CAM-Central Attacking Midfielder</option>
+
+        <option value="Central Midfielder">CM-Central Midfielder</option>
+
+        <option value="Central Defensive Midfielder">CDM-Central Defensive Midfielder</option>
+
+        <option value="Left Back">LB-Left Back</option>
+
+        <option value="Right Back">RB-Right Back</option>
+
+        <option value="Center Back">CB-Center Back</option>
+
+        <option value="Goalkeeper">GR-Goalkeeper</option>
+
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Best foot</label>
+      <select name="best_foot" class="form-control" (change)="changeBestFoot($event)">
+
+        <option value="Left">L-Left</option>
+
+        <option value="Right">R-Right</option>
+
+        <option value="Both">B-Both</option>
+
+      </select>
+    </div>
+    <div class="form-group">
+      Prefered number: <input type="number" (change)="changePreferedNumber($event)" >
+    </div>
+    <div class="form-group">
+      Image of the Competition: <input type="file" (change)="upload($event)">
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-danger">Upload</button>
+    </div>
+  </form>
+</div>
+
+

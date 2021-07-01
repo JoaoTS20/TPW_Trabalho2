@@ -3,7 +3,8 @@ from django.shortcuts import render
 import json
 # Create your views here.
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.parsers import MultiPartParser
+from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
@@ -53,6 +54,48 @@ def get_competitionDetails(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CompetitionSerializer(competition)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def insert_competition(request):
+    print(request)
+    print(request.FILES)
+    print(request.data)
+    print(request.data['region'])
+    print(request.data['full_name'])
+    print(request.data['competition_badge_img'])
+    c = Competition(full_name=request.data['full_name'],
+                    region=request.data['region'],
+                    competition_badge_img=request.FILES['competition_badge_img'])
+    c.save()
+    print(c)
+    return Response(status=200)
+
+
+@api_view(['PUT'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def edit_competition(request, id):
+    # print(request)
+    print(request.FILES)
+    print(request.data)
+    print(request.data['region'])
+    print(request.data['full_name'])
+    print(request.data['competition_badge_img'])
+    try:
+        competition = Competition.objects.get(id=id)
+    except Competition.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'competition_badge_img' in request.FILES.keys():
+        competition.competition_badge_img = request.data['competition_badge_img']
+    competition.full_name = request.data['full_name']
+    competition.region = request.data['region']
+
+    competition.save()
+    return Response(status=200)
 
 
 @api_view(['GET'])
@@ -123,6 +166,52 @@ def get_competition_matches(request, id, season="2020-2021"):
 def get_competition_seasons(request, id):
     return Response(ClubPlaysIn.objects.filter(competition_id=id).values_list('season', flat=True).distinct())
 
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def addTeamtoCompetition(request,compid):
+    print(request.data)
+    teamid = request.data['teamid']
+    season = request.data['season']
+    c= ClubPlaysIn(competition_id=compid,team_id=teamid,season=season)
+    c.save()
+    return Response(status=200)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def addMatchtoCompetition(request,compid):
+    print(request.data)
+    ngame = request.data['ngame']
+    description = request.data['description']
+    hometeamid = request.data['hometeamid']
+    awayteamid = request.data['awayteamid']
+    homegoals = request.data['homegoals']
+    awaygoals = request.data['awaygoals']
+    season = request.data['season']
+    match = Match(ngame=ngame, description=description,
+                  home_team_id=hometeamid,away_team_id=awayteamid,
+                  home_goals=homegoals, away_goals=awaygoals,
+                  competition_id=compid)
+    home_team = ClubPlaysIn.objects.filter(competition=match.competition, team=match.home_team, season=season)
+    away_team = ClubPlaysIn.objects.filter(competition=match.competition, team=match.away_team, season=season)
+
+    if len(home_team) < 1 or len(away_team) < 1:
+        print("jogo inválido")
+        return Response(status=400)
+    match.save()
+    cm = CompetitionsMatches(competition=match.competition, match=match, season=season)
+    cm.save()
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deleteCompetition(request, id):
+    try:
+        competition = Competition.objects.get(id=id)
+    except Competition.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    competition.delete()
+    return Response(status=200)
 
 # Team Related ###############
 
@@ -214,6 +303,82 @@ def get_teamSeasons(request, id):
     return Response(serializer.data)
 
 
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def insert_team(request):
+    print(request)
+    print(request.FILES)
+    t = Team(full_name=request.data['full_name'],
+             name=request.data['name'],
+             abreviated_name=request.data['abreviated_name'],
+             founding_year=int(request.data['founding_year']),
+             club_badge_img=request.data['club_badge_img'],
+             city=request.data['city'],
+             country=request.data['country'],
+             formation=request.data['formation']
+             )
+    t.save()
+    print(t)
+    return Response(status=200)
+
+
+@api_view(['PUT'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def edit_team(request, id):
+    print(request)
+    print(request.FILES)
+    try:
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'club_badge_img' in request.FILES.keys():
+        team.club_badge_img = request.data['club_badge_img']
+    team.full_name = request.data['full_name']
+    team.name = request.data['name']
+    team.abreviated_name = request.data['abreviated_name']
+    team.founding_year = int(request.data['founding_year'])
+    team.city = request.data['city']
+    team.country = request.data['country']
+    team.formation = request.data['formation']
+    team.save()
+    print(team)
+    return Response(status=200)
+
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def addPlayertoTeam(request,teamid):
+    print(request.data)
+    playerid = request.data['playerid']
+    season = request.data['season']
+    p = PlayerPlaysFor(team_id=teamid, player_id=playerid, season=season)
+    p.save()
+    return Response(status=200)
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def addStafftoTeam(request,teamid):
+    print(request.data)
+    staffid = request.data['staffid']
+    season = request.data['season']
+    s = StaffManages(team_id=teamid, staff_id=staffid, season=season)
+    s.save()
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deleteTeam(request, id):
+    try:
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    team.delete()
+    return Response(status=200)
+
 # Player Related ############3
 
 @api_view(['GET'])
@@ -272,6 +437,67 @@ def get_playerSeasons(request, id):
     return Response(serializer.data)
 
 
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def insert_player(request):
+    print(request)
+    print(request.FILES)
+    p = Player(full_name=request.data['full_name'],
+               name=request.data['name'],
+               birthday=request.data['birthday'],
+               height=request.data['height'],
+               nationality=request.data['nationality'],
+               position=request.data['position'],
+               best_foot=request.data['best_foot'],
+               preferred_number=request.data['preferred_number'],
+               player_img=request.data['player_img']
+               )
+
+    p.save()
+    print(p)
+    return Response(status=200)
+
+
+@api_view(['PUT'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def edit_player(request, id):
+    print(request)
+    print(request.FILES)
+
+    try:
+        player = Player.objects.get(id=id)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'player_img' in request.FILES.keys():
+        player.player_img = request.data['player_img']
+
+    player.full_name=request.data['full_name']
+    player.name=request.data['name']
+    player.birthday=request.data['birthday']
+    player.height=request.data['height']
+    player.nationality=request.data['nationality']
+    player.position=request.data['position']
+    player.best_foot=request.data['best_foot']
+    player.preferred_number=request.data['preferred_number']
+    player.save()
+
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deletePlayer(request, id):
+    try:
+        player = Player.objects.get(id=id)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    player.delete()
+    return Response(status=200)
+
+
 # Staff Related
 
 @api_view(['GET'])
@@ -316,7 +542,59 @@ def get_staffSeasons(request,id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = StaffManagesInSerializer(staff, many=True)
     return Response(serializer.data)
-# User Stuff
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def insert_staff(request):
+    print(request)
+    print(request.FILES)
+    s = Staff(full_name=request.data['full_name'],
+              name=request.data['name'],
+              birthday=request.data['birthday'],
+              nationality=request.data['nationality'],
+              staff_img=request.data['staff_img'],
+              funcao=request.data['funcao']
+              )
+    s.save()
+    print(s)
+    return Response(status=200)
+
+
+@api_view(['PUT'])
+@parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
+def edit_staff(request, id):
+    print(request)
+    print(request.FILES)
+
+    try:
+        staff = Staff.objects.get(id=id)
+    except Staff.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if 'staff_img' in request.FILES.keys():
+        staff.staff_img = request.data['staff_img']
+
+    staff.full_name = request.data['full_name']
+    staff.name = request.data['name']
+    staff.birthday = request.data['birthday']
+    staff.nationality = request.data['nationality']
+    staff.funcao = request.data['funcao']
+    staff.save()
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deleteStaff(request, id):
+    try:
+        staff = Staff.objects.get(id=id)
+    except Staff.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    staff.delete()
+    return Response(status=200)
+
+#User Stuff
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def get_UserProfile(request, id):

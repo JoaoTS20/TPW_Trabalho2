@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TeamService} from "../_services/team.service";
 import {Team} from "../_classes/team";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PlayersTeam} from "../_classes/players-team";
 import {Player} from "../_classes/player";
 import {StaffTeam} from "../_classes/staff-team";
@@ -9,6 +9,7 @@ import {CommentTeam} from "../_classes/comment-team";
 import {NormalUser} from "../normal-user";
 import {ProfileService} from "../profile.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-oneteam',
@@ -18,7 +19,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class OneteamComponent implements OnInit {
 
   @Input() team: Team | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
   players: PlayersTeam[] | undefined;
   staffs: any[] | undefined;
   competitions: any[] | undefined;
@@ -34,7 +35,7 @@ export class OneteamComponent implements OnInit {
     private teamservice: TeamService,
     private profileService: ProfileService,
     public fb: FormBuilder,
-    ) { }
+    private router: Router) { }
   selectedSeason: any;
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -131,6 +132,16 @@ export class OneteamComponent implements OnInit {
     formData.append("func",  "remove");
     this.teamservice.removeFavouriteTeam(this.team?.id,formData).subscribe(a => a)
     this.ngOnInit();
+  }
+  deleteTeam(){
+    // @ts-ignore
+    this.teamservice.deleteTeam(this.team.id).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/competitions']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 
   add_comment(text: any){

@@ -11,8 +11,8 @@
                 <p class="text-secondary mb-1">{{ staff.birthday }} ({{ age }})</p>
                 <p class="text-muted font-size-sm">{{ staff.funcao }}</p>
 
-                <button class="btn btn-info"   *ngIf="user=='admin'" name="edit"><a  href="{% url 'edit_player' player.id %}" style="color: white">Edit</a></button>
-                <button class="btn btn-danger" *ngIf="user=='admin'" value="delete" name="delete">Delete</button>
+                <button class="btn btn-info"   *ngIf="user=='admin'" name="edit"><a  routerLink="/editstaff/{{staff.id}}" style="color: white">Edit</a></button>
+                <button class="btn btn-danger" *ngIf="user=='admin'" value="delete" name="delete" (click)="deleteStaff()">Delete</button>
               </div>
             </div>
           </div>

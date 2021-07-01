@@ -4,12 +4,13 @@ import {Observable} from "rxjs/internal/Observable";
 import {Team} from "../_classes/team";
 import {Player} from "../_classes/player";
 import {CommentPlayer} from "../_classes/comment-player";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerService {
-  private baseURL = 'http://localhost:8000/ws/'
+  private baseURL = GlobalConstants.apiurl
   constructor(private http:HttpClient) { }
 
   getPlayers():Observable<Player[]>{
@@ -28,6 +29,18 @@ export class PlayerService {
   getSeasonsPlayer(id:number):Observable<any[]>{
     const url = this.baseURL+'players/seasons/'+id;
     return this.http.get<any[]>(url);
+  }
+  insertPlayer(player:any):Observable<any>{
+    const url = this.baseURL+'insertplayer/';
+    return this.http.post<any>(url,player);
+  }
+  editPlayer(id:number,player:any):Observable<any>{
+    const url = this.baseURL+'editplayer/'+id;
+    return this.http.put<any>(url,player);
+  }
+  deletePlayer(id:number) {
+    const url = this.baseURL + 'deleteplayer/' + id;
+    return this.http.delete(url)
   }
   addFavouritePlayer(id:any,values: any): Observable<any>{
     const url = this.baseURL+'players/' + id;

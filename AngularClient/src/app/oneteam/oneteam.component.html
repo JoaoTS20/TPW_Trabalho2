@@ -21,8 +21,8 @@
                     <button style="background: #106eea;" (click)="add_to_Favourite()" class="btn btn-primary" value="add" name="add">Add Favourite</button>
                   </ng-template>
                 </ng-container>
-                  <button class="btn btn-info" *ngIf="user=='admin'"  name="edit"><a  href="{% url 'edit_team' team.id %}" style="color: white">Edit</a></button>
-                  <button class="btn btn-danger" *ngIf="user=='admin'" value="delete" name="delete">Delete</button>
+                  <button class="btn btn-info" *ngIf="user=='admin'"  name="edit"><a  routerLink="/editteam/{{team.id}}" style="color: white">Edit</a></button>
+                  <button class="btn btn-danger" *ngIf="user=='admin'" value="delete" (click)="deleteTeam()" name="delete">Delete</button>
                 <!--button class="btn btn-outline-primary">Message</button-->
               </div>
             </div>

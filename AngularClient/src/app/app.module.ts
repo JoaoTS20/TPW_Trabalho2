@@ -14,11 +14,23 @@ import { AllCompetitionsComponent } from './all-competitions/all-competitions.co
 import { OnePlayerComponent } from './one-player/one-player.component';
 import { OneStaffComponent } from './one-staff/one-staff.component';
 import { OneCompetitionComponent } from './one-competition/one-competition.component';
+import { InsertCompetitionComponent } from './insert-competition/insert-competition.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { EditCompetitionComponent } from './edit-competition/edit-competition.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { InsertTeamComponent } from './insert-team/insert-team.component';
+import { EditTeamComponent } from './edit-team/edit-team.component';
+import { InsertStaffComponent } from './insert-staff/insert-staff.component';
+import { EditStaffComponent } from './edit-staff/edit-staff.component';
+import { InsertPlayerComponent } from './insert-player/insert-player.component';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 import { ProfileComponent } from './profile/profile.component';
 import {AuthGuard, AuthInterceptor} from "./auth-service.service";
+import { AddTeamCompetitionComponent } from './add-team-competition/add-team-competition.component';
+import { AddMatchCompetitionComponent } from './add-match-competition/add-match-competition.component';
+import { AddPlayerTeamComponent } from './add-player-team/add-player-team.component';
+import { AddStaffTeamComponent } from './add-staff-team/add-staff-team.component';
 
 @NgModule({
   declarations: [
@@ -32,17 +44,29 @@ import {AuthGuard, AuthInterceptor} from "./auth-service.service";
     OnePlayerComponent,
     OneStaffComponent,
     OneCompetitionComponent,
+    InsertCompetitionComponent,
+    EditCompetitionComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    InsertTeamComponent,
+    EditTeamComponent,
+    InsertStaffComponent,
+    EditStaffComponent,
+    InsertPlayerComponent,
+    EditPlayerComponent,
+    ProfileComponent,
+    AddTeamCompetitionComponent,
+    AddMatchCompetitionComponent,
+    AddPlayerTeamComponent,
+    AddStaffTeamComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthGuard,

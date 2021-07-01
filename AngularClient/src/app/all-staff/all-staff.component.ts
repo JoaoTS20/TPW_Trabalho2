@@ -3,6 +3,7 @@ import {Competition} from "../_classes/competition";
 import {CompetitionService} from "../_services/competition.service";
 import {Staff} from "../_classes/staff";
 import {StaffService} from "../_services/staff.service";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-all-staff',
@@ -12,7 +13,7 @@ import {StaffService} from "../_services/staff.service";
 export class AllStaffComponent implements OnInit {
 
   staffs: Staff[] | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
 
   constructor(private staffService: StaffService) { }
 
