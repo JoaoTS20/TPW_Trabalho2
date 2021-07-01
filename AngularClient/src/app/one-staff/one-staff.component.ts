@@ -63,4 +63,15 @@ export class OneStaffComponent implements OnInit {
     window.location.reload();
   }
 
+  deleteStaff(){
+    // @ts-ignore
+    this.staffService.deleteStaff(this.staff.id).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/staff']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
+  }
+
 }

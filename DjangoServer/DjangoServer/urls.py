@@ -71,7 +71,7 @@ urlpatterns = [
     path('ws/staff/comments/<int:id>', views.get_staffComments),
     path('ws/insertstaff/', views.insert_staff),
     path('ws/editstaff/<int:id>', views.edit_staff),
-    path('ws/deleteStaff/<int:id>', views.deleteStaff),
+    path('ws/deletestaff/<int:id>', views.deleteStaff),
     path('ws/staff/seasons/<int:id>', views.get_staffSeasons),
 
 
