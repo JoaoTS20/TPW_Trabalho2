@@ -79,8 +79,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let competition of profile[0].favouritecompetitions">
-        <th scope="row"><a routerLink="/competitionsdetails/{{ competition.id }}"><img src="{{baseURL}}{{ competition.competition_badge_img }}" style="width: 30px; height: 30px"></a></th>
-        <td><a routerLink="/competitionsdetails/{{ competition.id }}">{{ competition.full_name }}</a></td>
+        <th scope="row"><a routerLink="/competitiondetails/{{ competition.id }}"><img src="{{baseURL}}{{ competition.competition_badge_img }}" style="width: 30px; height: 30px"></a></th>
+        <td><a routerLink="/competitiondetails/{{ competition.id }}">{{ competition.full_name }}</a></td>
         <td>{{ competition.region }}</td>
       </tr>
       </tbody>
