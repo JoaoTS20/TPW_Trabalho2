@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CommentPlayer} from "../_classes/comment-player";
 import {ProfileService} from "../profile.service";
 import {NormalUser} from "../normal-user";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-one-player',
@@ -19,7 +20,7 @@ export class OnePlayerComponent implements OnInit {
   seasons: any[] |undefined;
   user: string | null | undefined;
   userID: string | null | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
   profile: NormalUser[] | undefined;
   favourite: boolean | undefined;
   constructor(

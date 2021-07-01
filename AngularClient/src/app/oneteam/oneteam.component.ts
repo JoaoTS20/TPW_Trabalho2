@@ -9,6 +9,7 @@ import {CommentTeam} from "../_classes/comment-team";
 import {NormalUser} from "../normal-user";
 import {ProfileService} from "../profile.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-oneteam',
@@ -18,7 +19,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 export class OneteamComponent implements OnInit {
 
   @Input() team: Team | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
   players: PlayersTeam[] | undefined;
   staffs: any[] | undefined;
   competitions: any[] | undefined;

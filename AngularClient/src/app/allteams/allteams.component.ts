@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Team} from "../_classes/team";
 import {TeamService} from "../_services/team.service";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-allteams',
@@ -10,7 +11,7 @@ import {TeamService} from "../_services/team.service";
 export class AllteamsComponent implements OnInit {
 
   teams: Team[] | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
 
 
   constructor(private teamService: TeamService) { }

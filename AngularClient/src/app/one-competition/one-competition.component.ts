@@ -6,6 +6,7 @@ import {CompetitionService} from "../_services/competition.service";
 import {Table} from "../_classes/table";
 import {ProfileService} from "../profile.service";
 import {NormalUser} from "../normal-user";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-one-competition',
@@ -22,7 +23,7 @@ export class OneCompetitionComponent implements OnInit {
   seasons: any[] | undefined;
   season="2020-2021"
   profile: NormalUser[] | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService,

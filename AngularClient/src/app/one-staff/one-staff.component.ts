@@ -8,6 +8,7 @@ import {PlayerService} from "../_services/player.service";
 import {ProfileService} from "../profile.service";
 import {StaffService} from "../_services/staff.service";
 import {CommentStaff} from "../comment-staff";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-one-staff',
@@ -22,7 +23,7 @@ export class OneStaffComponent implements OnInit {
   seasons: any[] |undefined;
   user: string | null | undefined;
   userID: string | null | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
   constructor(private route: ActivatedRoute,
               private staffService: StaffService,
               private router: Router) { }
@@ -37,10 +38,12 @@ export class OneStaffComponent implements OnInit {
   getStaff(): void {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
-    this.staffService.getSelectedStaff(id).subscribe(staff => this.staff = staff);
-    // @ts-ignore
-    this.age= Math.floor((( Math.abs(Date.now() - this.player?.birthday)) / (1000 * 3600 * 24))/365.25);
-  }
+    this.staffService.getSelectedStaff(id).subscribe(staff => {
+      this.staff = staff
+      // @ts-ignore
+      this.age= Math.floor((( Math.abs(Date.now() - Date.parse(this.staff.birthday.slice(0,11)))) / (1000 * 3600 * 24))/365.25);
+    });
+ }
   getComments(): void{
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');

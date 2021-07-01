@@ -3,6 +3,7 @@ import {Player} from "../_classes/player";
 import {PlayerService} from "../_services/player.service";
 import {Competition} from "../_classes/competition";
 import {CompetitionService} from "../_services/competition.service";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-all-competitions',
@@ -12,7 +13,7 @@ import {CompetitionService} from "../_services/competition.service";
 export class AllCompetitionsComponent implements OnInit {
 
   competitions: Competition[] | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
 
   constructor(private competitionService: CompetitionService) { }
 
