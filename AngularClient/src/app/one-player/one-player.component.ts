@@ -86,7 +86,7 @@ export class OnePlayerComponent implements OnInit {
     formData.append("user_id",  this.userID);
     formData.append("func","add")
     this.playerService.addFavouritePlayer(this.player?.id,formData).subscribe(a => a)
-    this.ngOnInit();
+    window.location.reload();
   }
 
   remove_to_Favourite(){
@@ -97,7 +97,7 @@ export class OnePlayerComponent implements OnInit {
     formData.append("user_id",  this.userID);
     formData.append("func",  "remove");
     this.playerService.removeFavouritePlayer(this.player?.id,formData).subscribe(a => a)
-    this.ngOnInit();
+    window.location.reload();
   }
 
   add_comment(text: any){
