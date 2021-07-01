@@ -6,6 +6,7 @@ import {CommentPlayer} from "../_classes/comment-player";
 import {CommentCompetition} from "../_classes/comment-competition";
 import {Table} from "../_classes/table";
 import {GlobalConstants} from "../_classes/globalconstants";
+import {Player} from "../_classes/player";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,17 @@ export class CompetitionService {
     const url = this.baseURL + 'competitions/';
     return this.http.get<Competition[]>(url);
   }
+  getCompetitionsSearch(name: any): Observable<Competition[]> {
+    let url;
+    if (name!=""){
+      url = this.baseURL + 'competitions/search/'+name;
+    }
+    else{
+      url = this.baseURL + 'competitions/';
+    }
+    return this.http.get<Competition[]>(url);
+  }
+
   getSelectedCompetition(id:number):Observable<Competition>{
     const url=this.baseURL+'competitions/'+id;
     return this.http.get<Competition>(url);

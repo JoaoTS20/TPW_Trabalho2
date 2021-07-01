@@ -21,10 +21,15 @@ from app.serializers import CompetitionSerializer, TeamSerializer, PlayerSeriali
 # Competition Related
 
 @api_view(['GET'])
-def get_competitions(request):
-    competitions = Competition.objects.all()
-    serializer = CompetitionSerializer(competitions, many=True)
-    return Response(serializer.data)
+def get_competitions(request, name=""):
+    if name=="":
+        competitions = Competition.objects.all()
+        serializer = CompetitionSerializer(competitions, many=True)
+        return Response(serializer.data)
+    else:
+        competitions = Competition.objects.filter(full_name__contains=name)
+        serializer = CompetitionSerializer(competitions, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET','POST'])

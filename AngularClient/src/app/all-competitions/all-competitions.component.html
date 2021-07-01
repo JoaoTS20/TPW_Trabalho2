@@ -5,21 +5,10 @@
     <p>Competitions from all over the world with accurate data.</p>
   </div>
   <div class="container" data-aos="fade-up">
-    <!--form class="form-row" style="text-align: center" action="{% url 'competitions' %}" method="post">
-      <div class="form-group col-md-4">
-        {% csrf_token %}
-        {{ form.full_name }}
-      </div>
-      <div class="form-group col-md-4">
-        {{ form.region }}
-      </div>
-      <div class="form-group col-md-3">
-        {{ form.order }}
-      </div>
-      <div class="form-group col-md-1">
-        <button class="btn btn-primary" style="background: #106eea;" name="search" type="submit" value="search">Search</button>
-      </div>
-    </form-->
+    <div style="align-items: center" class="form-group">
+      <h3>Search by Name:</h3>
+      <input [(ngModel)]="name" (ngModelChange)="search()" class="form-control" type="text">
+    </div>
     <hr>
     <div class="row">
       <div *ngFor="let competition of competitions" class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-3">

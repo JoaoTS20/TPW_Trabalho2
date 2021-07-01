@@ -34,6 +34,7 @@ urlpatterns = [
     path('ws/auth/refresh-token/', refresh_jwt_token),
 
     path('ws/competitions/', views.get_competitions),
+    path('ws/competitions/search/<str:name>', views.get_competitions),
     path('ws/competitions/<int:id>', views.get_competitionDetails),
     path('ws/competitions/comments/<int:id>',views.get_competitionComments),
     path('ws/insertcompetition/',views.insert_competition),
