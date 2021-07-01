@@ -310,8 +310,12 @@ def get_staffComments(request, id):
 
 @api_view(['GET'])
 def get_staffSeasons(request,id):
-    return Response(StaffManages.objects.filter(staff_id=id).values_list('season', flat=True).distinct())
-
+    try:
+        staff = StaffManages.objects.filter(staff_id=id)
+    except StaffManages.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = StaffManagesInSerializer(staff, many=True)
+    return Response(serializer.data)
 # User Stuff
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
