@@ -7,11 +7,12 @@ import { tap, shareReplay } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 import * as jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
+import {GlobalConstants} from "./_classes/globalconstants";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private baseURL = 'http://localhost:8000/ws/auth/'
+  private baseURL = GlobalConstants.apiurl +'/auth/'
   constructor(private http: HttpClient) {
   }
 
