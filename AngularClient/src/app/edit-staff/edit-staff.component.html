@@ -1,28 +1,29 @@
+<br>
 <div>
-  <h1>Insert Staff</h1>
+  <h1 style="padding-top: 20px">Edit Staff</h1>
+  <hr>
   <div *ngIf="staff">
     <form [formGroup]="form" (ngSubmit)="insertStaff()">
-      <div class="form-group">
-        Full Name: <input type="text" (change)="changeFullName($event)" value="{{staff.full_name}}">
+      <div class="form-group col-md-6">
+        Full Name: <input class="form-control" type="text" (change)="changeFullName($event)" value="{{staff.full_name}}">
       </div>
-      <div class="form-group">
-        Name: <input type="text" (change)="changeName($event)" value="{{staff.name}}">
+      <div class="form-group col-md-6">
+        Name: <input class="form-control" type="text" (change)="changeName($event)" value="{{staff.name}}">
       </div>
-      <div class="form-group">
-        Birthday: <input type="date" (change)="changeBirthday($event)" value="{{staff.birthday}}">
+      <div class="form-group col-md-6">
+        Birthday: <input class="form-control" type="date" (change)="changeBirthday($event)" value="{{staff.birthday}}">
       </div>
-      <div class="form-group">
-        Nationality: <input type="text" (change)="changeNationality($event)" value="{{staff.nationality}}">
+      <div class="form-group col-md-6">
+        Nationality: <input class="form-control" type="text" (change)="changeNationality($event)" value="{{staff.nationality}}">
       </div>
-      <div class="form-group">
-        Function: <input type="text" (change)="changeFunction($event)" value="{{staff.funcao}}">
+      <div class="form-group col-md-6">
+        Function: <input class="form-control" type="text" (change)="changeFunction($event)" value="{{staff.funcao}}">
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         StaffImage: <input type="file" (change)="upload($event)">
       </div>
-
-      <div class="form-group">
-        <button class="btn btn-danger">Upload</button>
+      <div class="form-group col-md-6">
+        <button style="background: #106eea;font-size: 15px; font-weight: bolder;" class="btn btn-primary btn-lg">Update</button>
       </div>
     </form>
   </div>

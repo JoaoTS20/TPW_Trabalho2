@@ -1,24 +1,25 @@
-
+<br>
 <div>
-  <h1>Edit Player</h1>
+  <h1 style="padding-top: 20px" >Edit Player</h1>
+  <hr>
   <div *ngIf="player">
     <form [formGroup]="form" (ngSubmit)="insertPlayer()">
-      <div class="form-group">
-        Full Name: <input type="text" (change)="changeFullName($event)" value="{{player.full_name}}">
+      <div class="form-group col-md-6">
+        Full Name: <input class="form-control" type="text" (change)="changeFullName($event)" value="{{player.full_name}}">
       </div>
-      <div class="form-group">
-        Name: <input type="text" (change)="changeName($event)" value="{{player.name}}">
+      <div class="form-group col-md-6">
+        Name: <input class="form-control" type="text" (change)="changeName($event)" value="{{player.name}}">
       </div>
-      <div class="form-group">
-        Birthday: <input type="date" (change)="changeBirthday($event)" value="{{player.birthday}}">
+      <div class="form-group col-md-6">
+        Birthday: <input class="form-control" type="date" (change)="changeBirthday($event)" value="{{player.birthday}}">
       </div>
-      <div class="form-group">
-        Height: <input type="number" (change)="changeHeight($event)" value="{{player.height}}">
+      <div class="form-group col-md-6">
+        Height: <input class="form-control" type="number" (change)="changeHeight($event)" value="{{player.height}}">
       </div>
-      <div class="form-group">
-        Nationality: <input type="text" (change)="changeNationality($event)" value="{{player.nationality}}">
+      <div class="form-group col-md-6">
+        Nationality: <input class="form-control" type="text" (change)="changeNationality($event)" value="{{player.nationality}}">
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label>Position</label>
         <select name="position" class="form-control" (change)="changePosition($event)" value="{{player.position}}">
 
@@ -45,7 +46,7 @@
         </select>
       </div>
 
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label>Best foot</label>
         <select name="best_foot" class="form-control" (change)="changeBestFoot($event)"value="{{player.best_foot}}">
 
@@ -57,15 +58,15 @@
 
         </select>
       </div>
-      <div class="form-group">
-        Prefered number: <input type="number" (change)="changePreferedNumber($event)" value="{{player.preferred_number}}">
+      <div class="form-group col-md-6">
+        Prefered number: <input class="form-control" type="number" (change)="changePreferedNumber($event)" value="{{player.preferred_number}}">
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         Image of the Competition: <input type="file" (change)="upload($event)">
       </div>
 
-      <div class="form-group">
-        <button class="btn btn-danger">Upload</button>
+      <div class="form-group col-md-6">
+        <button style="background: #106eea;font-size: 15px; font-weight: bolder;" class="btn btn-primary btn-lg">Update</button>
       </div>
     </form>
   </div>

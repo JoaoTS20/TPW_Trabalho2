@@ -1,33 +1,35 @@
+<br>
 <div>
-  <h1>Insert Team</h1>
+  <h1 style="padding-top: 20px">Insert Team</h1>
+  <hr>
   <form [formGroup]="form" (ngSubmit)="insertCompetition()">
-    <div class="form-group">
-      Full Name: <input type="text" (change)="changeFullName($event)">
+    <div class="form-group col-md-6">
+      Full Name: <input type="text" class="form-control" (change)="changeFullName($event)">
     </div>
-    <div class="form-group">
-      Name: <input type="text" (change)="changeName($event)" >
+    <div class="form-group col-md-6">
+      Name: <input type="text" class="form-control" (change)="changeName($event)" >
     </div>
-    <div class="form-group">
-      Abreviated name: <input type="text" (change)="changeAbrName($event)" >
+    <div class="form-group col-md-6">
+      Abreviated name: <input class="form-control" type="text" (change)="changeAbrName($event)" >
     </div>
-    <div class="form-group">
-      Founding year: <input type="text" (change)="changeFoundingYear($event)" >
+    <div class="form-group col-md-6">
+      Founding year: <input class="form-control" type="text" (change)="changeFoundingYear($event)" >
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       Image of the Team: <input type="file" (change)="upload($event)">
     </div>
-    <div class="form-group">
-      City: <input type="text" (change)="changeCity($event)" >
+    <div class="form-group col-md-6">
+      City: <input  class="form-control" type="text" (change)="changeCity($event)" >
     </div>
-    <div class="form-group">
-      Country: <input type="text" (change)="changeCountry($event)" >
+    <div class="form-group col-md-6">
+      Country: <input  class="form-control" type="text" (change)="changeCountry($event)" >
     </div>
-    <div class="form-group">
-      Formation: <input type="text" (change)="changeFormation($event)" >
+    <div class="form-group col-md-6">
+      Formation: <input  class="form-control" type="text" (change)="changeFormation($event)" >
     </div>
 
-    <div class="form-group">
-      <button class="btn btn-danger">Upload</button>
+    <div class="form-group col-md-6">
+      <button style="background: #106eea;font-size: 15px; font-weight: bolder;" class="btn btn-primary btn-lg">Insert</button>
     </div>
   </form>
 </div>

@@ -1,23 +1,26 @@
-
+<br>
 <div>
-  <h1>Insert Player</h1>
+  <h1 style="padding-top: 20px">Insert Player</h1>
+  <hr>
   <form [formGroup]="form" (ngSubmit)="insertPlayer()">
-    <div class="form-group">
-      Full Name: <input type="text" (change)="changeFullName($event)">
+    <div class="form-group col-md-6">
+      Full Name: <input class="form-control" type="text" (change)="changeFullName($event)">
     </div>
-    <div class="form-group">
-      Name: <input type="text" (change)="changeName($event)" >
+    <div class="form-group col-md-6">
+      Name: <input type="text" class="form-control"  (change)="changeName($event)" >
     </div>
-    <div class="form-group">
-      Birthday: <input type="date" (change)="changeBirthday($event)" >
+    <div class="form-group col-md-6">
+      Birthday: <input type="date" class="form-control"  (change)="changeBirthday($event)" >
     </div>
-    <div class="form-group">
-      Height: <input type="number" (change)="changeHeight($event)" >
+    <div class="form-group col-md-6">
+      <labeL>Height: </labeL>
+      <input type="number" class="form-control"  (change)="changeHeight($event)" >
     </div>
-    <div class="form-group">
-      Nationality: <input type="text" (change)="changeNationality($event)" >
+    <div class="form-group col-md-6">
+      <label>Nationality: </label>
+      <input type="text" class="form-control"  (change)="changeNationality($event)" >
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <label>Position</label>
       <select name="position" class="form-control" (change)="changePosition($event)">
 
@@ -44,7 +47,7 @@
       </select>
     </div>
 
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <label>Best foot</label>
       <select name="best_foot" class="form-control" (change)="changeBestFoot($event)">
 
@@ -56,15 +59,17 @@
 
       </select>
     </div>
-    <div class="form-group">
-      Prefered number: <input type="number" (change)="changePreferedNumber($event)" >
+    <div class="form-group col-md-6">
+      <label>Prefered number:</label>
+      <input class="form-control"  type="number" (change)="changePreferedNumber($event)" >
     </div>
-    <div class="form-group">
-      Image of the Competition: <input type="file" (change)="upload($event)">
+    <div class="form-group col-md-6">
+      <label>Image of the Competition:</label>
+      <input  type="file" (change)="upload($event)">
     </div>
 
-    <div class="form-group">
-      <button class="btn btn-danger">Upload</button>
+    <div class="form-group col-md-6">
+      <button style="background: #106eea;font-size: 15px; font-weight: bolder;" class="btn btn-primary btn-lg">Insert</button>
     </div>
   </form>
 </div>
