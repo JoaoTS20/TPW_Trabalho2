@@ -222,10 +222,15 @@ def deleteCompetition(request, id):
 
 
 @api_view(['GET'])
-def get_teams(request):
-    teams = Team.objects.all()
-    serializer = TeamSerializer(teams, many=True)
-    return Response(serializer.data)
+def get_teams(request, name=""):
+    if name=="":
+        teams = Team.objects.all()
+        serializer = TeamSerializer(teams, many=True)
+        return Response(serializer.data)
+    else:
+        teams = Team.objects.filter(full_name__contains=name)
+        serializer = TeamSerializer(teams, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET', 'POST'])
@@ -511,11 +516,15 @@ def deletePlayer(request, id):
 # Staff Related
 
 @api_view(['GET'])
-def get_staff(request):
-    staff = Staff.objects.all()
-    serializer = StaffSerializer(staff, many=True)
-    return Response(serializer.data)
-
+def get_staff(request,name=""):
+    if name=="":
+        staff = Staff.objects.all()
+        serializer = StaffSerializer(staff, many=True)
+        return Response(serializer.data)
+    else:
+        staff = Staff.objects.filter(full_name__contains=name)
+        serializer = StaffSerializer(staff, many=True)
+        return Response(serializer.data)
 
 @api_view(['GET','POST'])
 def get_staffdetails(request, id):

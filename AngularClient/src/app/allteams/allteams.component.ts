@@ -12,15 +12,18 @@ export class AllteamsComponent implements OnInit {
 
   teams: Team[] | undefined;
   baseURL = GlobalConstants.baseurl;
-
+  name="";
 
   constructor(private teamService: TeamService) { }
 
   ngOnInit(): void {
-    this.getTeams();
+    this.getTeams(this.name);
   }
-  getTeams(): void{
-    this.teamService.getTeams().subscribe(teams => this.teams=teams)
+  getTeams(name: any): void{
+    this.teamService.getTeamsSearch(name).subscribe(teams => this.teams=teams)
+  }
+  search(){
+    this.getTeams(this.name);
   }
 
 }

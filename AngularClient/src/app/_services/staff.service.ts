@@ -17,6 +17,18 @@ export class StaffService {
     const url = this.baseURL + 'staff/';
     return this.http.get<Staff[]>(url);
   }
+
+  getStaffSearch(name: any): Observable<Staff[]>{
+    let url;
+    if (name=="") {
+      url = this.baseURL + 'staff/';
+    }
+    else{
+      url = this.baseURL + 'staff/search/'+name;
+    }
+    return this.http.get<Staff[]>(url);
+  }
+
   insertStaff(staff: any): Observable<any>{
     const url = this.baseURL + 'insertstaff/';
     return this.http.post<any>(url,staff);
@@ -46,4 +58,6 @@ export class StaffService {
     const url = this.baseURL + 'staff/'+id;
     return this.http.post<Staff>(url,formData);
   }
+
+
 }

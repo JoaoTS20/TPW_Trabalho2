@@ -48,6 +48,7 @@ urlpatterns = [
     path('ws/deletecompetition/<int:id>', views.deleteCompetition),
 
     path('ws/teams/', views.get_teams),
+    path('ws/teams/search/<str:name>', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),
     path('ws/teams/players/<int:id>/<str:season>', views.get_teamPlayers),
     path('ws/teams/staff/<int:id>/<str:season>', views.get_teamStaff),
@@ -70,6 +71,7 @@ urlpatterns = [
     path('ws/deleteplayer/<int:id>', views.deletePlayer),
 
     path('ws/staff/', views.get_staff),
+    path('ws/staff/search/<str:name>', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),
     path('ws/staff/comments/<int:id>', views.get_staffComments),
     path('ws/insertstaff/', views.insert_staff),
