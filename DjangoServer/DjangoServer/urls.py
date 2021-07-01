@@ -43,6 +43,7 @@ urlpatterns = [
     path('ws/competitions/seasons/<int:id>',views.get_competition_seasons),
     path('ws/addteamtocompetition/<int:compid>', views.addTeamtoCompetition),
     path('ws/addmatchtocompetition/<int:compid>', views.addMatchtoCompetition),
+    path('ws/deletecompetition/<int:id>', views.deleteCompetition),
 
     path('ws/teams/', views.get_teams),
     path('ws/teams/<int:id>', views.get_teamDetails),
@@ -55,6 +56,7 @@ urlpatterns = [
     path('ws/editteam/<int:id>', views.edit_team),
     path('ws/addplayertoteam/<int:teamid>', views.addPlayertoTeam),
     path('ws/addstafftoteam/<int:teamid>', views.addStafftoTeam),
+    path('ws/deleteteam/<int:id>', views.deleteTeam),
 
     path('ws/players/', views.get_players),
     path('ws/players/<int:id>', views.get_playerdetails),
@@ -62,12 +64,14 @@ urlpatterns = [
     path('ws/players/seasons/<int:id>', views.get_playerSeasons),
     path('ws/insertplayer/', views.insert_player),
     path('ws/editplayer/<int:id>', views.edit_player),
+    path('ws/deleteplayer/<int:id>', views.deletePlayer),
 
     path('ws/staff/', views.get_staff),
     path('ws/staff/<int:id>', views.get_staffdetails),
     path('ws/staff/comments/<int:id>', views.get_staffComments),
     path('ws/insertstaff/', views.insert_staff),
     path('ws/editstaff/<int:id>', views.edit_staff),
+    path('ws/deleteStaff/<int:id>', views.deleteStaff),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

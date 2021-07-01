@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {PlayerService} from "../_services/player.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-insert-player',
@@ -13,7 +14,8 @@ export class InsertPlayerComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private router: Router) {
     this.form = this.fb.group({
       player_img: null,
       full_name : null,
@@ -122,6 +124,12 @@ export class InsertPlayerComponent implements OnInit {
     // @ts-ignore
     formData.append("preferred_number", this.form.get('preferred_number').value);
 
-    this.playerService.insertPlayer(formData).subscribe(a => a)
+    this.playerService.insertPlayer(formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/players']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {StaffService} from "../_services/staff.service";
 import {Staff} from "../_classes/staff";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-staff',
@@ -17,7 +17,8 @@ export class EditStaffComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
-    private staffService: StaffService) {
+    private staffService: StaffService,
+    private router: Router) {
     this.form = this.fb.group({
       staff_img: null,
       full_name : null,
@@ -113,7 +114,13 @@ export class EditStaffComponent implements OnInit {
     formData.append("funcao", this.form.get('funcao').value);
 
     // @ts-ignore
-    this.staffService.editStaff(this.staff.id,formData).subscribe(a => a)
+    this.staffService.editStaff(this.staff.id,formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/staffdetails/'+this.staff.id]).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 
 }

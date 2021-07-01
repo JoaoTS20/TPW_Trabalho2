@@ -37,5 +37,9 @@ export class PlayerService {
     const url = this.baseURL+'editplayer/'+id;
     return this.http.put<any>(url,player);
   }
+  deletePlayer(id:number){
+    const url = this.baseURL + 'deleteplayer/'+ id;
+    return this.http.delete(url)
+  }
 
 }

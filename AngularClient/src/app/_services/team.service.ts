@@ -75,4 +75,8 @@ export class TeamService {
     const url = this.baseURL+'teams/' + id;;
     return this.http.post<any>(url,values);
   }
+  deleteTeam(id:number){
+    const url = this.baseURL + 'deleteteam/'+ id;
+    return this.http.delete(url)
+  }
 }

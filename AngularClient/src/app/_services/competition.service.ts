@@ -57,5 +57,9 @@ export class CompetitionService {
     const url = this.baseURL + 'addmatchtocompetition/'+ id;
     return this.http.post(url,matchcomp)
   }
+  deleteCompetition(id:number){
+    const url = this.baseURL + 'deletecompetition/'+ id;
+    return this.http.delete(url)
+  }
 
 }

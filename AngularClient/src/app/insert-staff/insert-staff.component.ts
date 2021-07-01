@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {CompetitionService} from "../_services/competition.service";
 import {StaffService} from "../_services/staff.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-insert-staff',
@@ -17,7 +18,8 @@ export class InsertStaffComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private staffService: StaffService) {
+    private staffService: StaffService,
+    private router: Router) {
     this.form = this.fb.group({
       staff_img: null,
       full_name : null,
@@ -96,7 +98,13 @@ export class InsertStaffComponent implements OnInit {
     // @ts-ignore
     formData.append("funcao", this.form.get('funcao').value);
 
-    this.staffService.insertStaff(formData).subscribe(a => a)
+    this.staffService.insertStaff(formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/staff']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Competition} from "../_classes/competition";
 import {Team} from "../_classes/team";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CompetitionService} from "../_services/competition.service";
 import {TeamService} from "../_services/team.service";
 
@@ -20,13 +20,14 @@ export class AddMatchCompetitionComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               public fb: FormBuilder,
               private competitionService: CompetitionService,
-              private teamService: TeamService) {
+              private teamService: TeamService,
+              private router: Router) {
 
     this.form = this.fb.group({
       ngame: null,
       description:null,
-      hometeamid: '2020-2021',
-      awayteamid: null,
+      hometeamid: '1',
+      awayteamid: '1',
       homegoals:null,
       awaygoals: '2020-2021',
       season: '2020-2021'
@@ -114,6 +115,11 @@ export class AddMatchCompetitionComponent implements OnInit {
     formData.append("season", this.form.get('season').value);
 
     // @ts-ignore
-    this.competitionService.addMatchToCompetition(this.competition.id,formData).subscribe(a => a)
+    this.competitionService.addMatchToCompetition(this.competition.id,formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/competitiondetails/'+this.competition.id]).then(() => {
+        window.location.reload();
+      }),
+      error => error)
   }
 }

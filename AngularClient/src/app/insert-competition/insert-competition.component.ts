@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CompetitionService} from "../_services/competition.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-insert-competition',
@@ -16,7 +17,8 @@ export class InsertCompetitionComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private competitionService: CompetitionService) {
+    private competitionService: CompetitionService,
+    private router: Router) {
     this.form = this.fb.group({
       competition_badge_img: null,
       full_name : null,
@@ -62,7 +64,13 @@ export class InsertCompetitionComponent implements OnInit {
     // @ts-ignore
     formData.append("region", this.form.get('region').value);
 
-    this.competitionService.insertCompetition(formData).subscribe(a => a)
+    this.competitionService.insertCompetition(formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/competitions']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 
 }

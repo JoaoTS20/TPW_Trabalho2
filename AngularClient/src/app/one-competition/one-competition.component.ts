@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CommentCompetition} from "../_classes/comment-competition";
 import {Competition} from "../_classes/competition";
 import {CompetitionService} from "../_services/competition.service";
@@ -26,7 +26,8 @@ export class OneCompetitionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private competitionService: CompetitionService,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -79,6 +80,15 @@ export class OneCompetitionComponent implements OnInit {
   checkfavourite(id: number){
     // @ts-ignore
     return this.profile[0].favouritecompetitions.find(e => e.id === id);
+  }
+  deleteCompetition(){
+    // @ts-ignore
+    this.competitionService.deleteCompetition(this.competition.id).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/competitions']).then(() => {
+        window.location.reload();
+      }),
+      error => error)
   }
 }
 

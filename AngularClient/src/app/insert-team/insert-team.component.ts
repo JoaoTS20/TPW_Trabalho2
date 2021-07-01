@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {TeamService} from "../_services/team.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-insert-team',
@@ -13,7 +14,8 @@ export class InsertTeamComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private router: Router) {
     this.form = this.fb.group({
       club_badge_img: null,
       full_name : null,
@@ -102,6 +104,12 @@ export class InsertTeamComponent implements OnInit {
     // @ts-ignore
     formData.append("formation", this.form.get('formation').value);
 
-    this.teamService.insertTeam(formData).subscribe(a => a)
+    this.teamService.insertTeam(formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/teams']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 }

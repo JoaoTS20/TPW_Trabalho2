@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {PlayerService} from "../_services/player.service";
 import {Player} from "../_classes/player";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-player',
@@ -16,7 +16,8 @@ export class EditPlayerComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private router: Router) {
     this.form = this.fb.group({
       player_img: null,
       full_name : null,
@@ -145,6 +146,12 @@ export class EditPlayerComponent implements OnInit {
     formData.append("preferred_number", this.form.get('preferred_number').value);
 
     // @ts-ignore
-    this.playerService.editPlayer(this.player.id,formData).subscribe(a => a)
+    this.playerService.editPlayer(this.player.id,formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/playerdetails/'+this.player.id]).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 }

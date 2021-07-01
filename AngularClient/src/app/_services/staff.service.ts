@@ -27,4 +27,8 @@ export class StaffService {
     const url = this.baseURL + 'editstaff/'+id;
     return this.http.put<any>(url,staff);
   }
+  deleteStaff(id:number){
+    const url = this.baseURL + 'deletestaff/'+ id;
+    return this.http.delete(url)
+  }
 }

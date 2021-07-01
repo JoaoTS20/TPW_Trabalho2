@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {TeamService} from "../_services/team.service";
 import {Team} from "../_classes/team";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-team',
@@ -17,7 +17,8 @@ export class EditTeamComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private router: Router) {
     this.form = this.fb.group({
       club_badge_img: null,
       full_name : null,
@@ -126,6 +127,12 @@ export class EditTeamComponent implements OnInit {
     formData.append("formation", this.form.get('formation').value);
 
     // @ts-ignore
-    this.teamService.editTeam(this.team.id,formData).subscribe(a => a)
+    this.teamService.editTeam(this.team.id,formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/teamdetails/'+this.team.id]).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 }

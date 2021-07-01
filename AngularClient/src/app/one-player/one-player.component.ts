@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Player} from "../_classes/player";
 import {PlayerService} from "../_services/player.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CommentPlayer} from "../_classes/comment-player";
 import {ProfileService} from "../profile.service";
 import {NormalUser} from "../normal-user";
@@ -25,7 +25,8 @@ export class OnePlayerComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private playerService: PlayerService,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.user = localStorage.getItem('username')
@@ -60,6 +61,17 @@ export class OnePlayerComponent implements OnInit {
   checkfavourite(id: number){
     // @ts-ignore
     return this.profile[0].favouriteplayers.find(e => e.id === id);
+  }
+
+  deletePlayer(){
+    // @ts-ignore
+    this.playerService.deletePlayer(this.player.id).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/players']).then(() => {
+        window.location.reload();
+      }),
+      error => error
+    )
   }
 
 }

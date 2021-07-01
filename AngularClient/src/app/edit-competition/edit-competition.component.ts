@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {CompetitionService} from "../_services/competition.service";
 import {Competition} from "../_classes/competition";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
@@ -16,7 +16,8 @@ export class EditCompetitionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public fb: FormBuilder,
-    private competitionService: CompetitionService) {
+    private competitionService: CompetitionService,
+    private router: Router) {
     this.form = this.fb.group({
       competition_badge_img: null,
       full_name : null,
@@ -81,6 +82,11 @@ export class EditCompetitionComponent implements OnInit {
     formData.append("region", this.form.get('region').value);
 
     // @ts-ignore
-    this.competitionService.editCompetition(this.competition.id,formData).subscribe(a => a)
+    this.competitionService.editCompetition(this.competition.id,formData).subscribe(
+      // @ts-ignore
+      success => this.router.navigate(['/competitiondetails/'+this.competition.id]).then(() => {
+        window.location.reload();
+      }),
+      error => error)
   }
 }

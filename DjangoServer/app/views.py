@@ -38,6 +38,7 @@ def get_competitionDetails(request, id):
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def insert_competition(request):
     print(request)
     print(request.FILES)
@@ -55,6 +56,7 @@ def insert_competition(request):
 
 @api_view(['PUT'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def edit_competition(request, id):
     # print(request)
     print(request.FILES)
@@ -145,6 +147,7 @@ def get_competition_seasons(request, id):
     return Response(ClubPlaysIn.objects.filter(competition_id=id).values_list('season', flat=True).distinct())
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def addTeamtoCompetition(request,compid):
     print(request.data)
     teamid = request.data['teamid']
@@ -154,6 +157,7 @@ def addTeamtoCompetition(request,compid):
     return Response(status=200)
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def addMatchtoCompetition(request,compid):
     print(request.data)
     ngame = request.data['ngame']
@@ -176,6 +180,17 @@ def addMatchtoCompetition(request,compid):
     match.save()
     cm = CompetitionsMatches(competition=match.competition, match=match, season=season)
     cm.save()
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deleteCompetition(request, id):
+    try:
+        competition = Competition.objects.get(id=id)
+    except Competition.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    competition.delete()
     return Response(status=200)
 
 # Team Related ###############
@@ -265,6 +280,7 @@ def get_teamSeasons(request, id):
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def insert_team(request):
     print(request)
     print(request.FILES)
@@ -284,6 +300,7 @@ def insert_team(request):
 
 @api_view(['PUT'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def edit_team(request, id):
     print(request)
     print(request.FILES)
@@ -307,6 +324,7 @@ def edit_team(request, id):
 
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def addPlayertoTeam(request,teamid):
     print(request.data)
     playerid = request.data['playerid']
@@ -316,12 +334,24 @@ def addPlayertoTeam(request,teamid):
     return Response(status=200)
 
 @api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def addStafftoTeam(request,teamid):
     print(request.data)
     staffid = request.data['staffid']
     season = request.data['season']
     s = StaffManages(team_id=teamid, staff_id=staffid, season=season)
     s.save()
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deleteTeam(request, id):
+    try:
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    team.delete()
     return Response(status=200)
 
 # Player Related ############3
@@ -365,6 +395,7 @@ def get_playerSeasons(request, id):
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def insert_player(request):
     print(request)
     print(request.FILES)
@@ -386,6 +417,7 @@ def insert_player(request):
 
 @api_view(['PUT'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def edit_player(request, id):
     print(request)
     print(request.FILES)
@@ -408,6 +440,17 @@ def edit_player(request, id):
     player.preferred_number=request.data['preferred_number']
     player.save()
 
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deletePlayer(request, id):
+    try:
+        player = Player.objects.get(id=id)
+    except Player.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    player.delete()
     return Response(status=200)
 
 
@@ -442,6 +485,7 @@ def get_staffComments(request, id):
 
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def insert_staff(request):
     print(request)
     print(request.FILES)
@@ -459,6 +503,7 @@ def insert_staff(request):
 
 @api_view(['PUT'])
 @parser_classes([MultiPartParser])
+@permission_classes((IsAuthenticated,))
 def edit_staff(request, id):
     print(request)
     print(request.FILES)
@@ -477,6 +522,17 @@ def edit_staff(request, id):
     staff.nationality = request.data['nationality']
     staff.funcao = request.data['funcao']
     staff.save()
+    return Response(status=200)
+
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def deleteStaff(request, id):
+    try:
+        staff = Staff.objects.get(id=id)
+    except Staff.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    staff.delete()
     return Response(status=200)
 
 #User Stuff
