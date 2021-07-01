@@ -8,6 +8,7 @@ import {StaffTeam} from "../_classes/staff-team";
 import {CommentTeam} from "../_classes/comment-team";
 import {NormalUser} from "../normal-user";
 import {ProfileService} from "../profile.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-oneteam',
@@ -27,10 +28,12 @@ export class OneteamComponent implements OnInit {
   userID: string | null | undefined;
   season="2020-2021"
   profile: NormalUser[] | undefined;
+  form: FormGroup | undefined;
   constructor(
     private route: ActivatedRoute,
     private teamservice: TeamService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    public fb: FormBuilder,
     ) { }
   selectedSeason: any;
   ngOnInit(): void {
@@ -106,6 +109,28 @@ export class OneteamComponent implements OnInit {
   checkfavourite(id: number){
     // @ts-ignore
     return this.profile[0].favouriteteams.find(e => e.id === id);
+  }
+
+  add_to_Favourite(){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("team_id", this.team?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("func","add")
+    this.teamservice.addFavouriteTeam(this.team?.id,formData).subscribe(a => a)
+    this.ngOnInit();
+  }
+
+  remove_to_Favourite(){
+    const formData: any = new FormData();
+    // @ts-ignore
+    formData.append("team_id", this.team?.id);
+    // @ts-ignore
+    formData.append("user_id",  this.userID);
+    formData.append("func",  "remove");
+    this.teamservice.removeFavouriteTeam(this.team?.id,formData).subscribe(a => a)
+    this.ngOnInit();
   }
 
 }

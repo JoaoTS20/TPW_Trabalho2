@@ -50,5 +50,14 @@ export class TeamService {
     return this.http.get<any[]>(url);
   }
 
+  addFavouriteTeam(id:any,values: any): Observable<any>{
+    const url = this.baseURL+'teams/' + id;;
+    return this.http.post<any>(url,values);
+  }
 
+
+  removeFavouriteTeam(id: any, values: any): Observable<any> {
+    const url = this.baseURL+'teams/' + id;;
+    return this.http.post<any>(url,values);
+  }
 }

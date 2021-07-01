@@ -16,7 +16,7 @@ import { OneStaffComponent } from './one-staff/one-staff.component';
 import { OneCompetitionComponent } from './one-competition/one-competition.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
 import {AuthGuard, AuthInterceptor} from "./auth-service.service";
 
@@ -41,6 +41,7 @@ import {AuthGuard, AuthInterceptor} from "./auth-service.service";
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [
