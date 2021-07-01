@@ -39,9 +39,13 @@ export class OnePlayerComponent implements OnInit {
   getPlayer(): void {
     // @ts-ignore
     const id = +this.route.snapshot.paramMap.get('id');
-    this.playerService.getSelectedPlayer(id).subscribe(player => this.player = player);
-    // @ts-ignore
-    this.age= Math.floor((( Math.abs(Date.now() - this.player?.birthday)) / (1000 * 3600 * 24))/365.25);
+    this.playerService.getSelectedPlayer(id).subscribe(player => {
+      this.player = player
+      // @ts-ignore
+      this.age= Math.floor((( Math.abs(Date.now() - Date.parse(this.player.birthday.slice(0,11)))) / (1000 * 3600 * 24))/365.25);
+    });
+
+
   }
   getComments(): void{
     // @ts-ignore
