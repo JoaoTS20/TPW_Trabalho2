@@ -129,9 +129,7 @@ export class EditTeamComponent implements OnInit {
     // @ts-ignore
     this.teamService.editTeam(this.team.id,formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/teamdetails/'+this.team.id]).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/teamdetails/'+this.team.id]),
       error => error
     )
   }

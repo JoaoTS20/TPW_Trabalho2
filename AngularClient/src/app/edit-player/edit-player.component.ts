@@ -148,9 +148,7 @@ export class EditPlayerComponent implements OnInit {
     // @ts-ignore
     this.playerService.editPlayer(this.player.id,formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/playerdetails/'+this.player.id]).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/playersdetails/'+this.player.id]),
       error => error
     )
   }

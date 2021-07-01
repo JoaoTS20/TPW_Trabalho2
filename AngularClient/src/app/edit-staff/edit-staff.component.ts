@@ -116,9 +116,7 @@ export class EditStaffComponent implements OnInit {
     // @ts-ignore
     this.staffService.editStaff(this.staff.id,formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/staffdetails/'+this.staff.id]).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/staffdetails/'+this.staff.id]),
       error => error
     )
   }

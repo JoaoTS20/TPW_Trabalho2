@@ -84,9 +84,7 @@ export class EditCompetitionComponent implements OnInit {
     // @ts-ignore
     this.competitionService.editCompetition(this.competition.id,formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/competitiondetails/'+this.competition.id]).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/competitiondetails/'+this.competition.id]),
       error => error)
   }
 }

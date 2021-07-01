@@ -100,9 +100,7 @@ export class InsertStaffComponent implements OnInit {
 
     this.staffService.insertStaff(formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/staff']).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/staff']),
       error => error
     )
   }
