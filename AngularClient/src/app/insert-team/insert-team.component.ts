@@ -106,9 +106,7 @@ export class InsertTeamComponent implements OnInit {
 
     this.teamService.insertTeam(formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/teams']).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/teams']),
       error => error
     )
   }

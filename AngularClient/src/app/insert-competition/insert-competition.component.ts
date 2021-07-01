@@ -66,9 +66,7 @@ export class InsertCompetitionComponent implements OnInit {
 
     this.competitionService.insertCompetition(formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/competitions']).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/competitions']),
       error => error
     )
   }

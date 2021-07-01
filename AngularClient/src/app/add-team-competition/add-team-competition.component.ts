@@ -24,7 +24,7 @@ export class AddTeamCompetitionComponent implements OnInit {
               private router: Router) {
 
     this.form = this.fb.group({
-      teamid: null,
+      teamid: '1',
       season: '2020-2021'
     })
   }
@@ -69,9 +69,7 @@ export class AddTeamCompetitionComponent implements OnInit {
     // @ts-ignore
     this.competitionService.addTeamToCompetition(this.competition.id,formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/competitiondetails/'+this.competition.id]).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/competitiondetails/'+this.competition.id]),
       error => error
     )
   }

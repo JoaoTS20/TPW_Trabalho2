@@ -126,9 +126,7 @@ export class InsertPlayerComponent implements OnInit {
 
     this.playerService.insertPlayer(formData).subscribe(
       // @ts-ignore
-      success => this.router.navigate(['/players']).then(() => {
-        window.location.reload();
-      }),
+      success => this.router.navigate(['/players']),
       error => error
     )
   }
