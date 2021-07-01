@@ -23,8 +23,8 @@ export class InsertPlayerComponent implements OnInit {
       birthday: null,
       height : null,
       nationality : null,
-      position: null,
-      best_foot : null,
+      position: 'Striker',
+      best_foot : 'Left',
       preferred_number : null,
     })
   }
