@@ -14,7 +14,7 @@
                     <button style="background: #106eea;"  class="btn btn-primary" value="add" name="add">Add Favourite</button>
                   </ng-template>
                 </ng-container>
-                  <button class="btn btn-info" *ngIf="user=='admin'" name="edit"><a  href="{% url 'edit_competition' competition.id %}" style="color: white">Edit</a></button>
+                  <button class="btn btn-info" *ngIf="user=='admin'" name="edit"><a  routerLink="/editcompetition/{{competition.id}}" style="color: white">Edit</a></button>
                   <button class="btn btn-danger" *ngIf="user=='admin'"value="delete" (click)="deleteCompetition()" name="delete">Delete</button>
               </div>
             </div>
