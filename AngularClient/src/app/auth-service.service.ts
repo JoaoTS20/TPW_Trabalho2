@@ -12,7 +12,7 @@ import {GlobalConstants} from "./_classes/globalconstants";
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private baseURL = GlobalConstants.apiurl +'/auth/'
+  private baseURL = GlobalConstants.apiurl +'auth/'
   constructor(private http: HttpClient) {
   }
 

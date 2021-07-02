@@ -4,6 +4,7 @@ import {ProfileService} from "../profile.service";
 import {ActivatedRoute} from "@angular/router";
 import {NormalUser} from "../normal-user";
 import {User} from "../user";
+import {GlobalConstants} from "../_classes/globalconstants";
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ import {User} from "../user";
 export class ProfileComponent implements OnInit {
   profile: NormalUser[] | undefined;
   adminprofile: User[] | undefined;
-  baseURL = 'http://localhost:8000';
+  baseURL = GlobalConstants.baseurl;
   constructor(private route: ActivatedRoute,private profileService: ProfileService) {}
 
   ngOnInit(): void {
